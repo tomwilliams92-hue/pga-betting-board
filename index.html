@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>PGA Betting Board</title>
+<meta name="description" content="Weekly PGA Tour betting board: 3 picks to win and 3 outside bets, built from strokes-gained, recent form and course fit." />
+<meta property="og:title" content="PGA Betting Board" />
+<meta property="og:description" content="3 to win + 3 outside bets, every Monday. Built from strokes-gained, recent form and course fit." />
+<meta property="og:type" content="website" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg: #06100c;
+    --bg2: #0a1712;
+    --panel: #0e201a;
+    --panel2: #122a22;
+    --line: #1d3a2f;
+    --txt: #e8f1ec;
+    --muted: #8aa79b;
+    --green: #19c37d;
+    --green-d: #0f7a4e;
+    --gold: #e8c468;
+    --gold-d: #b8911f;
+    --red: #f0696b;
+    --shadow: 0 10px 34px rgba(0,0,0,.45);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: radial-gradient(1200px 600px at 50% -10%, #103224 0%, var(--bg) 55%) fixed, var(--bg);
+    color: var(--txt);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    padding-bottom: 60px;
+  }
+  .wrap { max-width: 1120px; margin: 0 auto; padding: 0 18px; }
+  .display { font-family: 'Oswald', sans-serif; letter-spacing: .5px; text-transform: uppercase; }
+
+  /* header */
+  header.top {
+    border-bottom: 1px solid var(--line);
+    background: linear-gradient(180deg, rgba(25,195,125,.08), transparent);
+    padding: 26px 0 22px;
+  }
+  .brand { display: flex; align-items: center; gap: 13px; }
+  .brand .mark {
+    width: 46px; height: 46px; border-radius: 11px; flex: none;
+    background: linear-gradient(135deg, var(--green), var(--green-d));
+    display: grid; place-items: center; font-family: 'Oswald'; font-weight: 700; font-size: 22px; color: #04130c;
+    box-shadow: 0 6px 18px rgba(25,195,125,.35);
+  }
+  .brand h1 { font-family: 'Oswald'; font-weight: 700; font-size: 27px; letter-spacing: 1px; text-transform: uppercase; line-height: 1; }
+  .brand .sub { color: var(--muted); font-size: 12.5px; letter-spacing: .4px; margin-top: 3px; }
+  .updated { margin-left: auto; text-align: right; font-size: 12px; color: var(--muted); }
+  .updated b { color: var(--green); }
+
+  /* event strip */
+  .event {
+    margin-top: 22px; display: flex; flex-wrap: wrap; align-items: flex-end; gap: 8px 22px;
+    padding: 20px 22px; border: 1px solid var(--line); border-radius: 16px;
+    background: linear-gradient(120deg, var(--panel), var(--bg2));
+  }
+  .event .ttl { font-family: 'Oswald'; font-weight: 700; font-size: 30px; text-transform: uppercase; line-height: 1.02; }
+  .event .meta { color: var(--muted); font-size: 14px; }
+  .event .meta b { color: var(--txt); font-weight: 600; }
+  .event .pills { margin-left: auto; display: flex; gap: 8px; flex-wrap: wrap; }
+  .pill { font-size: 12px; padding: 6px 11px; border-radius: 999px; border: 1px solid var(--line); background: rgba(255,255,255,.03); color: var(--muted); }
+  .pill b { color: var(--txt); }
+
+  /* section heads */
+  .shead { display: flex; align-items: center; gap: 14px; margin: 38px 0 16px; }
+  .shead h2 { font-family: 'Oswald'; font-weight: 700; font-size: 21px; letter-spacing: 1px; text-transform: uppercase; white-space: nowrap; }
+  .shead .ln { height: 1px; background: var(--line); flex: 1; }
+  .shead .tag { font-size: 12px; color: var(--muted); white-space: nowrap; }
+  .accent-green h2 { color: var(--green); }
+  .accent-gold h2 { color: var(--gold); }
+
+  /* course profile */
+  .course { display: grid; grid-template-columns: 1.3fr 1fr; gap: 18px; }
+  .card-base { border: 1px solid var(--line); border-radius: 16px; background: linear-gradient(160deg, var(--panel), var(--bg2)); box-shadow: var(--shadow); }
+  .course .info { padding: 20px 22px; }
+  .course .arche { font-family: 'Oswald'; font-weight: 600; text-transform: uppercase; letter-spacing: .8px; color: var(--green); font-size: 15px; }
+  .course .summary { margin: 9px 0 14px; color: #cfe0d8; font-size: 14.5px; }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .chip { font-size: 12.5px; padding: 6px 11px; border-radius: 8px; background: rgba(25,195,125,.10); border: 1px solid rgba(25,195,125,.22); color: #b6e9cf; }
+  .weights { padding: 20px 22px; }
+  .weights .wt-h { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 14px; }
+  .wbar { margin-bottom: 13px; }
+  .wbar .lab { display: flex; justify-content: space-between; font-size: 12.5px; margin-bottom: 5px; }
+  .wbar .lab span:last-child { color: var(--green); font-weight: 600; }
+  .track { height: 8px; background: rgba(255,255,255,.06); border-radius: 6px; overflow: hidden; }
+  .track > i { display: block; height: 100%; border-radius: 6px; background: linear-gradient(90deg, var(--green-d), var(--green)); }
+
+  /* pick cards */
+  .grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .pick { position: relative; overflow: hidden; padding: 0 0 18px; }
+  .pick .ph {
+    position: relative; padding: 18px 18px 14px; display: flex; gap: 14px; align-items: center;
+    border-bottom: 1px solid var(--line);
+    background: linear-gradient(180deg, rgba(25,195,125,.07), transparent);
+  }
+  .gold .ph { background: linear-gradient(180deg, rgba(232,196,104,.09), transparent); }
+  .badge {
+    position: absolute; top: 12px; right: 12px; font-family: 'Oswald'; font-size: 11px; letter-spacing: 1px;
+    padding: 4px 9px; border-radius: 6px; text-transform: uppercase; font-weight: 600;
+    background: var(--green); color: #04130c;
+  }
+  .gold .badge { background: var(--gold); color: #1c1402; }
+  .shot {
+    width: 74px; height: 74px; border-radius: 50%; flex: none; object-fit: cover; background: #16271f;
+    border: 2px solid var(--green); box-shadow: 0 4px 14px rgba(0,0,0,.4);
+  }
+  .gold .shot { border-color: var(--gold); }
+  .shot.fallback { display: grid; place-items: center; font-family: 'Oswald'; font-size: 22px; color: var(--muted); }
+  .who .nm { font-family: 'Oswald'; font-weight: 600; font-size: 19px; line-height: 1.1; text-transform: uppercase; }
+  .who .row2 { margin-top: 6px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+  .flag { font-size: 10.5px; font-weight: 700; letter-spacing: .6px; padding: 2px 7px; border-radius: 5px; background: rgba(255,255,255,.07); color: var(--muted); }
+  .owgr { font-size: 11.5px; color: var(--muted); }
+  .stars { color: var(--gold); font-size: 13px; letter-spacing: 1px; }
+  .stars .off { color: #3a4f45; }
+
+  .odds-row { display: flex; align-items: baseline; justify-content: space-between; padding: 14px 18px 6px; }
+  .odds-row .odds { font-family: 'Oswald'; font-weight: 700; font-size: 34px; line-height: 1; color: var(--green); }
+  .gold .odds-row .odds { color: var(--gold); }
+  .odds-row .oddlab { font-size: 10.5px; color: var(--muted); text-transform: uppercase; letter-spacing: .8px; text-align: right; }
+  .odds-row .oddlab b { display:block; color: var(--txt); font-size: 13px; }
+
+  .prob { padding: 4px 18px 0; }
+  .prob .track { height: 6px; }
+  .prob .track > i { background: linear-gradient(90deg, #156b46, var(--green)); }
+  .gold .prob .track > i { background: linear-gradient(90deg, var(--gold-d), var(--gold)); }
+  .prob .pl { display: flex; justify-content: space-between; font-size: 11px; color: var(--muted); margin-top: 5px; }
+
+  .stake { margin: 12px 18px 0; padding: 10px 12px; border-radius: 10px; background: rgba(255,255,255,.04); border: 1px solid var(--line); font-size: 13px; }
+  .stake .big { font-weight: 700; color: var(--txt); }
+  .stake .ew { color: var(--muted); font-size: 12px; margin-top: 2px; }
+
+  .sg { display: grid; grid-template-columns: repeat(4,1fr); gap: 7px; margin: 13px 18px 0; }
+  .sg .cell { text-align: center; padding: 8px 4px; border-radius: 9px; background: rgba(255,255,255,.03); border: 1px solid var(--line); }
+  .sg .cell .k { font-size: 9.5px; color: var(--muted); text-transform: uppercase; letter-spacing: .5px; }
+  .sg .cell .v { font-family: 'Oswald'; font-weight: 600; font-size: 15px; margin-top: 3px; }
+  .pos { color: var(--green); } .neg { color: var(--red); }
+
+  .form { margin: 12px 18px 0; font-size: 12.5px; color: var(--muted); display: flex; align-items: center; gap: 7px; }
+  .form .ar { font-weight: 700; }
+  .ar.up { color: var(--green); } .ar.down { color: var(--red); } .ar.flat { color: var(--muted); }
+  .why { margin: 11px 18px 0; font-size: 13px; color: #cfe0d8; }
+
+  /* bankroll */
+  .bank { margin-top: 22px; display: grid; grid-template-columns: repeat(4,1fr); gap: 14px; }
+  .bank .b { padding: 16px 18px; }
+  .bank .b .k { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; }
+  .bank .b .v { font-family: 'Oswald'; font-weight: 700; font-size: 24px; margin-top: 5px; }
+  .bank .b small { color: var(--muted); font-size: 11.5px; }
+
+  /* field table */
+  table { width: 100%; border-collapse: collapse; margin-top: 6px; font-size: 13.5px; }
+  thead th { text-align: left; font-size: 10.5px; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); padding: 9px 10px; border-bottom: 1px solid var(--line); }
+  tbody td { padding: 9px 10px; border-bottom: 1px solid rgba(29,58,47,.5); }
+  tbody tr:hover { background: rgba(25,195,125,.05); }
+  .tname { display: flex; align-items: center; gap: 10px; }
+  .tshot { width: 30px; height: 30px; border-radius: 50%; object-fit: cover; background: #16271f; }
+  .rk { color: var(--muted); width: 26px; }
+  td.num { font-family: 'Oswald'; font-weight: 600; }
+  .right { text-align: right; }
+
+  .notes { margin-top: 26px; font-size: 12.5px; color: var(--muted); }
+  .notes li { margin: 5px 0 5px 18px; }
+  footer { margin-top: 30px; padding-top: 18px; border-top: 1px solid var(--line); font-size: 12px; color: var(--muted); display:flex; flex-wrap:wrap; gap:10px; justify-content: space-between; }
+  .rg { color: #c7a23a; }
+
+  @media (max-width: 860px) {
+    .course { grid-template-columns: 1fr; }
+    .grid3 { grid-template-columns: 1fr; }
+    .bank { grid-template-columns: repeat(2,1fr); }
+    .event .pills { margin-left: 0; }
+  }
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap" style="display:flex;align-items:center;gap:14px;">
+  <div class="brand">
+    <div class="mark">PGA</div>
+    <div>
+      <h1>Betting Board</h1>
+      <div class="sub">Win picks &amp; outside bets &middot; updated every Monday</div>
+    </div>
+  </div>
+  <div class="updated" id="updated"></div>
+</div></header>
+
+<main class="wrap" id="app"></main>
+
+<script src="data.js"></script>
+<script>
+const B = window.BOARD;
+const $ = (h) => { const t = document.createElement('template'); t.innerHTML = h.trim(); return t.content.firstChild; };
+const gbp = (n) => '£' + (Number.isInteger(n) ? n : n.toFixed(2));
+const initials = (nm) => nm.split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase();
+const sgClass = (v) => v >= 0 ? 'pos' : 'neg';
+const sgFmt = (v) => (v==null||isNaN(v)) ? '–' : (v>=0?'+':'') + v.toFixed(2);
+const stars = (n) => Array.from({length:5},(_,i)=>i<n?'★':'<span class="off">★</span>').join('');
+const arrow = (t) => t==='up'?'▲ trending up': t==='down'?'▼ cooling off':'▬ steady';
+
+function shotImg(p, cls) {
+  return `<img class="${cls}" src="${p.headshot}" alt="${p.name}" loading="lazy"
+    onerror="this.outerHTML='<div class=\\'${cls} fallback\\'>${initials(p.name)}</div>'">`;
+}
+
+function pickCard(p, idx, kind) {
+  const label = kind==='win' ? 'Pick '+(idx+1) : 'Value '+(idx+1);
+  const sg = p.sg;
+  return $(`
+  <div class="card-base pick ${kind==='out'?'gold':''}">
+    <div class="ph">
+      <span class="badge">${label}</span>
+      ${shotImg(p,'shot')}
+      <div class="who">
+        <div class="nm">${p.name}${p.dataThin?' <span style="color:var(--gold);font-size:11px">⚠ thin data</span>':''}</div>
+        <div class="row2">
+          <span class="flag">${p.countryFlag||p.country||''}</span>
+          <span class="owgr">OWGR #${p.owgr}</span>
+          <span class="stars">${stars(p.confidence)}</span>
+        </div>
+      </div>
+    </div>
+    <div class="odds-row">
+      <div class="odds">${p.modelOdds.fractional}</div>
+      <div class="oddlab">model est.<b>${(p.winProb*100).toFixed(1)}% win</b></div>
+    </div>
+    <div class="prob">
+      <div class="track"><i style="width:${Math.min(100,p.winProb*100*3.2).toFixed(0)}%"></i></div>
+      <div class="pl"><span>win probability</span><span>fair odds from model</span></div>
+    </div>
+    <div class="stake">
+      <div class="big">Stake: ${p.points} pt${p.points>1?'s':''} &middot; ${gbp(p.stakeGBP)} each-way</div>
+      <div class="ew">${gbp(p.ewWin)} win / ${gbp(p.ewPlace)} place &middot; terms: ${B.ewTerms}</div>
+    </div>
+    <div class="sg">
+      <div class="cell"><div class="k">Off Tee</div><div class="v ${sgClass(sg.ott)}">${sgFmt(sg.ott)}</div></div>
+      <div class="cell"><div class="k">Approach</div><div class="v ${sgClass(sg.app)}">${sgFmt(sg.app)}</div></div>
+      <div class="cell"><div class="k">Short</div><div class="v ${sgClass(sg.arg)}">${sgFmt(sg.arg)}</div></div>
+      <div class="cell"><div class="k">Putting</div><div class="v ${sgClass(sg.putt)}">${sgFmt(sg.putt)}</div></div>
+    </div>
+    <div class="form"><span class="ar ${p.trend}">${arrow(p.trend)}</span>
+      ${p.recentEvents?`&middot; ${p.recentSG.toFixed(2)} SG/rd over last ${p.recentEvents} starts`:'&middot; limited recent data'}</div>
+    <div class="why">${p.rationale}</div>
+  </div>`);
+}
+
+function render() {
+  document.getElementById('updated').innerHTML =
+    `Updated<br><b>${new Date(B.generatedAt).toLocaleDateString('en-GB',{weekday:'short',day:'numeric',month:'short'})}</b>`;
+
+  const app = document.getElementById('app');
+  const cp = B.courseProfile;
+  const wlabels = {ott:'Off the tee',app:'Approach play',arg:'Short game',putt:'Putting'};
+
+  app.appendChild($(`
+    <div class="event">
+      <div>
+        <div class="ttl">${B.event.name}</div>
+        <div class="meta"><b>${B.event.course||''}</b> ${B.event.city?'&middot; '+B.event.city+', '+(B.event.state||''):''}</div>
+      </div>
+      <div class="pills">
+        ${B.event.dateRange?`<span class="pill"><b>${B.event.dateRange}</b></span>`:''}
+        <span class="pill">Field <b>${B.event.fieldSize}</b></span>
+        ${cp.par?`<span class="pill">Par <b>${cp.par}</b></span>`:''}
+        ${cp.yards?`<span class="pill"><b>${cp.yards.toLocaleString()}</b> yds</span>`:''}
+      </div>
+    </div>`));
+
+  // course profile
+  app.appendChild($(`<div class="shead accent-green"><h2>The Course</h2><div class="ln"></div><div class="tag">what wins here drives the model</div></div>`));
+  // normalise bar widths to the strongest-weighted skill so it fills the bar
+  const maxW = Math.max(...Object.values(cp.weights));
+  const bars = ['app','ott','arg','putt'].sort((a,b)=>cp.weights[b]-cp.weights[a]).map(k=>
+    `<div class="wbar"><div class="lab"><span>${wlabels[k]}</span><span>${Math.round(cp.weights[k]*100)}%</span></div>
+     <div class="track"><i style="width:${(cp.weights[k]/maxW*100).toFixed(0)}%"></i></div></div>`).join('');
+  app.appendChild($(`
+    <div class="course">
+      <div class="card-base info">
+        <div class="arche">${cp.archetype}</div>
+        <div class="summary">${cp.summary}</div>
+        <div class="chips">${cp.tags.map(t=>`<span class="chip">${t}</span>`).join('')}</div>
+      </div>
+      <div class="card-base weights">
+        <div class="wt-h">Skill weighting the model uses</div>
+        ${bars}
+      </div>
+    </div>`));
+
+  // win picks
+  app.appendChild($(`<div class="shead accent-green"><h2>3 To Win</h2><div class="ln"></div><div class="tag">backed each-way</div></div>`));
+  const g1 = $(`<div class="grid3"></div>`);
+  B.winPicks.forEach((p,i)=>g1.appendChild(pickCard(p,i,'win')));
+  app.appendChild(g1);
+
+  // outside bets
+  app.appendChild($(`<div class="shead accent-gold"><h2>3 Outside Bets</h2><div class="ln"></div><div class="tag">value at a bigger price</div></div>`));
+  const g2 = $(`<div class="grid3"></div>`);
+  B.outsidePicks.forEach((p,i)=>g2.appendChild(pickCard(p,i,'out')));
+  app.appendChild(g2);
+
+  // bankroll
+  const bk = B.bankroll;
+  app.appendChild($(`
+    <div class="bank">
+      <div class="card-base b"><div class="k">Bankroll</div><div class="v">${gbp(bk.startGBP)}</div><small>${bk.startPoints} pts &middot; 1 pt = ${gbp(bk.unitGBP)}</small></div>
+      <div class="card-base b"><div class="k">Staked this week</div><div class="v">${gbp(bk.stakedThisWeekGBP)}</div><small>${bk.stakedThisWeekPoints} pts across 6 bets</small></div>
+      <div class="card-base b"><div class="k">Bets</div><div class="v">3 + 3</div><small>win picks + outside</small></div>
+      <div class="card-base b"><div class="k">Event no.</div><div class="v">#${bk.weekNumber}</div><small>of the season</small></div>
+    </div>`));
+
+  // field watch
+  app.appendChild($(`<div class="shead accent-green"><h2>Field Watch</h2><div class="ln"></div><div class="tag">model top 15</div></div>`));
+  const rows = B.fieldRanking.map(p=>`
+    <tr>
+      <td class="rk">${p.modelRank}</td>
+      <td><div class="tname">${shotImg(p,'tshot')}<span>${p.name}</span></div></td>
+      <td class="num right">${p.modelOdds.fractional}</td>
+      <td class="num right">${(p.winProb*100).toFixed(1)}%</td>
+      <td class="right ${p.trend==='up'?'pos':p.trend==='down'?'neg':''}">${p.trend==='up'?'▲':p.trend==='down'?'▼':'▬'} ${p.recentEvents?p.recentSG.toFixed(2):'–'}</td>
+    </tr>`).join('');
+  app.appendChild($(`<div class="card-base" style="padding:6px 14px 10px;overflow-x:auto">
+    <table><thead><tr><th></th><th>Player</th><th class="right">Model odds</th><th class="right">Win%</th><th class="right">Recent SG</th></tr></thead>
+    <tbody>${rows}</tbody></table></div>`));
+
+  // notes + footer
+  app.appendChild($(`<ul class="notes">${B.notes.map(n=>`<li>${n}</li>`).join('')}
+    <li>Recent form uses the last 5 events: ${B.recentEventsUsed.join(', ')}.</li></ul>`));
+  app.appendChild($(`<footer>
+    <span>Data: pgatour.com strokes-gained &middot; model estimates, not financial advice.</span>
+    <span class="rg">18+ &middot; Bet responsibly &middot; begambleaware.org</span>
+  </footer>`));
+}
+render();
+</script>
+</body>
+</html>

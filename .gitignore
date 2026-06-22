@@ -1,0 +1,6 @@
+node_modules/
+.apikey
+shots/
+*.log
+.DS_Store
+data.prev.js

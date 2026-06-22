@@ -1,0 +1,11 @@
+{
+  "name": "pga-betting-board",
+  "version": "1.0.0",
+  "description": "Weekly PGA Tour betting board - 3 win picks + 3 outside bets from strokes-gained, recent form and course fit.",
+  "type": "module",
+  "main": "build.mjs",
+  "scripts": {
+    "build": "node build.mjs"
+  },
+  "license": "ISC"
+}

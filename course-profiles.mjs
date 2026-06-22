@@ -1,0 +1,89 @@
+// course-profiles.mjs
+// What kind of course is it, and which skills does it reward?
+// `weights` re-weight the strokes-gained components for the picks model and MUST sum to 1:
+//   ott  = off the tee (distance + driving)   app = approach play
+//   arg  = around the green (short game)       putt = putting
+// A bomber's track lifts `ott`; a short, fiddly course lifts `app`/`putt`; links lifts `ott`/`arg`.
+// `archetype` is the one-line "what wins here", `tags` are the bullet read for the board.
+
+export const DEFAULT_PROFILE = {
+  archetype: 'Balanced ball-striking',
+  summary: 'No strong course bias on file - the model falls back to all-round strokes-gained.',
+  tags: ['Balanced test', 'All-round game rewarded'],
+  weights: { ott: 0.25, app: 0.30, arg: 0.20, putt: 0.25 },
+};
+
+// Keyed by PGA Tour tournament id (e.g. Travelers 2026 = R2026034).
+export const COURSE_PROFILES = {
+  // Travelers Championship - TPC River Highlands, Cromwell CT
+  R2026034: {
+    course: 'TPC River Highlands',
+    par: 70,
+    yards: 6841,
+    archetype: 'Precision irons & hot putter',
+    summary:
+      'One of the shortest, most scoreable tracks on tour. A par 70 with small greens where birdies are made with sharp approach play and putting, not raw power. Straight, accurate iron players beat the bombers here.',
+    tags: [
+      'Short par 70 - among the shortest on tour',
+      'Small greens reward pinpoint approach play',
+      'Birdie-fest: putting and short game decide it',
+      'Distance off the tee is a minor edge - accuracy over power',
+    ],
+    weights: { ott: 0.15, app: 0.35, arg: 0.20, putt: 0.30 },
+  },
+
+  // John Deere Classic - TPC Deere Run, Silvis IL
+  R2026030: {
+    course: 'TPC Deere Run',
+    par: 71,
+    yards: 7268,
+    archetype: 'Birdie-machine, elite irons & putting',
+    summary:
+      'A low-scoring birdie-fest. The winner almost always goes deep under par, so relentless approach play and a hot putter matter far more than length.',
+    tags: [
+      'Famously low scoring - winner goes deep red',
+      'Approach play and putting are everything',
+      'Length is not a requirement',
+      'Suits accurate, in-form scorers',
+    ],
+    weights: { ott: 0.15, app: 0.35, arg: 0.15, putt: 0.35 },
+  },
+
+  // Genesis Scottish Open - The Renaissance Club, North Berwick (links, co-sanctioned)
+  R2026541: {
+    course: 'The Renaissance Club',
+    par: 70,
+    yards: 7282,
+    archetype: 'Wind-proof ball-striker',
+    summary:
+      'A links test in the wind the week before The Open. Control off the tee and flighted iron play win out; a strong all-round ball-striker who handles the breeze is favoured over a pure bomber.',
+    tags: [
+      'Coastal links - wind is the defence',
+      'Driving control and accuracy at a premium',
+      'Flighted, precise iron play rewarded',
+      'Strong field: DP World Tour players in the mix (thinner PGA Tour data)',
+    ],
+    weights: { ott: 0.30, app: 0.30, arg: 0.20, putt: 0.20 },
+  },
+
+  // The Open Championship - Royal Birkdale, Southport (major, not a PGA Tour stats event)
+  R2026100: {
+    course: 'Royal Birkdale',
+    par: 70,
+    yards: 7156,
+    archetype: 'Complete links player',
+    summary:
+      'Classic Open links. Driving control, penetrating iron play and a sharp short game in the wind separate the field. Putting matters least of the four here - ball-striking and scrambling win Opens.',
+    tags: [
+      'Major championship links in the wind',
+      'Premium on driving control and iron flight',
+      'Scrambling and bunker play are decisive',
+      'Global field - many players have little/no PGA Tour data (picks flagged)',
+    ],
+    weights: { ott: 0.30, app: 0.30, arg: 0.25, putt: 0.15 },
+  },
+};
+
+export function profileFor(tournamentId) {
+  return COURSE_PROFILES[tournamentId] || DEFAULT_PROFILE;
+}
