@@ -4,178 +4,142 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>PGA Betting Board</title>
-<meta name="description" content="Weekly PGA Tour betting board: 3 picks to win and 3 outside bets, built from strokes-gained, recent form and course fit." />
+<meta name="description" content="Weekly PGA Tour betting board: win picks, outside bets, each-way & place markets, built from strokes-gained, recent form, course fit and the post-major let-down." />
 <meta property="og:title" content="PGA Betting Board" />
-<meta property="og:description" content="3 to win + 3 outside bets, every Monday. Built from strokes-gained, recent form and course fit." />
+<meta property="og:description" content="Win picks, outside bets, each-way & place selections. Every Monday." />
 <meta property="og:type" content="website" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet" />
 <style>
   :root {
-    --bg: #06100c;
-    --bg2: #0a1712;
-    --panel: #0e201a;
-    --panel2: #122a22;
-    --line: #1d3a2f;
-    --txt: #e8f1ec;
-    --muted: #8aa79b;
-    --green: #19c37d;
-    --green-d: #0f7a4e;
-    --gold: #e8c468;
-    --gold-d: #b8911f;
-    --red: #f0696b;
-    --shadow: 0 10px 34px rgba(0,0,0,.45);
+    --bg:#04142f; --bg2:#07203f; --panel:#0a2046; --panel2:#0d2a57; --line:#1d3e72;
+    --txt:#eaf2fd; --muted:#8fa9d0; --blue:#2b8cff; --blue-d:#1657b0;
+    --gold:#f2c14e; --gold-d:#b88a1f; --red:#ff6f6f; --shadow:0 10px 34px rgba(0,0,0,.5);
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-    background: radial-gradient(1200px 600px at 50% -10%, #103224 0%, var(--bg) 55%) fixed, var(--bg);
-    color: var(--txt);
-    line-height: 1.5;
-    -webkit-font-smoothing: antialiased;
-    padding-bottom: 60px;
+    background: radial-gradient(1200px 620px at 50% -12%, #0b3a7a 0%, var(--bg) 56%) fixed, var(--bg);
+    color: var(--txt); line-height: 1.5; -webkit-font-smoothing: antialiased; padding-bottom: 60px;
   }
   .wrap { max-width: 1120px; margin: 0 auto; padding: 0 18px; }
-  .display { font-family: 'Oswald', sans-serif; letter-spacing: .5px; text-transform: uppercase; }
+  a { color: var(--blue); }
 
-  /* header */
-  header.top {
-    border-bottom: 1px solid var(--line);
-    background: linear-gradient(180deg, rgba(25,195,125,.08), transparent);
-    padding: 26px 0 22px;
-  }
+  header.top { border-bottom: 1px solid var(--line); background: linear-gradient(180deg, rgba(43,140,255,.10), transparent); padding: 24px 0 20px; }
   .brand { display: flex; align-items: center; gap: 13px; }
-  .brand .mark {
-    width: 46px; height: 46px; border-radius: 11px; flex: none;
-    background: linear-gradient(135deg, var(--green), var(--green-d));
-    display: grid; place-items: center; font-family: 'Oswald'; font-weight: 700; font-size: 22px; color: #04130c;
-    box-shadow: 0 6px 18px rgba(25,195,125,.35);
-  }
+  .brand .mark { width: 48px; height: 48px; border-radius: 11px; flex: none; background: linear-gradient(135deg, var(--blue), var(--blue-d)); display: grid; place-items: center; font-family: 'Oswald'; font-weight: 700; font-size: 19px; color: #fff; box-shadow: 0 6px 18px rgba(43,140,255,.4); letter-spacing: .5px; }
   .brand h1 { font-family: 'Oswald'; font-weight: 700; font-size: 27px; letter-spacing: 1px; text-transform: uppercase; line-height: 1; }
   .brand .sub { color: var(--muted); font-size: 12.5px; letter-spacing: .4px; margin-top: 3px; }
   .updated { margin-left: auto; text-align: right; font-size: 12px; color: var(--muted); }
-  .updated b { color: var(--green); }
+  .updated b { color: var(--blue); }
 
-  /* event strip */
-  .event {
-    margin-top: 22px; display: flex; flex-wrap: wrap; align-items: flex-end; gap: 8px 22px;
-    padding: 20px 22px; border: 1px solid var(--line); border-radius: 16px;
-    background: linear-gradient(120deg, var(--panel), var(--bg2));
-  }
+  .event { margin-top: 20px; display: flex; flex-wrap: wrap; align-items: flex-end; gap: 8px 22px; padding: 20px 22px; border: 1px solid var(--line); border-radius: 16px; background: linear-gradient(120deg, var(--panel), var(--bg2)); }
   .event .ttl { font-family: 'Oswald'; font-weight: 700; font-size: 30px; text-transform: uppercase; line-height: 1.02; }
-  .event .meta { color: var(--muted); font-size: 14px; }
-  .event .meta b { color: var(--txt); font-weight: 600; }
+  .event .meta { color: var(--muted); font-size: 14px; } .event .meta b { color: var(--txt); font-weight: 600; }
   .event .pills { margin-left: auto; display: flex; gap: 8px; flex-wrap: wrap; }
-  .pill { font-size: 12px; padding: 6px 11px; border-radius: 999px; border: 1px solid var(--line); background: rgba(255,255,255,.03); color: var(--muted); }
-  .pill b { color: var(--txt); }
+  .pill { font-size: 12px; padding: 6px 11px; border-radius: 999px; border: 1px solid var(--line); background: rgba(255,255,255,.03); color: var(--muted); } .pill b { color: var(--txt); }
 
-  /* section heads */
-  .shead { display: flex; align-items: center; gap: 14px; margin: 38px 0 16px; }
-  .shead h2 { font-family: 'Oswald'; font-weight: 700; font-size: 21px; letter-spacing: 1px; text-transform: uppercase; white-space: nowrap; }
+  /* let-down alert */
+  .alert { margin-top: 14px; padding: 13px 16px; border-radius: 12px; border: 1px solid rgba(242,193,78,.35); background: rgba(242,193,78,.10); font-size: 13.5px; color: #f6d99b; display:flex; gap:10px; align-items:flex-start; }
+  .alert b { color: var(--gold); }
+  .alert .ic { font-size: 16px; }
+
+  /* tabs */
+  .tabs { display: flex; gap: 6px; margin: 22px 0 6px; border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+  .tab { font-family: 'Oswald'; font-weight: 600; letter-spacing: .6px; text-transform: uppercase; font-size: 14px; color: var(--muted); background: none; border: none; padding: 11px 16px; cursor: pointer; border-bottom: 2px solid transparent; }
+  .tab:hover { color: var(--txt); }
+  .tab.active { color: var(--blue); border-bottom-color: var(--blue); }
+  .panel-tab { display: none; } .panel-tab.active { display: block; }
+
+  .shead { display: flex; align-items: center; gap: 14px; margin: 30px 0 15px; }
+  .shead h2 { font-family: 'Oswald'; font-weight: 700; font-size: 20px; letter-spacing: 1px; text-transform: uppercase; white-space: nowrap; }
   .shead .ln { height: 1px; background: var(--line); flex: 1; }
   .shead .tag { font-size: 12px; color: var(--muted); white-space: nowrap; }
-  .accent-green h2 { color: var(--green); }
-  .accent-gold h2 { color: var(--gold); }
+  .accent-blue h2 { color: var(--blue); } .accent-gold h2 { color: var(--gold); }
 
-  /* course profile */
-  .course { display: grid; grid-template-columns: 1.3fr 1fr; gap: 18px; }
   .card-base { border: 1px solid var(--line); border-radius: 16px; background: linear-gradient(160deg, var(--panel), var(--bg2)); box-shadow: var(--shadow); }
-  .course .info { padding: 20px 22px; }
-  .course .arche { font-family: 'Oswald'; font-weight: 600; text-transform: uppercase; letter-spacing: .8px; color: var(--green); font-size: 15px; }
-  .course .summary { margin: 9px 0 14px; color: #cfe0d8; font-size: 14.5px; }
-  .chips { display: flex; flex-wrap: wrap; gap: 8px; }
-  .chip { font-size: 12.5px; padding: 6px 11px; border-radius: 8px; background: rgba(25,195,125,.10); border: 1px solid rgba(25,195,125,.22); color: #b6e9cf; }
-  .weights { padding: 20px 22px; }
-  .weights .wt-h { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 14px; }
-  .wbar { margin-bottom: 13px; }
-  .wbar .lab { display: flex; justify-content: space-between; font-size: 12.5px; margin-bottom: 5px; }
-  .wbar .lab span:last-child { color: var(--green); font-weight: 600; }
-  .track { height: 8px; background: rgba(255,255,255,.06); border-radius: 6px; overflow: hidden; }
-  .track > i { display: block; height: 100%; border-radius: 6px; background: linear-gradient(90deg, var(--green-d), var(--green)); }
 
-  /* pick cards */
+  /* best bet hero */
+  .bestbet { margin-top: 22px; display: grid; grid-template-columns: auto 1fr auto; gap: 22px; align-items: center; padding: 20px 24px; position: relative; overflow: hidden; border-color: rgba(43,140,255,.4); }
+  .bestbet::before { content:''; position:absolute; inset:0; background: linear-gradient(120deg, rgba(43,140,255,.14), transparent 60%); pointer-events:none; }
+  .bestbet .tagline { position:absolute; top:14px; right:18px; font-family:'Oswald'; font-size:11px; letter-spacing:1.5px; color:var(--blue); text-transform:uppercase; }
+  .bestbet .shot { width: 92px; height: 92px; border-radius: 50%; object-fit: cover; border: 3px solid var(--blue); background:#0c2750; box-shadow:0 6px 18px rgba(0,0,0,.45); }
+  .bestbet .nm { font-family:'Oswald'; font-weight:700; font-size:26px; text-transform:uppercase; line-height:1; }
+  .bestbet .why { color:#cfe0f7; font-size:14px; margin-top:8px; max-width:560px; }
+  .bestbet .bigodds { text-align:right; } .bestbet .bigodds .o { font-family:'Oswald'; font-weight:700; font-size:46px; color:var(--blue); line-height:1; }
+  .bestbet .bigodds .l { font-size:11px; color:var(--muted); text-transform:uppercase; letter-spacing:.6px; }
+
+  .course { display: grid; grid-template-columns: 1.3fr 1fr; gap: 18px; }
+  .course .info { padding: 20px 22px; } .course .arche { font-family: 'Oswald'; font-weight: 600; text-transform: uppercase; letter-spacing: .8px; color: var(--blue); font-size: 15px; }
+  .course .summary { margin: 9px 0 14px; color: #cfe0f7; font-size: 14.5px; }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; } .chip { font-size: 12.5px; padding: 6px 11px; border-radius: 8px; background: rgba(43,140,255,.12); border: 1px solid rgba(43,140,255,.28); color: #bcd8ff; }
+  .weights { padding: 20px 22px; } .weights .wt-h { font-size: 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 14px; }
+  .wbar { margin-bottom: 13px; } .wbar .lab { display: flex; justify-content: space-between; font-size: 12.5px; margin-bottom: 5px; } .wbar .lab span:last-child { color: var(--blue); font-weight: 600; }
+  .track { height: 8px; background: rgba(255,255,255,.07); border-radius: 6px; overflow: hidden; } .track > i { display: block; height: 100%; border-radius: 6px; background: linear-gradient(90deg, var(--blue-d), var(--blue)); }
+
   .grid3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
   .pick { position: relative; overflow: hidden; padding: 0 0 18px; }
-  .pick .ph {
-    position: relative; padding: 18px 18px 14px; display: flex; gap: 14px; align-items: center;
-    border-bottom: 1px solid var(--line);
-    background: linear-gradient(180deg, rgba(25,195,125,.07), transparent);
-  }
-  .gold .ph { background: linear-gradient(180deg, rgba(232,196,104,.09), transparent); }
-  .badge {
-    position: absolute; top: 12px; right: 12px; font-family: 'Oswald'; font-size: 11px; letter-spacing: 1px;
-    padding: 4px 9px; border-radius: 6px; text-transform: uppercase; font-weight: 600;
-    background: var(--green); color: #04130c;
-  }
+  .pick .ph { position: relative; padding: 18px 18px 14px; display: flex; gap: 14px; align-items: center; border-bottom: 1px solid var(--line); background: linear-gradient(180deg, rgba(43,140,255,.08), transparent); }
+  .gold .ph { background: linear-gradient(180deg, rgba(242,193,78,.10), transparent); }
+  .badge { position: absolute; top: 12px; right: 12px; font-family: 'Oswald'; font-size: 11px; letter-spacing: 1px; padding: 4px 9px; border-radius: 6px; text-transform: uppercase; font-weight: 600; background: var(--blue); color: #04142f; }
   .gold .badge { background: var(--gold); color: #1c1402; }
-  .shot {
-    width: 74px; height: 74px; border-radius: 50%; flex: none; object-fit: cover; background: #16271f;
-    border: 2px solid var(--green); box-shadow: 0 4px 14px rgba(0,0,0,.4);
-  }
+  .shot { width: 74px; height: 74px; border-radius: 50%; flex: none; object-fit: cover; background: #0c2750; border: 2px solid var(--blue); box-shadow: 0 4px 14px rgba(0,0,0,.4); }
   .gold .shot { border-color: var(--gold); }
-  .shot.fallback { display: grid; place-items: center; font-family: 'Oswald'; font-size: 22px; color: var(--muted); }
+  .shot.fallback, .tshot.fallback, .bshot.fallback { display: grid; place-items: center; font-family: 'Oswald'; color: var(--muted); }
   .who .nm { font-family: 'Oswald'; font-weight: 600; font-size: 19px; line-height: 1.1; text-transform: uppercase; }
   .who .row2 { margin-top: 6px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
-  .flag { font-size: 10.5px; font-weight: 700; letter-spacing: .6px; padding: 2px 7px; border-radius: 5px; background: rgba(255,255,255,.07); color: var(--muted); }
-  .owgr { font-size: 11.5px; color: var(--muted); }
-  .stars { color: var(--gold); font-size: 13px; letter-spacing: 1px; }
-  .stars .off { color: #3a4f45; }
+  .flag { font-size: 10.5px; font-weight: 700; letter-spacing: .6px; padding: 2px 7px; border-radius: 5px; background: rgba(255,255,255,.08); color: var(--muted); }
+  .owgr { font-size: 11.5px; color: var(--muted); } .stars { color: var(--gold); font-size: 13px; letter-spacing: 1px; } .stars .off { color: #34507f; }
+  .ldflag { margin: 11px 18px 0; padding: 8px 11px; border-radius: 9px; background: rgba(242,193,78,.10); border: 1px solid rgba(242,193,78,.3); font-size: 12px; color: #f4d486; }
 
   .odds-row { display: flex; align-items: baseline; justify-content: space-between; padding: 14px 18px 6px; }
-  .odds-row .odds { font-family: 'Oswald'; font-weight: 700; font-size: 34px; line-height: 1; color: var(--green); }
-  .gold .odds-row .odds { color: var(--gold); }
-  .odds-row .oddlab { font-size: 10.5px; color: var(--muted); text-transform: uppercase; letter-spacing: .8px; text-align: right; }
-  .odds-row .oddlab b { display:block; color: var(--txt); font-size: 13px; }
-
-  .prob { padding: 4px 18px 0; }
-  .prob .track { height: 6px; }
-  .prob .track > i { background: linear-gradient(90deg, #156b46, var(--green)); }
-  .gold .prob .track > i { background: linear-gradient(90deg, var(--gold-d), var(--gold)); }
+  .odds-row .odds { font-family: 'Oswald'; font-weight: 700; font-size: 34px; line-height: 1; color: var(--blue); } .gold .odds-row .odds { color: var(--gold); }
+  .odds-row .oddlab { font-size: 10.5px; color: var(--muted); text-transform: uppercase; letter-spacing: .8px; text-align: right; } .odds-row .oddlab b { display:block; color: var(--txt); font-size: 13px; }
+  .prob { padding: 4px 18px 0; } .prob .track { height: 6px; } .prob .track > i { background: linear-gradient(90deg, #1657b0, var(--blue)); } .gold .prob .track > i { background: linear-gradient(90deg, var(--gold-d), var(--gold)); }
   .prob .pl { display: flex; justify-content: space-between; font-size: 11px; color: var(--muted); margin-top: 5px; }
+  .stake { margin: 12px 18px 0; padding: 10px 12px; border-radius: 10px; background: rgba(255,255,255,.04); border: 1px solid var(--line); font-size: 13px; } .stake .big { font-weight: 700; } .stake .ew { color: var(--muted); font-size: 12px; margin-top: 2px; }
+  .pmini { display:flex; gap:7px; margin: 10px 18px 0; } .pmini .pc { flex:1; text-align:center; padding:6px 4px; border-radius:8px; background:rgba(255,255,255,.03); border:1px solid var(--line); } .pmini .pc .k{font-size:9px;color:var(--muted);text-transform:uppercase;letter-spacing:.4px} .pmini .pc .v{font-family:'Oswald';font-weight:600;font-size:13px;margin-top:2px}
+  .sg { display: grid; grid-template-columns: repeat(4,1fr); gap: 7px; margin: 11px 18px 0; }
+  .sg .cell { text-align: center; padding: 8px 4px; border-radius: 9px; background: rgba(255,255,255,.03); border: 1px solid var(--line); } .sg .cell .k { font-size: 9.5px; color: var(--muted); text-transform: uppercase; letter-spacing: .5px; } .sg .cell .v { font-family: 'Oswald'; font-weight: 600; font-size: 15px; margin-top: 3px; }
+  .pos { color: var(--blue); } .neg { color: var(--red); }
+  .form { margin: 11px 18px 0; font-size: 12.5px; color: var(--muted); } .ar.up { color: var(--blue); } .ar.down { color: var(--red); } .ar.flat { color: var(--muted); } .form .ar { font-weight: 700; }
+  .why2 { margin: 10px 18px 0; font-size: 13px; color: #cfe0f7; }
 
-  .stake { margin: 12px 18px 0; padding: 10px 12px; border-radius: 10px; background: rgba(255,255,255,.04); border: 1px solid var(--line); font-size: 13px; }
-  .stake .big { font-weight: 700; color: var(--txt); }
-  .stake .ew { color: var(--muted); font-size: 12px; margin-top: 2px; }
-
-  .sg { display: grid; grid-template-columns: repeat(4,1fr); gap: 7px; margin: 13px 18px 0; }
-  .sg .cell { text-align: center; padding: 8px 4px; border-radius: 9px; background: rgba(255,255,255,.03); border: 1px solid var(--line); }
-  .sg .cell .k { font-size: 9.5px; color: var(--muted); text-transform: uppercase; letter-spacing: .5px; }
-  .sg .cell .v { font-family: 'Oswald'; font-weight: 600; font-size: 15px; margin-top: 3px; }
-  .pos { color: var(--green); } .neg { color: var(--red); }
-
-  .form { margin: 12px 18px 0; font-size: 12.5px; color: var(--muted); display: flex; align-items: center; gap: 7px; }
-  .form .ar { font-weight: 700; }
-  .ar.up { color: var(--green); } .ar.down { color: var(--red); } .ar.flat { color: var(--muted); }
-  .why { margin: 11px 18px 0; font-size: 13px; color: #cfe0d8; }
-
-  /* bankroll */
   .bank { margin-top: 22px; display: grid; grid-template-columns: repeat(4,1fr); gap: 14px; }
-  .bank .b { padding: 16px 18px; }
-  .bank .b .k { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; }
-  .bank .b .v { font-family: 'Oswald'; font-weight: 700; font-size: 24px; margin-top: 5px; }
-  .bank .b small { color: var(--muted); font-size: 11.5px; }
+  .bank .b { padding: 16px 18px; } .bank .b .k { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; } .bank .b .v { font-family: 'Oswald'; font-weight: 700; font-size: 24px; margin-top: 5px; } .bank .b small { color: var(--muted); font-size: 11.5px; }
 
-  /* field table */
+  /* ew value cards */
+  .grid4 { display:grid; grid-template-columns: repeat(4,1fr); gap:14px; }
+  .ewcard { padding: 16px; text-align:center; border-color: rgba(242,193,78,.3); }
+  .ewcard .bshot { width:60px;height:60px;border-radius:50%;object-fit:cover;border:2px solid var(--gold);background:#0c2750;margin:0 auto 9px; }
+  .ewcard .nm { font-family:'Oswald';font-weight:600;font-size:15px;text-transform:uppercase;line-height:1.1; }
+  .ewcard .o { margin-top:8px;font-family:'Oswald';font-weight:700;font-size:20px;color:var(--gold); }
+  .ewcard .o small { display:block;color:var(--muted);font-size:11px;font-family:'Inter';font-weight:400; }
+  .ewcard .t5 { margin-top:7px;font-size:12px;color:#cfe0f7; } .ewcard .t5 b{color:var(--gold);}
+
+  /* selection columns */
+  .sel3 { display:grid; grid-template-columns: repeat(3,1fr); gap:16px; }
+  .selcol { padding: 6px 4px 10px; } .selcol h3 { font-family:'Oswald'; font-weight:600; text-transform:uppercase; letter-spacing:.6px; font-size:14px; color:var(--blue); padding:12px 14px 8px; }
+  .selrow { display:flex; align-items:center; gap:10px; padding:8px 14px; border-top:1px solid rgba(29,62,114,.5); font-size:13.5px; }
+  .selrow .tshot { width:28px;height:28px;border-radius:50%;object-fit:cover;background:#0c2750; }
+  .selrow .nm { flex:1; } .selrow .od { font-family:'Oswald'; font-weight:600; } .selrow .pr { color:var(--muted); font-size:11.5px; width:42px; text-align:right; }
+
   table { width: 100%; border-collapse: collapse; margin-top: 6px; font-size: 13.5px; }
   thead th { text-align: left; font-size: 10.5px; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); padding: 9px 10px; border-bottom: 1px solid var(--line); }
-  tbody td { padding: 9px 10px; border-bottom: 1px solid rgba(29,58,47,.5); }
-  tbody tr:hover { background: rgba(25,195,125,.05); }
-  .tname { display: flex; align-items: center; gap: 10px; }
-  .tshot { width: 30px; height: 30px; border-radius: 50%; object-fit: cover; background: #16271f; }
-  .rk { color: var(--muted); width: 26px; }
-  td.num { font-family: 'Oswald'; font-weight: 600; }
-  .right { text-align: right; }
+  tbody td { padding: 9px 10px; border-bottom: 1px solid rgba(29,62,114,.5); } tbody tr:hover { background: rgba(43,140,255,.06); }
+  .tname { display: flex; align-items: center; gap: 10px; } .tshot { width: 30px; height: 30px; border-radius: 50%; object-fit: cover; background: #0c2750; }
+  .rk { color: var(--muted); width: 30px; } td.num { font-family: 'Oswald'; font-weight: 600; } .right { text-align: right; }
 
-  .notes { margin-top: 26px; font-size: 12.5px; color: var(--muted); }
-  .notes li { margin: 5px 0 5px 18px; }
-  footer { margin-top: 30px; padding-top: 18px; border-top: 1px solid var(--line); font-size: 12px; color: var(--muted); display:flex; flex-wrap:wrap; gap:10px; justify-content: space-between; }
-  .rg { color: #c7a23a; }
+  .notes { margin-top: 26px; font-size: 12.5px; color: var(--muted); } .notes li { margin: 5px 0 5px 18px; }
+  footer { margin-top: 26px; padding-top: 18px; border-top: 1px solid var(--line); font-size: 12px; color: var(--muted); display:flex; flex-wrap:wrap; gap:10px; justify-content: space-between; }
+  .rg { color: #d7a93a; }
 
-  @media (max-width: 860px) {
-    .course { grid-template-columns: 1fr; }
-    .grid3 { grid-template-columns: 1fr; }
+  @media (max-width: 880px) {
+    .course, .grid3, .sel3 { grid-template-columns: 1fr; }
+    .grid4 { grid-template-columns: repeat(2,1fr); }
     .bank { grid-template-columns: repeat(2,1fr); }
+    .bestbet { grid-template-columns: 1fr; text-align:center; } .bestbet .shot{margin:0 auto;} .bestbet .bigodds{text-align:center;}
     .event .pills { margin-left: 0; }
   }
 </style>
@@ -184,10 +148,7 @@
 <header class="top"><div class="wrap" style="display:flex;align-items:center;gap:14px;">
   <div class="brand">
     <div class="mark">PGA</div>
-    <div>
-      <h1>Betting Board</h1>
-      <div class="sub">Win picks &amp; outside bets &middot; updated every Monday</div>
-    </div>
+    <div><h1>Betting Board</h1><div class="sub">Win, outside &amp; each-way picks &middot; updated every Monday</div></div>
   </div>
   <div class="updated" id="updated"></div>
 </div></header>
@@ -200,15 +161,12 @@ const B = window.BOARD;
 const $ = (h) => { const t = document.createElement('template'); t.innerHTML = h.trim(); return t.content.firstChild; };
 const gbp = (n) => '£' + (Number.isInteger(n) ? n : n.toFixed(2));
 const initials = (nm) => nm.split(' ').map(w=>w[0]).join('').slice(0,2).toUpperCase();
-const sgClass = (v) => v >= 0 ? 'pos' : 'neg';
 const sgFmt = (v) => (v==null||isNaN(v)) ? '–' : (v>=0?'+':'') + v.toFixed(2);
+const sgCls = (v) => v >= 0 ? 'pos' : 'neg';
 const stars = (n) => Array.from({length:5},(_,i)=>i<n?'★':'<span class="off">★</span>').join('');
 const arrow = (t) => t==='up'?'▲ trending up': t==='down'?'▼ cooling off':'▬ steady';
-
-function shotImg(p, cls) {
-  return `<img class="${cls}" src="${p.headshot}" alt="${p.name}" loading="lazy"
-    onerror="this.outerHTML='<div class=\\'${cls} fallback\\'>${initials(p.name)}</div>'">`;
-}
+const pct = (p) => (p*100).toFixed(p<0.1?1:0)+'%';
+function shot(p, cls, size) { return `<img class="${cls}" src="${p.headshot}" alt="${p.name}" loading="lazy" onerror="this.outerHTML='<div class=\\'${cls} fallback\\' style=\\'font-size:${size}px\\'>${initials(p.name)}</div>'">`; }
 
 function pickCard(p, idx, kind) {
   const label = kind==='win' ? 'Pick '+(idx+1) : 'Value '+(idx+1);
@@ -217,125 +175,126 @@ function pickCard(p, idx, kind) {
   <div class="card-base pick ${kind==='out'?'gold':''}">
     <div class="ph">
       <span class="badge">${label}</span>
-      ${shotImg(p,'shot')}
+      ${shot(p,'shot',22)}
       <div class="who">
         <div class="nm">${p.name}${p.dataThin?' <span style="color:var(--gold);font-size:11px">⚠ thin data</span>':''}</div>
-        <div class="row2">
-          <span class="flag">${p.countryFlag||p.country||''}</span>
-          <span class="owgr">OWGR #${p.owgr}</span>
-          <span class="stars">${stars(p.confidence)}</span>
-        </div>
+        <div class="row2"><span class="flag">${p.countryFlag||p.country||''}</span><span class="owgr">OWGR #${p.owgr}</span><span class="stars">${stars(p.confidence)}</span></div>
       </div>
     </div>
-    <div class="odds-row">
-      <div class="odds">${p.modelOdds.fractional}</div>
-      <div class="oddlab">model est.<b>${(p.winProb*100).toFixed(1)}% win</b></div>
-    </div>
-    <div class="prob">
-      <div class="track"><i style="width:${Math.min(100,p.winProb*100*3.2).toFixed(0)}%"></i></div>
-      <div class="pl"><span>win probability</span><span>fair odds from model</span></div>
-    </div>
-    <div class="stake">
-      <div class="big">Stake: ${p.points} pt${p.points>1?'s':''} &middot; ${gbp(p.stakeGBP)} each-way</div>
-      <div class="ew">${gbp(p.ewWin)} win / ${gbp(p.ewPlace)} place &middot; terms: ${B.ewTerms}</div>
+    <div class="odds-row"><div class="odds">${p.win.fractional}</div><div class="oddlab">model est.<b>${pct(p.winProb)} win</b></div></div>
+    <div class="prob"><div class="track"><i style="width:${Math.min(100,p.winProb*100*3.2).toFixed(0)}%"></i></div><div class="pl"><span>win probability</span><span>fair odds from model</span></div></div>
+    ${p.letdownFlag?`<div class="ldflag">⚠ ${p.letdownFlag}</div>`:''}
+    <div class="stake"><div class="big">Stake: ${p.points} pt${p.points>1?'s':''} &middot; ${gbp(p.stakeGBP)} each-way</div><div class="ew">${gbp(p.ewWin)} win / ${gbp(p.ewPlace)} place</div></div>
+    <div class="pmini">
+      <div class="pc"><div class="k">Top 5</div><div class="v">${p.t5.fractional}</div></div>
+      <div class="pc"><div class="k">Top 10</div><div class="v">${p.t10.fractional}</div></div>
+      <div class="pc"><div class="k">Top 20</div><div class="v">${p.t20.fractional}</div></div>
     </div>
     <div class="sg">
-      <div class="cell"><div class="k">Off Tee</div><div class="v ${sgClass(sg.ott)}">${sgFmt(sg.ott)}</div></div>
-      <div class="cell"><div class="k">Approach</div><div class="v ${sgClass(sg.app)}">${sgFmt(sg.app)}</div></div>
-      <div class="cell"><div class="k">Short</div><div class="v ${sgClass(sg.arg)}">${sgFmt(sg.arg)}</div></div>
-      <div class="cell"><div class="k">Putting</div><div class="v ${sgClass(sg.putt)}">${sgFmt(sg.putt)}</div></div>
+      <div class="cell"><div class="k">Off Tee</div><div class="v ${sgCls(sg.ott)}">${sgFmt(sg.ott)}</div></div>
+      <div class="cell"><div class="k">Approach</div><div class="v ${sgCls(sg.app)}">${sgFmt(sg.app)}</div></div>
+      <div class="cell"><div class="k">Short</div><div class="v ${sgCls(sg.arg)}">${sgFmt(sg.arg)}</div></div>
+      <div class="cell"><div class="k">Putting</div><div class="v ${sgCls(sg.putt)}">${sgFmt(sg.putt)}</div></div>
     </div>
-    <div class="form"><span class="ar ${p.trend}">${arrow(p.trend)}</span>
-      ${p.recentEvents?`&middot; ${p.recentSG.toFixed(2)} SG/rd over last ${p.recentEvents} starts`:'&middot; limited recent data'}</div>
-    <div class="why">${p.rationale}</div>
+    <div class="form"><span class="ar ${p.trend}">${arrow(p.trend)}</span> ${p.recentEvents?`&middot; ${p.recentSG.toFixed(2)} SG/rd over last ${p.recentEvents} starts`:'&middot; limited recent data'}</div>
+    <div class="why2">${p.rationale}</div>
   </div>`);
 }
 
-function render() {
-  document.getElementById('updated').innerHTML =
-    `Updated<br><b>${new Date(B.generatedAt).toLocaleDateString('en-GB',{weekday:'short',day:'numeric',month:'short'})}</b>`;
+function selCol(title, list, market) {
+  const rows = list.map(p=>`<div class="selrow">${shot(p,'tshot',11)}<span class="nm">${p.name}</span><span class="od">${p[market].fractional}</span><span class="pr">${pct(p[market].prob)}</span></div>`).join('');
+  return `<div class="card-base selcol"><h3>${title}</h3>${rows}</div>`;
+}
 
+function render() {
+  document.getElementById('updated').innerHTML = `Updated<br><b>${new Date(B.generatedAt).toLocaleDateString('en-GB',{weekday:'short',day:'numeric',month:'short'})}</b>`;
   const app = document.getElementById('app');
   const cp = B.courseProfile;
   const wlabels = {ott:'Off the tee',app:'Approach play',arg:'Short game',putt:'Putting'};
 
-  app.appendChild($(`
-    <div class="event">
-      <div>
-        <div class="ttl">${B.event.name}</div>
-        <div class="meta"><b>${B.event.course||''}</b> ${B.event.city?'&middot; '+B.event.city+', '+(B.event.state||''):''}</div>
-      </div>
-      <div class="pills">
-        ${B.event.dateRange?`<span class="pill"><b>${B.event.dateRange}</b></span>`:''}
-        <span class="pill">Field <b>${B.event.fieldSize}</b></span>
-        ${cp.par?`<span class="pill">Par <b>${cp.par}</b></span>`:''}
-        ${cp.yards?`<span class="pill"><b>${cp.yards.toLocaleString()}</b> yds</span>`:''}
-      </div>
-    </div>`));
+  // event strip
+  app.appendChild($(`<div class="event"><div><div class="ttl">${B.event.name}</div><div class="meta"><b>${B.event.course||''}</b> ${B.event.city?'&middot; '+B.event.city+', '+(B.event.state||''):''}</div></div>
+    <div class="pills">${B.event.dateRange?`<span class="pill"><b>${B.event.dateRange}</b></span>`:''}<span class="pill">Field <b>${B.event.fieldSize}</b></span>${cp.par?`<span class="pill">Par <b>${cp.par}</b></span>`:''}${cp.yards?`<span class="pill"><b>${cp.yards.toLocaleString()}</b> yds</span>`:''}</div></div>`));
 
-  // course profile
-  app.appendChild($(`<div class="shead accent-green"><h2>The Course</h2><div class="ln"></div><div class="tag">what wins here drives the model</div></div>`));
-  // normalise bar widths to the strongest-weighted skill so it fills the bar
+  // post-major alert
+  if (B.previousEvent && B.previousEvent.isMajor)
+    app.appendChild($(`<div class="alert"><span class="ic">⚠</span><div><b>Post-major week.</b> Last week was the ${B.previousEvent.name} (a major). History says contenders - and especially the winner, ${B.previousEvent.champion} - rarely fire again the very next week, so the model fades them. Watch for the let-down flags below.</div></div>`));
+
+  // tabs
+  app.appendChild($(`<div class="tabs">
+    <button class="tab active" data-tab="picks">Win &amp; Outside</button>
+    <button class="tab" data-tab="places">Each-Way &amp; Places</button>
+    <button class="tab" data-tab="rankings">World Rankings</button>
+  </div>`));
+
+  // ---------- TAB 1: PICKS ----------
+  const t1 = $(`<div class="panel-tab active" id="tab-picks"></div>`);
+  const bb = B.bestBet;
+  if (bb) t1.appendChild($(`<div class="card-base bestbet">
+    <span class="tagline">★ Best Bet of the Week</span>
+    ${shot(bb,'shot',26)}
+    <div><div class="nm">${bb.name}</div><div class="why">${bb.rationale} Strong each-way shout: places (top 5) about ${pct(bb.p5)} of the time at this price.</div></div>
+    <div class="bigodds"><div class="o">${bb.win.fractional}</div><div class="l">${pct(bb.winProb)} win &middot; T5 ${bb.t5.fractional}</div></div>
+  </div>`));
+
+  t1.appendChild($(`<div class="shead accent-blue"><h2>The Course</h2><div class="ln"></div><div class="tag">what wins here drives the model</div></div>`));
   const maxW = Math.max(...Object.values(cp.weights));
-  const bars = ['app','ott','arg','putt'].sort((a,b)=>cp.weights[b]-cp.weights[a]).map(k=>
-    `<div class="wbar"><div class="lab"><span>${wlabels[k]}</span><span>${Math.round(cp.weights[k]*100)}%</span></div>
-     <div class="track"><i style="width:${(cp.weights[k]/maxW*100).toFixed(0)}%"></i></div></div>`).join('');
-  app.appendChild($(`
-    <div class="course">
-      <div class="card-base info">
-        <div class="arche">${cp.archetype}</div>
-        <div class="summary">${cp.summary}</div>
-        <div class="chips">${cp.tags.map(t=>`<span class="chip">${t}</span>`).join('')}</div>
-      </div>
-      <div class="card-base weights">
-        <div class="wt-h">Skill weighting the model uses</div>
-        ${bars}
-      </div>
-    </div>`));
+  const bars = ['app','ott','arg','putt'].sort((a,b)=>cp.weights[b]-cp.weights[a]).map(k=>`<div class="wbar"><div class="lab"><span>${wlabels[k]}</span><span>${Math.round(cp.weights[k]*100)}%</span></div><div class="track"><i style="width:${(cp.weights[k]/maxW*100).toFixed(0)}%"></i></div></div>`).join('');
+  t1.appendChild($(`<div class="course"><div class="card-base info"><div class="arche">${cp.archetype}</div><div class="summary">${cp.summary}</div><div class="chips">${cp.tags.map(t=>`<span class="chip">${t}</span>`).join('')}</div></div><div class="card-base weights"><div class="wt-h">Skill weighting the model uses</div>${bars}</div></div>`));
 
-  // win picks
-  app.appendChild($(`<div class="shead accent-green"><h2>3 To Win</h2><div class="ln"></div><div class="tag">backed each-way</div></div>`));
-  const g1 = $(`<div class="grid3"></div>`);
-  B.winPicks.forEach((p,i)=>g1.appendChild(pickCard(p,i,'win')));
-  app.appendChild(g1);
+  t1.appendChild($(`<div class="shead accent-blue"><h2>3 To Win</h2><div class="ln"></div><div class="tag">backed each-way</div></div>`));
+  const g1 = $(`<div class="grid3"></div>`); B.winPicks.forEach((p,i)=>g1.appendChild(pickCard(p,i,'win'))); t1.appendChild(g1);
 
-  // outside bets
-  app.appendChild($(`<div class="shead accent-gold"><h2>3 Outside Bets</h2><div class="ln"></div><div class="tag">value at a bigger price</div></div>`));
-  const g2 = $(`<div class="grid3"></div>`);
-  B.outsidePicks.forEach((p,i)=>g2.appendChild(pickCard(p,i,'out')));
-  app.appendChild(g2);
+  t1.appendChild($(`<div class="shead accent-gold"><h2>3 Outside Bets</h2><div class="ln"></div><div class="tag">value at a bigger price</div></div>`));
+  const g2 = $(`<div class="grid3"></div>`); B.outsidePicks.forEach((p,i)=>g2.appendChild(pickCard(p,i,'out'))); t1.appendChild(g2);
 
-  // bankroll
   const bk = B.bankroll;
-  app.appendChild($(`
-    <div class="bank">
-      <div class="card-base b"><div class="k">Bankroll</div><div class="v">${gbp(bk.startGBP)}</div><small>${bk.startPoints} pts &middot; 1 pt = ${gbp(bk.unitGBP)}</small></div>
-      <div class="card-base b"><div class="k">Staked this week</div><div class="v">${gbp(bk.stakedThisWeekGBP)}</div><small>${bk.stakedThisWeekPoints} pts across 6 bets</small></div>
-      <div class="card-base b"><div class="k">Bets</div><div class="v">3 + 3</div><small>win picks + outside</small></div>
-      <div class="card-base b"><div class="k">Event no.</div><div class="v">#${bk.weekNumber}</div><small>of the season</small></div>
-    </div>`));
+  t1.appendChild($(`<div class="bank">
+    <div class="card-base b"><div class="k">Bankroll</div><div class="v">${gbp(bk.startGBP)}</div><small>${bk.startPoints} pts &middot; 1 pt = ${gbp(bk.unitGBP)}</small></div>
+    <div class="card-base b"><div class="k">Staked this week</div><div class="v">${gbp(bk.stakedThisWeekGBP)}</div><small>${bk.stakedThisWeekPoints} pts across 6 bets</small></div>
+    <div class="card-base b"><div class="k">Each-way terms</div><div class="v">5 / ⅕</div><small>5 places at 1/5 odds</small></div>
+    <div class="card-base b"><div class="k">Event no.</div><div class="v">#${bk.weekNumber}</div><small>of the season</small></div>
+  </div>`));
 
-  // field watch
-  app.appendChild($(`<div class="shead accent-green"><h2>Field Watch</h2><div class="ln"></div><div class="tag">model top 15</div></div>`));
-  const rows = B.fieldRanking.map(p=>`
-    <tr>
-      <td class="rk">${p.modelRank}</td>
-      <td><div class="tname">${shotImg(p,'tshot')}<span>${p.name}</span></div></td>
-      <td class="num right">${p.modelOdds.fractional}</td>
-      <td class="num right">${(p.winProb*100).toFixed(1)}%</td>
-      <td class="right ${p.trend==='up'?'pos':p.trend==='down'?'neg':''}">${p.trend==='up'?'▲':p.trend==='down'?'▼':'▬'} ${p.recentEvents?p.recentSG.toFixed(2):'–'}</td>
-    </tr>`).join('');
-  app.appendChild($(`<div class="card-base" style="padding:6px 14px 10px;overflow-x:auto">
-    <table><thead><tr><th></th><th>Player</th><th class="right">Model odds</th><th class="right">Win%</th><th class="right">Recent SG</th></tr></thead>
-    <tbody>${rows}</tbody></table></div>`));
+  t1.appendChild($(`<div class="shead accent-blue"><h2>Field Watch</h2><div class="ln"></div><div class="tag">model top 15</div></div>`));
+  const fr = B.fieldRanking.map(p=>`<tr><td class="rk">${p.modelRank}</td><td><div class="tname">${shot(p,'tshot',11)}<span>${p.name}</span></div></td><td class="num right">${p.win.fractional}</td><td class="num right">${pct(p.winProb)}</td><td class="right ${p.trend==='up'?'pos':p.trend==='down'?'neg':''}">${p.trend==='up'?'▲':p.trend==='down'?'▼':'▬'} ${p.recentEvents?p.recentSG.toFixed(2):'–'}</td></tr>`).join('');
+  t1.appendChild($(`<div class="card-base" style="padding:6px 14px 10px;overflow-x:auto"><table><thead><tr><th></th><th>Player</th><th class="right">Win odds</th><th class="right">Win%</th><th class="right">Recent SG</th></tr></thead><tbody>${fr}</tbody></table></div>`));
+  app.appendChild(t1);
 
-  // notes + footer
-  app.appendChild($(`<ul class="notes">${B.notes.map(n=>`<li>${n}</li>`).join('')}
-    <li>Recent form uses the last 5 events: ${B.recentEventsUsed.join(', ')}.</li></ul>`));
-  app.appendChild($(`<footer>
-    <span>Data: pgatour.com strokes-gained &middot; model estimates, not financial advice.</span>
-    <span class="rg">18+ &middot; Bet responsibly &middot; begambleaware.org</span>
-  </footer>`));
+  // ---------- TAB 2: PLACES ----------
+  const t2 = $(`<div class="panel-tab" id="tab-places"></div>`);
+  t2.appendChild($(`<div class="shead accent-gold"><h2>Best Each-Way Value</h2><div class="ln"></div><div class="tag">place far more often than they win</div></div>`));
+  const g4 = $(`<div class="grid4"></div>`);
+  B.eachWayValue.forEach(p=>g4.appendChild($(`<div class="card-base ewcard">${shot(p,'bshot',16)}<div class="nm">${p.name}</div><div class="o">${p.win.fractional}<small>to win &middot; ${pct(p.winProb)}</small></div><div class="t5">Top 5: <b>${p.t5.fractional}</b> (${pct(p.p5)})</div></div>`)));
+  t2.appendChild(g4);
+
+  t2.appendChild($(`<div class="shead accent-blue"><h2>Place Selections</h2><div class="ln"></div><div class="tag">model odds &amp; chance per market</div></div>`));
+  t2.appendChild($(`<div class="sel3">${selCol('To Finish Top 5', B.top5Sel,'t5')}${selCol('To Finish Top 10', B.top10Sel,'t10')}${selCol('To Finish Top 20', B.top20Sel,'t20')}</div>`));
+
+  t2.appendChild($(`<div class="shead accent-blue"><h2>Full Market Board</h2><div class="ln"></div><div class="tag">fair odds, all markets</div></div>`));
+  const pr = B.placesTable.map(p=>`<tr><td class="rk">${p.modelRank}</td><td><div class="tname">${shot(p,'tshot',11)}<span>${p.name}${p.letdownFlag?' <span style="color:var(--gold)">⚠</span>':''}</span></div></td><td class="num right">${p.win.fractional}</td><td class="num right">${p.t5.fractional}</td><td class="num right">${p.t10.fractional}</td><td class="num right">${p.t20.fractional}</td></tr>`).join('');
+  t2.appendChild($(`<div class="card-base" style="padding:6px 14px 10px;overflow-x:auto"><table><thead><tr><th></th><th>Player</th><th class="right">Win</th><th class="right">Top 5</th><th class="right">Top 10</th><th class="right">Top 20</th></tr></thead><tbody>${pr}</tbody></table></div>`));
+  app.appendChild(t2);
+
+  // ---------- TAB 3: RANKINGS ----------
+  const t3 = $(`<div class="panel-tab" id="tab-rankings"></div>`);
+  t3.appendChild($(`<div class="shead accent-blue"><h2>Official World Golf Ranking</h2><div class="ln"></div><div class="tag">this week's field &middot; reference</div></div>`));
+  const wr = B.worldRankings.map(w=>`<tr><td class="rk">${w.owgr}</td><td><div class="tname"><img class="tshot" src="${w.headshot}" loading="lazy" onerror="this.style.visibility='hidden'"><span>${w.name}</span></div></td><td>${w.country||''}</td><td class="num right">${w.winOdds}</td></tr>`).join('');
+  t3.appendChild($(`<div class="card-base" style="padding:6px 14px 10px;overflow-x:auto"><table><thead><tr><th>OWGR</th><th>Player</th><th>Country</th><th class="right">Win odds (this week)</th></tr></thead><tbody>${wr}</tbody></table></div>`));
+  app.appendChild(t3);
+
+  // notes + footer (always visible)
+  app.appendChild($(`<ul class="notes">${B.notes.map(n=>`<li>${n}</li>`).join('')}<li>Recent form uses the last 5 events: ${B.recentEventsUsed.join(', ')}.</li></ul>`));
+  app.appendChild($(`<footer><span>Data: pgatour.com strokes-gained &middot; model estimates, not financial advice.</span><span class="rg">18+ &middot; Bet responsibly &middot; begambleaware.org</span></footer>`));
+
+  // tab switching
+  document.querySelectorAll('.tab').forEach(btn=>btn.addEventListener('click',()=>{
+    document.querySelectorAll('.tab').forEach(b=>b.classList.remove('active'));
+    document.querySelectorAll('.panel-tab').forEach(p=>p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('tab-'+btn.dataset.tab).classList.add('active');
+    window.scrollTo({top:0,behavior:'smooth'});
+  }));
 }
 render();
 </script>

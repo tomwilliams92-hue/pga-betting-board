@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-22T19:38:06.183Z",
+  "generatedAt": "2026-06-22T20:05:35.662Z",
   "event": {
     "id": "R2026034",
     "name": "Travelers Championship",
@@ -34,6 +34,11 @@
     "Charles Schwab Challenge",
     "THE CJ CUP Byron Nelson"
   ],
+  "previousEvent": {
+    "name": "U.S. Open",
+    "isMajor": true,
+    "champion": "Wyndham Clark"
+  },
   "winPicks": [
     {
       "playerId": "46046",
@@ -60,58 +65,42 @@
       "owgrZ": 3.4764710836370174,
       "trendRaw": 0.4793333333333334,
       "trend": "up",
-      "composite": 2.0486176729128456,
-      "winProb": 0.2450243359627537,
-      "modelOdds": {
-        "decimal": 4.081227262878944,
-        "fractional": "3/1"
+      "composite": 1.8486176729128456,
+      "_prevRank": 5,
+      "letdownPenalty": 0.2,
+      "letdownFlag": "Contended at the U.S. Open (major) last week - fatigue/hangover risk",
+      "winProb": 0.15915,
+      "p5": 0.5946,
+      "p10": 0.8566,
+      "p20": 0.99035,
+      "win": {
+        "prob": 0.15915,
+        "decimal": 6.283380458686773,
+        "fractional": "11/2"
       },
-      "confidence": 5,
-      "modelRank": 1,
+      "t5": {
+        "prob": 0.5946,
+        "decimal": 1.6818028927009754,
+        "fractional": "4/6"
+      },
+      "t10": {
+        "prob": 0.8566,
+        "decimal": 1.1674060238150827,
+        "fractional": "1/5"
+      },
+      "t20": {
+        "prob": 0.99035,
+        "decimal": 1.0416666666666667,
+        "fractional": "1/5"
+      },
+      "confidence": 4,
       "rationale": "Form in his game: gains on off the tee (+0.68/rd), gains on approach (+0.54/rd). Trending up - recent SG 2.68/rd over last 3 starts, above his season line. A big hitter (313 yds avg).",
+      "ewValue": 3.7360980207351555,
+      "modelRank": 1,
       "points": 3,
       "stakeGBP": 15,
       "ewWin": 7.5,
       "ewPlace": 7.5
-    },
-    {
-      "playerId": "51766",
-      "name": "Wyndham Clark",
-      "country": "United States",
-      "countryFlag": "USA",
-      "owgr": "8",
-      "headshot": "https://pga-tour-res.cloudinary.com/image/upload/c_fill,g_face:center,h_240,w_240,q_auto,f_auto/headshots_51766.png",
-      "sg": {
-        "total": 1.148,
-        "ott": -0.011,
-        "app": 0.567,
-        "arg": 0.352,
-        "putt": 0.239
-      },
-      "drivingDistance": 311.5,
-      "drivingAccuracy": 58.91,
-      "recentSG": 3.51175,
-      "recentEvents": 4,
-      "dataThin": false,
-      "fitScore": 0.6773410996273623,
-      "recentZ": 2.2243925427857967,
-      "seasonZ": 0.9662747368684047,
-      "owgrZ": 1.4454385249832162,
-      "trendRaw": 2.3637500000000005,
-      "trend": "up",
-      "composite": 1.5680251979760385,
-      "winProb": 0.0983204295053975,
-      "modelOdds": {
-        "decimal": 10.170826195842675,
-        "fractional": "9/1"
-      },
-      "confidence": 5,
-      "modelRank": 2,
-      "rationale": "Skillset fits TPC River Highlands: strongest on approach, exactly what wins here. Trending up - recent SG 3.51/rd over last 4 starts, above his season line. A big hitter (312 yds avg).",
-      "points": 2,
-      "stakeGBP": 10,
-      "ewWin": 5,
-      "ewPlace": 5
     },
     {
       "playerId": "37455",
@@ -139,14 +128,96 @@
       "trendRaw": 1.7339999999999998,
       "trend": "up",
       "composite": 1.3029211487484238,
-      "winProb": 0.05941425258881348,
-      "modelOdds": {
-        "decimal": 16.830978366767845,
-        "fractional": "16/1"
+      "winProb": 0.06285,
+      "p5": 0.3027,
+      "p10": 0.5578,
+      "p20": 0.8681,
+      "win": {
+        "prob": 0.06285,
+        "decimal": 15.910898965791567,
+        "fractional": "14/1"
       },
-      "confidence": 5,
-      "modelRank": 3,
+      "t5": {
+        "prob": 0.3027,
+        "decimal": 3.3036009250082587,
+        "fractional": "9/4"
+      },
+      "t10": {
+        "prob": 0.5578,
+        "decimal": 1.7927572606669058,
+        "fractional": "4/5"
+      },
+      "t20": {
+        "prob": 0.8681,
+        "decimal": 1.1519410206197442,
+        "fractional": "1/5"
+      },
+      "confidence": 2,
       "rationale": "Skillset fits TPC River Highlands: strongest on approach, exactly what wins here. Trending up - recent SG 3.08/rd over last 2 starts, above his season line. An accurate driver (70% fairways).",
+      "ewValue": 4.816229116945108,
+      "modelRank": 2,
+      "points": 2,
+      "stakeGBP": 10,
+      "ewWin": 5,
+      "ewPlace": 5
+    },
+    {
+      "playerId": "51766",
+      "name": "Wyndham Clark",
+      "country": "United States",
+      "countryFlag": "USA",
+      "owgr": "8",
+      "headshot": "https://pga-tour-res.cloudinary.com/image/upload/c_fill,g_face:center,h_240,w_240,q_auto,f_auto/headshots_51766.png",
+      "sg": {
+        "total": 1.148,
+        "ott": -0.011,
+        "app": 0.567,
+        "arg": 0.352,
+        "putt": 0.239
+      },
+      "drivingDistance": 311.5,
+      "drivingAccuracy": 58.91,
+      "recentSG": 3.51175,
+      "recentEvents": 4,
+      "dataThin": false,
+      "fitScore": 0.6773410996273623,
+      "recentZ": 2.2243925427857967,
+      "seasonZ": 0.9662747368684047,
+      "owgrZ": 1.4454385249832162,
+      "trendRaw": 2.3637500000000005,
+      "trend": "up",
+      "composite": 1.1480251979760385,
+      "_prevRank": 1,
+      "letdownPenalty": 0.42,
+      "letdownFlag": "Won the U.S. Open last week - winners almost never back up the next week",
+      "winProb": 0.04945,
+      "p5": 0.2457,
+      "p10": 0.4687,
+      "p20": 0.79375,
+      "win": {
+        "prob": 0.04945,
+        "decimal": 20.222446916076844,
+        "fractional": "20/1"
+      },
+      "t5": {
+        "prob": 0.2457,
+        "decimal": 4.07000407000407,
+        "fractional": "3/1"
+      },
+      "t10": {
+        "prob": 0.4687,
+        "decimal": 2.1335609131640707,
+        "fractional": "11/10"
+      },
+      "t20": {
+        "prob": 0.79375,
+        "decimal": 1.2598425196850394,
+        "fractional": "1/4"
+      },
+      "confidence": 2,
+      "rationale": "Skillset fits TPC River Highlands: strongest on approach, exactly what wins here. Trending up - recent SG 3.51/rd over last 4 starts, above his season line. A big hitter (312 yds avg).",
+      "ewValue": 4.968655207280081,
+      "modelRank": 3,
       "points": 2,
       "stakeGBP": 10,
       "ewWin": 5,
@@ -155,45 +226,6 @@
   ],
   "outsidePicks": [
     {
-      "playerId": "47504",
-      "name": "Sam Burns",
-      "country": "United States",
-      "countryFlag": "USA",
-      "owgr": "15",
-      "headshot": "https://pga-tour-res.cloudinary.com/image/upload/c_fill,g_face:center,h_240,w_240,q_auto,f_auto/headshots_47504.png",
-      "sg": {
-        "total": 1.045,
-        "ott": 0.186,
-        "app": 0.233,
-        "arg": -0.06,
-        "putt": 0.687
-      },
-      "drivingDistance": 314.4,
-      "drivingAccuracy": 57.85,
-      "recentSG": 2.6646666666666667,
-      "recentEvents": 3,
-      "dataThin": false,
-      "fitScore": 0.47522656945813296,
-      "recentZ": 1.4345175152159328,
-      "seasonZ": 0.8094663267574143,
-      "owgrZ": 0.8314637493772697,
-      "trendRaw": 1.6196666666666668,
-      "trend": "up",
-      "composite": 1.045604720550639,
-      "winProb": 0.03643875574800151,
-      "modelOdds": {
-        "decimal": 27.443308078784913,
-        "fractional": "25/1"
-      },
-      "confidence": 5,
-      "modelRank": 6,
-      "rationale": "Form in his game: gains on putting (+0.69/rd), gains on approach (+0.23/rd). Trending up - recent SG 2.66/rd over last 3 starts, above his season line. A big hitter (314 yds avg).",
-      "points": 1,
-      "stakeGBP": 5,
-      "ewWin": 2.5,
-      "ewPlace": 2.5
-    },
-    {
       "playerId": "59018",
       "name": "Ryan Gerard",
       "country": "United States",
@@ -219,359 +251,34 @@
       "trendRaw": 2.117,
       "trend": "up",
       "composite": 0.9879728407268702,
-      "winProb": 0.032659388198241296,
-      "modelOdds": {
-        "decimal": 30.61906714020595,
-        "fractional": "28/1"
+      "winProb": 0.0368,
+      "p5": 0.1906,
+      "p10": 0.37925,
+      "p20": 0.69575,
+      "win": {
+        "prob": 0.0368,
+        "decimal": 27.17391304347826,
+        "fractional": "25/1"
       },
-      "confidence": 5,
-      "modelRank": 7,
+      "t5": {
+        "prob": 0.1906,
+        "decimal": 5.246589716684156,
+        "fractional": "4/1"
+      },
+      "t10": {
+        "prob": 0.37925,
+        "decimal": 2.636783124588003,
+        "fractional": "7/4"
+      },
+      "t20": {
+        "prob": 0.69575,
+        "decimal": 1.437297879985627,
+        "fractional": "4/9"
+      },
+      "confidence": 2,
       "rationale": "Skillset fits TPC River Highlands: strongest on approach, exactly what wins here. Trending up - recent SG 2.93/rd over last 2 starts, above his season line.",
-      "points": 1,
-      "stakeGBP": 5,
-      "ewWin": 2.5,
-      "ewPlace": 2.5
-    },
-    {
-      "playerId": "46340",
-      "name": "Alex Smalley",
-      "country": "United States",
-      "countryFlag": "USA",
-      "owgr": "43",
-      "headshot": "https://pga-tour-res.cloudinary.com/image/upload/c_fill,g_face:center,h_240,w_240,q_auto,f_auto/headshots_46340.png",
-      "sg": {
-        "total": 0.808,
-        "ott": 0.085,
-        "app": 0.419,
-        "arg": 0.037,
-        "putt": 0.266
-      },
-      "drivingDistance": 307.1,
-      "drivingAccuracy": 59.2,
-      "recentSG": 2.751,
-      "recentEvents": 1,
-      "dataThin": false,
-      "fitScore": 0.3214667067678918,
-      "recentZ": 1.515020272575734,
-      "seasonZ": 0.44865474232727115,
-      "owgrZ": -0.19716904592149698,
-      "trendRaw": 1.9429999999999998,
-      "trend": "up",
-      "composite": 0.8268201744581443,
-      "winProb": 0.024045365830108106,
-      "modelOdds": {
-        "decimal": 41.58805513983332,
-        "fractional": "40/1"
-      },
-      "confidence": 4,
-      "modelRank": 8,
-      "rationale": "Skillset fits TPC River Highlands: strongest on approach, exactly what wins here. Trending up - recent SG 2.75/rd over last 1 start, above his season line. A big hitter (307 yds avg).",
-      "points": 1,
-      "stakeGBP": 5,
-      "ewWin": 2.5,
-      "ewPlace": 2.5
-    }
-  ],
-  "fieldRanking": [
-    {
-      "playerId": "46046",
-      "name": "Scottie Scheffler",
-      "country": "United States",
-      "countryFlag": "USA",
-      "owgr": "1",
-      "headshot": "https://pga-tour-res.cloudinary.com/image/upload/c_fill,g_face:center,h_240,w_240,q_auto,f_auto/headshots_46046.png",
-      "sg": {
-        "total": 2.204,
-        "ott": 0.68,
-        "app": 0.54,
-        "arg": 0.516,
-        "putt": 0.467
-      },
-      "drivingDistance": 312.8,
-      "drivingAccuracy": 65.25,
-      "recentSG": 2.6833333333333336,
-      "recentEvents": 3,
-      "dataThin": false,
-      "fitScore": 1.3163832475187975,
-      "recentZ": 1.4519235168072413,
-      "seasonZ": 2.5739415434432207,
-      "owgrZ": 3.4764710836370174,
-      "trendRaw": 0.4793333333333334,
-      "trend": "up",
-      "composite": 2.0486176729128456,
-      "winProb": 0.2450243359627537,
-      "modelOdds": {
-        "decimal": 4.081227262878944,
-        "fractional": "3/1"
-      },
-      "confidence": 5,
-      "modelRank": 1,
-      "rationale": "Form in his game: gains on off the tee (+0.68/rd), gains on approach (+0.54/rd). Trending up - recent SG 2.68/rd over last 3 starts, above his season line. A big hitter (313 yds avg).",
-      "points": 3,
-      "stakeGBP": 15,
-      "ewWin": 7.5,
-      "ewPlace": 7.5
-    },
-    {
-      "playerId": "51766",
-      "name": "Wyndham Clark",
-      "country": "United States",
-      "countryFlag": "USA",
-      "owgr": "8",
-      "headshot": "https://pga-tour-res.cloudinary.com/image/upload/c_fill,g_face:center,h_240,w_240,q_auto,f_auto/headshots_51766.png",
-      "sg": {
-        "total": 1.148,
-        "ott": -0.011,
-        "app": 0.567,
-        "arg": 0.352,
-        "putt": 0.239
-      },
-      "drivingDistance": 311.5,
-      "drivingAccuracy": 58.91,
-      "recentSG": 3.51175,
-      "recentEvents": 4,
-      "dataThin": false,
-      "fitScore": 0.6773410996273623,
-      "recentZ": 2.2243925427857967,
-      "seasonZ": 0.9662747368684047,
-      "owgrZ": 1.4454385249832162,
-      "trendRaw": 2.3637500000000005,
-      "trend": "up",
-      "composite": 1.5680251979760385,
-      "winProb": 0.0983204295053975,
-      "modelOdds": {
-        "decimal": 10.170826195842675,
-        "fractional": "9/1"
-      },
-      "confidence": 5,
-      "modelRank": 2,
-      "rationale": "Skillset fits TPC River Highlands: strongest on approach, exactly what wins here. Trending up - recent SG 3.51/rd over last 4 starts, above his season line. A big hitter (312 yds avg).",
-      "points": 2,
-      "stakeGBP": 10,
-      "ewWin": 5,
-      "ewPlace": 5
-    },
-    {
-      "playerId": "37455",
-      "name": "Si Woo Kim",
-      "country": "Republic of Korea",
-      "countryFlag": "KOR",
-      "owgr": "21",
-      "headshot": "https://pga-tour-res.cloudinary.com/image/upload/c_fill,g_face:center,h_240,w_240,q_auto,f_auto/headshots_37455.png",
-      "sg": {
-        "total": 1.348,
-        "ott": 0.504,
-        "app": 0.735,
-        "arg": 0.243,
-        "putt": -0.135
-      },
-      "drivingDistance": 300.5,
-      "drivingAccuracy": 69.91,
-      "recentSG": 3.082,
-      "recentEvents": 2,
-      "dataThin": false,
-      "fitScore": 0.6616193808702722,
-      "recentZ": 1.8236659793644698,
-      "seasonZ": 1.2707570865984839,
-      "owgrZ": 0.5028245191016788,
-      "trendRaw": 1.7339999999999998,
-      "trend": "up",
-      "composite": 1.3029211487484238,
-      "winProb": 0.05941425258881348,
-      "modelOdds": {
-        "decimal": 16.830978366767845,
-        "fractional": "16/1"
-      },
-      "confidence": 5,
-      "modelRank": 3,
-      "rationale": "Skillset fits TPC River Highlands: strongest on approach, exactly what wins here. Trending up - recent SG 3.08/rd over last 2 starts, above his season line. An accurate driver (70% fairways).",
-      "points": 2,
-      "stakeGBP": 10,
-      "ewWin": 5,
-      "ewPlace": 5
-    },
-    {
-      "playerId": "30911",
-      "name": "Tommy Fleetwood",
-      "country": "England",
-      "countryFlag": "ENG",
-      "owgr": "7",
-      "headshot": "https://pga-tour-res.cloudinary.com/image/upload/c_fill,g_face:center,h_240,w_240,q_auto,f_auto/headshots_30911.png",
-      "sg": {
-        "total": 1.408,
-        "ott": 0.462,
-        "app": 0.281,
-        "arg": 0.534,
-        "putt": 0.131
-      },
-      "drivingDistance": 303,
-      "drivingAccuracy": 69.29,
-      "recentSG": 2.4146666666666667,
-      "recentEvents": 3,
-      "dataThin": false,
-      "fitScore": 0.6287319482180471,
-      "recentZ": 1.2014014224751959,
-      "seasonZ": 1.362101791517507,
-      "owgrZ": 1.575861333505018,
-      "trendRaw": 1.0066666666666668,
-      "trend": "up",
-      "composite": 1.1787877740288815,
-      "winProb": 0.04693110748532915,
-      "modelOdds": {
-        "decimal": 21.307828721335927,
-        "fractional": "20/1"
-      },
-      "confidence": 5,
-      "modelRank": 4,
-      "rationale": "Form in his game: gains on around the green (+0.53/rd), gains on off the tee (+0.46/rd). Trending up - recent SG 2.41/rd over last 3 starts, above his season line. An accurate driver (69% fairways)."
-    },
-    {
-      "playerId": "40098",
-      "name": "Matt Fitzpatrick",
-      "country": "England",
-      "countryFlag": "ENG",
-      "owgr": "4",
-      "headshot": "https://pga-tour-res.cloudinary.com/image/upload/c_fill,g_face:center,h_240,w_240,q_auto,f_auto/headshots_40098.png",
-      "sg": {
-        "total": 1.486,
-        "ott": 0.23,
-        "app": 0.776,
-        "arg": 0.557,
-        "putt": -0.078
-      },
-      "drivingDistance": 305.8,
-      "drivingAccuracy": 67.05,
-      "recentSG": 1.4146666666666665,
-      "recentEvents": 3,
-      "dataThin": false,
-      "fitScore": 0.8941963439092617,
-      "recentZ": 0.26893705151224734,
-      "seasonZ": 1.480849907912238,
-      "owgrZ": 2.1224493778678166,
-      "trendRaw": -0.07133333333333347,
-      "trend": "flat",
-      "composite": 1.1008146008968471,
-      "winProb": 0.04046881587944312,
-      "modelOdds": {
-        "decimal": 24.71038448416694,
-        "fractional": "25/1"
-      },
-      "confidence": 5,
-      "modelRank": 5,
-      "rationale": "Skillset fits TPC River Highlands: strongest on approach, exactly what wins here. Steady recent SG of 1.41/rd over last 3 starts. A big hitter (306 yds avg)."
-    },
-    {
-      "playerId": "47504",
-      "name": "Sam Burns",
-      "country": "United States",
-      "countryFlag": "USA",
-      "owgr": "15",
-      "headshot": "https://pga-tour-res.cloudinary.com/image/upload/c_fill,g_face:center,h_240,w_240,q_auto,f_auto/headshots_47504.png",
-      "sg": {
-        "total": 1.045,
-        "ott": 0.186,
-        "app": 0.233,
-        "arg": -0.06,
-        "putt": 0.687
-      },
-      "drivingDistance": 314.4,
-      "drivingAccuracy": 57.85,
-      "recentSG": 2.6646666666666667,
-      "recentEvents": 3,
-      "dataThin": false,
-      "fitScore": 0.47522656945813296,
-      "recentZ": 1.4345175152159328,
-      "seasonZ": 0.8094663267574143,
-      "owgrZ": 0.8314637493772697,
-      "trendRaw": 1.6196666666666668,
-      "trend": "up",
-      "composite": 1.045604720550639,
-      "winProb": 0.03643875574800151,
-      "modelOdds": {
-        "decimal": 27.443308078784913,
-        "fractional": "25/1"
-      },
-      "confidence": 5,
+      "ewValue": 5.179347826086956,
       "modelRank": 6,
-      "rationale": "Form in his game: gains on putting (+0.69/rd), gains on approach (+0.23/rd). Trending up - recent SG 2.66/rd over last 3 starts, above his season line. A big hitter (314 yds avg).",
-      "points": 1,
-      "stakeGBP": 5,
-      "ewWin": 2.5,
-      "ewPlace": 2.5
-    },
-    {
-      "playerId": "59018",
-      "name": "Ryan Gerard",
-      "country": "United States",
-      "countryFlag": "USA",
-      "owgr": "27",
-      "headshot": "https://pga-tour-res.cloudinary.com/image/upload/c_fill,g_face:center,h_240,w_240,q_auto,f_auto/headshots_59018.png",
-      "sg": {
-        "total": 0.814,
-        "ott": 0.119,
-        "app": 0.616,
-        "arg": -0.276,
-        "putt": 0.356
-      },
-      "drivingDistance": 304.3,
-      "drivingAccuracy": 62.93,
-      "recentSG": 2.931,
-      "recentEvents": 2,
-      "dataThin": false,
-      "fitScore": 0.38032056336118625,
-      "recentZ": 1.6828638593490648,
-      "seasonZ": 0.45778921281917334,
-      "owgrZ": 0.2573606404270002,
-      "trendRaw": 2.117,
-      "trend": "up",
-      "composite": 0.9879728407268702,
-      "winProb": 0.032659388198241296,
-      "modelOdds": {
-        "decimal": 30.61906714020595,
-        "fractional": "28/1"
-      },
-      "confidence": 5,
-      "modelRank": 7,
-      "rationale": "Skillset fits TPC River Highlands: strongest on approach, exactly what wins here. Trending up - recent SG 2.93/rd over last 2 starts, above his season line.",
-      "points": 1,
-      "stakeGBP": 5,
-      "ewWin": 2.5,
-      "ewPlace": 2.5
-    },
-    {
-      "playerId": "46340",
-      "name": "Alex Smalley",
-      "country": "United States",
-      "countryFlag": "USA",
-      "owgr": "43",
-      "headshot": "https://pga-tour-res.cloudinary.com/image/upload/c_fill,g_face:center,h_240,w_240,q_auto,f_auto/headshots_46340.png",
-      "sg": {
-        "total": 0.808,
-        "ott": 0.085,
-        "app": 0.419,
-        "arg": 0.037,
-        "putt": 0.266
-      },
-      "drivingDistance": 307.1,
-      "drivingAccuracy": 59.2,
-      "recentSG": 2.751,
-      "recentEvents": 1,
-      "dataThin": false,
-      "fitScore": 0.3214667067678918,
-      "recentZ": 1.515020272575734,
-      "seasonZ": 0.44865474232727115,
-      "owgrZ": -0.19716904592149698,
-      "trendRaw": 1.9429999999999998,
-      "trend": "up",
-      "composite": 0.8268201744581443,
-      "winProb": 0.024045365830108106,
-      "modelOdds": {
-        "decimal": 41.58805513983332,
-        "fractional": "40/1"
-      },
-      "confidence": 4,
-      "modelRank": 8,
-      "rationale": "Skillset fits TPC River Highlands: strongest on approach, exactly what wins here. Trending up - recent SG 2.75/rd over last 1 start, above his season line. A big hitter (307 yds avg).",
       "points": 1,
       "stakeGBP": 5,
       "ewWin": 2.5,
@@ -603,14 +310,272 @@
       "trendRaw": 0.4045000000000001,
       "trend": "up",
       "composite": 0.8093391752279022,
-      "winProb": 0.02325984284155187,
-      "modelOdds": {
-        "decimal": 42.99255187629983,
+      "_prevRank": 16,
+      "winProb": 0.02925,
+      "p5": 0.14895,
+      "p10": 0.29675,
+      "p20": 0.587,
+      "win": {
+        "prob": 0.02925,
+        "decimal": 34.18803418803419,
+        "fractional": "33/1"
+      },
+      "t5": {
+        "prob": 0.14895,
+        "decimal": 6.71366230278617,
+        "fractional": "11/2"
+      },
+      "t10": {
+        "prob": 0.29675,
+        "decimal": 3.369839932603201,
+        "fractional": "9/4"
+      },
+      "t20": {
+        "prob": 0.587,
+        "decimal": 1.7035775127768313,
+        "fractional": "8/11"
+      },
+      "confidence": 1,
+      "rationale": "Skillset fits TPC River Highlands: strongest on approach, exactly what wins here. Trending up - recent SG 1.57/rd over last 2 starts, above his season line. A big hitter (305 yds avg).",
+      "ewValue": 5.092307692307692,
+      "modelRank": 7,
+      "points": 1,
+      "stakeGBP": 5,
+      "ewWin": 2.5,
+      "ewPlace": 2.5
+    },
+    {
+      "playerId": "46340",
+      "name": "Alex Smalley",
+      "country": "United States",
+      "countryFlag": "USA",
+      "owgr": "43",
+      "headshot": "https://pga-tour-res.cloudinary.com/image/upload/c_fill,g_face:center,h_240,w_240,q_auto,f_auto/headshots_46340.png",
+      "sg": {
+        "total": 0.808,
+        "ott": 0.085,
+        "app": 0.419,
+        "arg": 0.037,
+        "putt": 0.266
+      },
+      "drivingDistance": 307.1,
+      "drivingAccuracy": 59.2,
+      "recentSG": 2.751,
+      "recentEvents": 1,
+      "dataThin": false,
+      "fitScore": 0.3214667067678918,
+      "recentZ": 1.515020272575734,
+      "seasonZ": 0.44865474232727115,
+      "owgrZ": -0.19716904592149698,
+      "trendRaw": 1.9429999999999998,
+      "trend": "up",
+      "composite": 0.8268201744581443,
+      "winProb": 0.02865,
+      "p5": 0.1491,
+      "p10": 0.3077,
+      "p20": 0.60815,
+      "win": {
+        "prob": 0.02865,
+        "decimal": 34.904013961605585,
+        "fractional": "33/1"
+      },
+      "t5": {
+        "prob": 0.1491,
+        "decimal": 6.706908115358819,
+        "fractional": "11/2"
+      },
+      "t10": {
+        "prob": 0.3077,
+        "decimal": 3.2499187520311996,
+        "fractional": "9/4"
+      },
+      "t20": {
+        "prob": 0.60815,
+        "decimal": 1.6443311682972952,
+        "fractional": "4/6"
+      },
+      "confidence": 1,
+      "rationale": "Skillset fits TPC River Highlands: strongest on approach, exactly what wins here. Trending up - recent SG 2.75/rd over last 1 start, above his season line. A big hitter (307 yds avg).",
+      "ewValue": 5.204188481675393,
+      "modelRank": 8,
+      "points": 1,
+      "stakeGBP": 5,
+      "ewWin": 2.5,
+      "ewPlace": 2.5
+    }
+  ],
+  "bestBet": {
+    "playerId": "37455",
+    "name": "Si Woo Kim",
+    "country": "Republic of Korea",
+    "countryFlag": "KOR",
+    "owgr": "21",
+    "headshot": "https://pga-tour-res.cloudinary.com/image/upload/c_fill,g_face:center,h_240,w_240,q_auto,f_auto/headshots_37455.png",
+    "sg": {
+      "total": 1.348,
+      "ott": 0.504,
+      "app": 0.735,
+      "arg": 0.243,
+      "putt": -0.135
+    },
+    "drivingDistance": 300.5,
+    "drivingAccuracy": 69.91,
+    "recentSG": 3.082,
+    "recentEvents": 2,
+    "dataThin": false,
+    "fitScore": 0.6616193808702722,
+    "recentZ": 1.8236659793644698,
+    "seasonZ": 1.2707570865984839,
+    "owgrZ": 0.5028245191016788,
+    "trendRaw": 1.7339999999999998,
+    "trend": "up",
+    "composite": 1.3029211487484238,
+    "winProb": 0.06285,
+    "p5": 0.3027,
+    "p10": 0.5578,
+    "p20": 0.8681,
+    "win": {
+      "prob": 0.06285,
+      "decimal": 15.910898965791567,
+      "fractional": "14/1"
+    },
+    "t5": {
+      "prob": 0.3027,
+      "decimal": 3.3036009250082587,
+      "fractional": "9/4"
+    },
+    "t10": {
+      "prob": 0.5578,
+      "decimal": 1.7927572606669058,
+      "fractional": "4/5"
+    },
+    "t20": {
+      "prob": 0.8681,
+      "decimal": 1.1519410206197442,
+      "fractional": "1/5"
+    },
+    "confidence": 2,
+    "rationale": "Skillset fits TPC River Highlands: strongest on approach, exactly what wins here. Trending up - recent SG 3.08/rd over last 2 starts, above his season line. An accurate driver (70% fairways).",
+    "ewValue": 4.816229116945108,
+    "modelRank": 2,
+    "points": 2,
+    "stakeGBP": 10,
+    "ewWin": 5,
+    "ewPlace": 5
+  },
+  "eachWayValue": [
+    {
+      "playerId": "47591",
+      "name": "Eric Cole",
+      "country": "United States",
+      "countryFlag": "USA",
+      "owgr": "66",
+      "headshot": "https://pga-tour-res.cloudinary.com/image/upload/c_fill,g_face:center,h_240,w_240,q_auto,f_auto/headshots_47591.png",
+      "sg": {
+        "total": 0.771,
+        "ott": -0.613,
+        "app": 0.253,
+        "arg": 0.471,
+        "putt": 0.66
+      },
+      "drivingDistance": 298.9,
+      "drivingAccuracy": 51.3,
+      "recentSG": 2.138333333333333,
+      "recentEvents": 3,
+      "dataThin": false,
+      "fitScore": 0.5430923150434159,
+      "recentZ": 0.9437304346324342,
+      "seasonZ": 0.3923255076272065,
+      "owgrZ": -0.615649334280512,
+      "trendRaw": 1.3673333333333333,
+      "trend": "up",
+      "composite": 0.7292920310135678,
+      "winProb": 0.02325,
+      "p5": 0.1291,
+      "p10": 0.26955,
+      "p20": 0.5482,
+      "win": {
+        "prob": 0.02325,
+        "decimal": 43.01075268817204,
         "fractional": "40/1"
       },
-      "confidence": 4,
-      "modelRank": 9,
-      "rationale": "Skillset fits TPC River Highlands: strongest on approach, exactly what wins here. Trending up - recent SG 1.57/rd over last 2 starts, above his season line. A big hitter (305 yds avg)."
+      "t5": {
+        "prob": 0.1291,
+        "decimal": 7.74593338497289,
+        "fractional": "13/2"
+      },
+      "t10": {
+        "prob": 0.26955,
+        "decimal": 3.7098868484511223,
+        "fractional": "11/4"
+      },
+      "t20": {
+        "prob": 0.5482,
+        "decimal": 1.8241517694272162,
+        "fractional": "5/6"
+      },
+      "confidence": 1,
+      "rationale": "Form in his game: gains on putting (+0.66/rd), gains on around the green (+0.47/rd). Trending up - recent SG 2.14/rd over last 3 starts, above his season line.",
+      "ewValue": 5.552688172043011,
+      "modelRank": 11
+    },
+    {
+      "playerId": "47504",
+      "name": "Sam Burns",
+      "country": "United States",
+      "countryFlag": "USA",
+      "owgr": "15",
+      "headshot": "https://pga-tour-res.cloudinary.com/image/upload/c_fill,g_face:center,h_240,w_240,q_auto,f_auto/headshots_47504.png",
+      "sg": {
+        "total": 1.045,
+        "ott": 0.186,
+        "app": 0.233,
+        "arg": -0.06,
+        "putt": 0.687
+      },
+      "drivingDistance": 314.4,
+      "drivingAccuracy": 57.85,
+      "recentSG": 2.6646666666666667,
+      "recentEvents": 3,
+      "dataThin": false,
+      "fitScore": 0.47522656945813296,
+      "recentZ": 1.4345175152159328,
+      "seasonZ": 0.8094663267574143,
+      "owgrZ": 0.8314637493772697,
+      "trendRaw": 1.6196666666666668,
+      "trend": "up",
+      "composite": 0.845604720550639,
+      "_prevRank": 2,
+      "letdownPenalty": 0.2,
+      "letdownFlag": "Contended at the U.S. Open (major) last week - fatigue/hangover risk",
+      "winProb": 0.02815,
+      "p5": 0.153,
+      "p10": 0.3163,
+      "p20": 0.61715,
+      "win": {
+        "prob": 0.02815,
+        "decimal": 35.52397868561279,
+        "fractional": "33/1"
+      },
+      "t5": {
+        "prob": 0.153,
+        "decimal": 6.5359477124183005,
+        "fractional": "11/2"
+      },
+      "t10": {
+        "prob": 0.3163,
+        "decimal": 3.161555485298767,
+        "fractional": "9/4"
+      },
+      "t20": {
+        "prob": 0.61715,
+        "decimal": 1.6203516163007374,
+        "fractional": "8/13"
+      },
+      "confidence": 1,
+      "rationale": "Form in his game: gains on putting (+0.69/rd), gains on approach (+0.23/rd). Trending up - recent SG 2.66/rd over last 3 starts, above his season line. A big hitter (314 yds avg).",
+      "ewValue": 5.435168738898756,
+      "modelRank": 9
     },
     {
       "playerId": "46717",
@@ -638,14 +603,1815 @@
       "trendRaw": 2.218,
       "trend": "up",
       "composite": 0.7314477783148314,
-      "winProb": 0.020060139493752856,
-      "modelOdds": {
-        "decimal": 49.85010200509427,
-        "fractional": "50/1"
+      "winProb": 0.02425,
+      "p5": 0.1317,
+      "p10": 0.27215,
+      "p20": 0.54555,
+      "win": {
+        "prob": 0.02425,
+        "decimal": 41.23711340206185,
+        "fractional": "40/1"
+      },
+      "t5": {
+        "prob": 0.1317,
+        "decimal": 7.59301442672741,
+        "fractional": "13/2"
+      },
+      "t10": {
+        "prob": 0.27215,
+        "decimal": 3.6744442403086532,
+        "fractional": "11/4"
+      },
+      "t20": {
+        "prob": 0.54555,
+        "decimal": 1.8330125561360096,
+        "fractional": "5/6"
+      },
+      "confidence": 1,
+      "rationale": "Skillset fits TPC River Highlands: strongest on approach, exactly what wins here. Trending up - recent SG 2.75/rd over last 1 start, above his season line. An accurate driver (66% fairways).",
+      "ewValue": 5.430927835051547,
+      "modelRank": 10
+    },
+    {
+      "playerId": "46340",
+      "name": "Alex Smalley",
+      "country": "United States",
+      "countryFlag": "USA",
+      "owgr": "43",
+      "headshot": "https://pga-tour-res.cloudinary.com/image/upload/c_fill,g_face:center,h_240,w_240,q_auto,f_auto/headshots_46340.png",
+      "sg": {
+        "total": 0.808,
+        "ott": 0.085,
+        "app": 0.419,
+        "arg": 0.037,
+        "putt": 0.266
+      },
+      "drivingDistance": 307.1,
+      "drivingAccuracy": 59.2,
+      "recentSG": 2.751,
+      "recentEvents": 1,
+      "dataThin": false,
+      "fitScore": 0.3214667067678918,
+      "recentZ": 1.515020272575734,
+      "seasonZ": 0.44865474232727115,
+      "owgrZ": -0.19716904592149698,
+      "trendRaw": 1.9429999999999998,
+      "trend": "up",
+      "composite": 0.8268201744581443,
+      "winProb": 0.02865,
+      "p5": 0.1491,
+      "p10": 0.3077,
+      "p20": 0.60815,
+      "win": {
+        "prob": 0.02865,
+        "decimal": 34.904013961605585,
+        "fractional": "33/1"
+      },
+      "t5": {
+        "prob": 0.1491,
+        "decimal": 6.706908115358819,
+        "fractional": "11/2"
+      },
+      "t10": {
+        "prob": 0.3077,
+        "decimal": 3.2499187520311996,
+        "fractional": "9/4"
+      },
+      "t20": {
+        "prob": 0.60815,
+        "decimal": 1.6443311682972952,
+        "fractional": "4/6"
+      },
+      "confidence": 1,
+      "rationale": "Skillset fits TPC River Highlands: strongest on approach, exactly what wins here. Trending up - recent SG 2.75/rd over last 1 start, above his season line. A big hitter (307 yds avg).",
+      "ewValue": 5.204188481675393,
+      "modelRank": 8,
+      "points": 1,
+      "stakeGBP": 5,
+      "ewWin": 2.5,
+      "ewPlace": 2.5
+    }
+  ],
+  "top5Sel": [
+    {
+      "playerId": "46046",
+      "name": "Scottie Scheffler",
+      "country": "United States",
+      "countryFlag": "USA",
+      "owgr": "1",
+      "headshot": "https://pga-tour-res.cloudinary.com/image/upload/c_fill,g_face:center,h_240,w_240,q_auto,f_auto/headshots_46046.png",
+      "sg": {
+        "total": 2.204,
+        "ott": 0.68,
+        "app": 0.54,
+        "arg": 0.516,
+        "putt": 0.467
+      },
+      "drivingDistance": 312.8,
+      "drivingAccuracy": 65.25,
+      "recentSG": 2.6833333333333336,
+      "recentEvents": 3,
+      "dataThin": false,
+      "fitScore": 1.3163832475187975,
+      "recentZ": 1.4519235168072413,
+      "seasonZ": 2.5739415434432207,
+      "owgrZ": 3.4764710836370174,
+      "trendRaw": 0.4793333333333334,
+      "trend": "up",
+      "composite": 1.8486176729128456,
+      "_prevRank": 5,
+      "letdownPenalty": 0.2,
+      "letdownFlag": "Contended at the U.S. Open (major) last week - fatigue/hangover risk",
+      "winProb": 0.15915,
+      "p5": 0.5946,
+      "p10": 0.8566,
+      "p20": 0.99035,
+      "win": {
+        "prob": 0.15915,
+        "decimal": 6.283380458686773,
+        "fractional": "11/2"
+      },
+      "t5": {
+        "prob": 0.5946,
+        "decimal": 1.6818028927009754,
+        "fractional": "4/6"
+      },
+      "t10": {
+        "prob": 0.8566,
+        "decimal": 1.1674060238150827,
+        "fractional": "1/5"
+      },
+      "t20": {
+        "prob": 0.99035,
+        "decimal": 1.0416666666666667,
+        "fractional": "1/5"
       },
       "confidence": 4,
-      "modelRank": 10,
-      "rationale": "Skillset fits TPC River Highlands: strongest on approach, exactly what wins here. Trending up - recent SG 2.75/rd over last 1 start, above his season line. An accurate driver (66% fairways)."
+      "rationale": "Form in his game: gains on off the tee (+0.68/rd), gains on approach (+0.54/rd). Trending up - recent SG 2.68/rd over last 3 starts, above his season line. A big hitter (313 yds avg).",
+      "ewValue": 3.7360980207351555,
+      "modelRank": 1,
+      "points": 3,
+      "stakeGBP": 15,
+      "ewWin": 7.5,
+      "ewPlace": 7.5
+    },
+    {
+      "playerId": "37455",
+      "name": "Si Woo Kim",
+      "country": "Republic of Korea",
+      "countryFlag": "KOR",
+      "owgr": "21",
+      "headshot": "https://pga-tour-res.cloudinary.com/image/upload/c_fill,g_face:center,h_240,w_240,q_auto,f_auto/headshots_37455.png",
+      "sg": {
+        "total": 1.348,
+        "ott": 0.504,
+        "app": 0.735,
+        "arg": 0.243,
+        "putt": -0.135
+      },
+      "drivingDistance": 300.5,
+      "drivingAccuracy": 69.91,
+      "recentSG": 3.082,
+      "recentEvents": 2,
+      "dataThin": false,
+      "fitScore": 0.6616193808702722,
+      "recentZ": 1.8236659793644698,
+      "seasonZ": 1.2707570865984839,
+      "owgrZ": 0.5028245191016788,
+      "trendRaw": 1.7339999999999998,
+      "trend": "up",
+      "composite": 1.3029211487484238,
+      "winProb": 0.06285,
+      "p5": 0.3027,
+      "p10": 0.5578,
+      "p20": 0.8681,
+      "win": {
+        "prob": 0.06285,
+        "decimal": 15.910898965791567,
+        "fractional": "14/1"
+      },
+      "t5": {
+        "prob": 0.3027,
+        "decimal": 3.3036009250082587,
+        "fractional": "9/4"
+      },
+      "t10": {
+        "prob": 0.5578,
+        "decimal": 1.7927572606669058,
+        "fractional": "4/5"
+      },
+      "t20": {
+        "prob": 0.8681,
+        "decimal": 1.1519410206197442,
+        "fractional": "1/5"
+      },
+      "confidence": 2,
+      "rationale": "Skillset fits TPC River Highlands: strongest on approach, exactly what wins here. Trending up - recent SG 3.08/rd over last 2 starts, above his season line. An accurate driver (70% fairways).",
+      "ewValue": 4.816229116945108,
+      "modelRank": 2,
+      "points": 2,
+      "stakeGBP": 10,
+      "ewWin": 5,
+      "ewPlace": 5
+    },
+    {
+      "playerId": "51766",
+      "name": "Wyndham Clark",
+      "country": "United States",
+      "countryFlag": "USA",
+      "owgr": "8",
+      "headshot": "https://pga-tour-res.cloudinary.com/image/upload/c_fill,g_face:center,h_240,w_240,q_auto,f_auto/headshots_51766.png",
+      "sg": {
+        "total": 1.148,
+        "ott": -0.011,
+        "app": 0.567,
+        "arg": 0.352,
+        "putt": 0.239
+      },
+      "drivingDistance": 311.5,
+      "drivingAccuracy": 58.91,
+      "recentSG": 3.51175,
+      "recentEvents": 4,
+      "dataThin": false,
+      "fitScore": 0.6773410996273623,
+      "recentZ": 2.2243925427857967,
+      "seasonZ": 0.9662747368684047,
+      "owgrZ": 1.4454385249832162,
+      "trendRaw": 2.3637500000000005,
+      "trend": "up",
+      "composite": 1.1480251979760385,
+      "_prevRank": 1,
+      "letdownPenalty": 0.42,
+      "letdownFlag": "Won the U.S. Open last week - winners almost never back up the next week",
+      "winProb": 0.04945,
+      "p5": 0.2457,
+      "p10": 0.4687,
+      "p20": 0.79375,
+      "win": {
+        "prob": 0.04945,
+        "decimal": 20.222446916076844,
+        "fractional": "20/1"
+      },
+      "t5": {
+        "prob": 0.2457,
+        "decimal": 4.07000407000407,
+        "fractional": "3/1"
+      },
+      "t10": {
+        "prob": 0.4687,
+        "decimal": 2.1335609131640707,
+        "fractional": "11/10"
+      },
+      "t20": {
+        "prob": 0.79375,
+        "decimal": 1.2598425196850394,
+        "fractional": "1/4"
+      },
+      "confidence": 2,
+      "rationale": "Skillset fits TPC River Highlands: strongest on approach, exactly what wins here. Trending up - recent SG 3.51/rd over last 4 starts, above his season line. A big hitter (312 yds avg).",
+      "ewValue": 4.968655207280081,
+      "modelRank": 3,
+      "points": 2,
+      "stakeGBP": 10,
+      "ewWin": 5,
+      "ewPlace": 5
+    },
+    {
+      "playerId": "40098",
+      "name": "Matt Fitzpatrick",
+      "country": "England",
+      "countryFlag": "ENG",
+      "owgr": "4",
+      "headshot": "https://pga-tour-res.cloudinary.com/image/upload/c_fill,g_face:center,h_240,w_240,q_auto,f_auto/headshots_40098.png",
+      "sg": {
+        "total": 1.486,
+        "ott": 0.23,
+        "app": 0.776,
+        "arg": 0.557,
+        "putt": -0.078
+      },
+      "drivingDistance": 305.8,
+      "drivingAccuracy": 67.05,
+      "recentSG": 1.4146666666666665,
+      "recentEvents": 3,
+      "dataThin": false,
+      "fitScore": 0.8941963439092617,
+      "recentZ": 0.26893705151224734,
+      "seasonZ": 1.480849907912238,
+      "owgrZ": 2.1224493778678166,
+      "trendRaw": -0.07133333333333347,
+      "trend": "flat",
+      "composite": 1.1008146008968471,
+      "_prevRank": 18,
+      "winProb": 0.0473,
+      "p5": 0.2268,
+      "p10": 0.43615,
+      "p20": 0.76335,
+      "win": {
+        "prob": 0.0473,
+        "decimal": 21.14164904862579,
+        "fractional": "20/1"
+      },
+      "t5": {
+        "prob": 0.2268,
+        "decimal": 4.409171075837742,
+        "fractional": "7/2"
+      },
+      "t10": {
+        "prob": 0.43615,
+        "decimal": 2.29278917803508,
+        "fractional": "5/4"
+      },
+      "t20": {
+        "prob": 0.76335,
+        "decimal": 1.3100150651732496,
+        "fractional": "1/3"
+      },
+      "confidence": 2,
+      "rationale": "Skillset fits TPC River Highlands: strongest on approach, exactly what wins here. Steady recent SG of 1.41/rd over last 3 starts. A big hitter (306 yds avg).",
+      "ewValue": 4.79492600422833,
+      "modelRank": 5
+    },
+    {
+      "playerId": "30911",
+      "name": "Tommy Fleetwood",
+      "country": "England",
+      "countryFlag": "ENG",
+      "owgr": "7",
+      "headshot": "https://pga-tour-res.cloudinary.com/image/upload/c_fill,g_face:center,h_240,w_240,q_auto,f_auto/headshots_30911.png",
+      "sg": {
+        "total": 1.408,
+        "ott": 0.462,
+        "app": 0.281,
+        "arg": 0.534,
+        "putt": 0.131
+      },
+      "drivingDistance": 303,
+      "drivingAccuracy": 69.29,
+      "recentSG": 2.4146666666666667,
+      "recentEvents": 3,
+      "dataThin": false,
+      "fitScore": 0.6287319482180471,
+      "recentZ": 1.2014014224751959,
+      "seasonZ": 1.362101791517507,
+      "owgrZ": 1.575861333505018,
+      "trendRaw": 1.0066666666666668,
+      "trend": "up",
+      "composite": 1.0887877740288814,
+      "_prevRank": 8,
+      "letdownPenalty": 0.09,
+      "letdownFlag": "Played the U.S. Open last week - mild fatigue watch",
+      "winProb": 0.048,
+      "p5": 0.2262,
+      "p10": 0.4308,
+      "p20": 0.7531,
+      "win": {
+        "prob": 0.048,
+        "decimal": 20.833333333333332,
+        "fractional": "20/1"
+      },
+      "t5": {
+        "prob": 0.2262,
+        "decimal": 4.420866489832007,
+        "fractional": "7/2"
+      },
+      "t10": {
+        "prob": 0.4308,
+        "decimal": 2.321262766945218,
+        "fractional": "11/8"
+      },
+      "t20": {
+        "prob": 0.7531,
+        "decimal": 1.327844907714779,
+        "fractional": "1/3"
+      },
+      "confidence": 2,
+      "rationale": "Form in his game: gains on around the green (+0.53/rd), gains on off the tee (+0.46/rd). Trending up - recent SG 2.41/rd over last 3 starts, above his season line. An accurate driver (69% fairways).",
+      "ewValue": 4.7125,
+      "modelRank": 4
+    }
+  ],
+  "top10Sel": [
+    {
+      "playerId": "46046",
+      "name": "Scottie Scheffler",
+      "country": "United States",
+      "countryFlag": "USA",
+      "owgr": "1",
+      "headshot": "https://pga-tour-res.cloudinary.com/image/upload/c_fill,g_face:center,h_240,w_240,q_auto,f_auto/headshots_46046.png",
+      "sg": {
+        "total": 2.204,
+        "ott": 0.68,
+        "app": 0.54,
+        "arg": 0.516,
+        "putt": 0.467
+      },
+      "drivingDistance": 312.8,
+      "drivingAccuracy": 65.25,
+      "recentSG": 2.6833333333333336,
+      "recentEvents": 3,
+      "dataThin": false,
+      "fitScore": 1.3163832475187975,
+      "recentZ": 1.4519235168072413,
+      "seasonZ": 2.5739415434432207,
+      "owgrZ": 3.4764710836370174,
+      "trendRaw": 0.4793333333333334,
+      "trend": "up",
+      "composite": 1.8486176729128456,
+      "_prevRank": 5,
+      "letdownPenalty": 0.2,
+      "letdownFlag": "Contended at the U.S. Open (major) last week - fatigue/hangover risk",
+      "winProb": 0.15915,
+      "p5": 0.5946,
+      "p10": 0.8566,
+      "p20": 0.99035,
+      "win": {
+        "prob": 0.15915,
+        "decimal": 6.283380458686773,
+        "fractional": "11/2"
+      },
+      "t5": {
+        "prob": 0.5946,
+        "decimal": 1.6818028927009754,
+        "fractional": "4/6"
+      },
+      "t10": {
+        "prob": 0.8566,
+        "decimal": 1.1674060238150827,
+        "fractional": "1/5"
+      },
+      "t20": {
+        "prob": 0.99035,
+        "decimal": 1.0416666666666667,
+        "fractional": "1/5"
+      },
+      "confidence": 4,
+      "rationale": "Form in his game: gains on off the tee (+0.68/rd), gains on approach (+0.54/rd). Trending up - recent SG 2.68/rd over last 3 starts, above his season line. A big hitter (313 yds avg).",
+      "ewValue": 3.7360980207351555,
+      "modelRank": 1,
+      "points": 3,
+      "stakeGBP": 15,
+      "ewWin": 7.5,
+      "ewPlace": 7.5
+    },
+    {
+      "playerId": "37455",
+      "name": "Si Woo Kim",
+      "country": "Republic of Korea",
+      "countryFlag": "KOR",
+      "owgr": "21",
+      "headshot": "https://pga-tour-res.cloudinary.com/image/upload/c_fill,g_face:center,h_240,w_240,q_auto,f_auto/headshots_37455.png",
+      "sg": {
+        "total": 1.348,
+        "ott": 0.504,
+        "app": 0.735,
+        "arg": 0.243,
+        "putt": -0.135
+      },
+      "drivingDistance": 300.5,
+      "drivingAccuracy": 69.91,
+      "recentSG": 3.082,
+      "recentEvents": 2,
+      "dataThin": false,
+      "fitScore": 0.6616193808702722,
+      "recentZ": 1.8236659793644698,
+      "seasonZ": 1.2707570865984839,
+      "owgrZ": 0.5028245191016788,
+      "trendRaw": 1.7339999999999998,
+      "trend": "up",
+      "composite": 1.3029211487484238,
+      "winProb": 0.06285,
+      "p5": 0.3027,
+      "p10": 0.5578,
+      "p20": 0.8681,
+      "win": {
+        "prob": 0.06285,
+        "decimal": 15.910898965791567,
+        "fractional": "14/1"
+      },
+      "t5": {
+        "prob": 0.3027,
+        "decimal": 3.3036009250082587,
+        "fractional": "9/4"
+      },
+      "t10": {
+        "prob": 0.5578,
+        "decimal": 1.7927572606669058,
+        "fractional": "4/5"
+      },
+      "t20": {
+        "prob": 0.8681,
+        "decimal": 1.1519410206197442,
+        "fractional": "1/5"
+      },
+      "confidence": 2,
+      "rationale": "Skillset fits TPC River Highlands: strongest on approach, exactly what wins here. Trending up - recent SG 3.08/rd over last 2 starts, above his season line. An accurate driver (70% fairways).",
+      "ewValue": 4.816229116945108,
+      "modelRank": 2,
+      "points": 2,
+      "stakeGBP": 10,
+      "ewWin": 5,
+      "ewPlace": 5
+    },
+    {
+      "playerId": "51766",
+      "name": "Wyndham Clark",
+      "country": "United States",
+      "countryFlag": "USA",
+      "owgr": "8",
+      "headshot": "https://pga-tour-res.cloudinary.com/image/upload/c_fill,g_face:center,h_240,w_240,q_auto,f_auto/headshots_51766.png",
+      "sg": {
+        "total": 1.148,
+        "ott": -0.011,
+        "app": 0.567,
+        "arg": 0.352,
+        "putt": 0.239
+      },
+      "drivingDistance": 311.5,
+      "drivingAccuracy": 58.91,
+      "recentSG": 3.51175,
+      "recentEvents": 4,
+      "dataThin": false,
+      "fitScore": 0.6773410996273623,
+      "recentZ": 2.2243925427857967,
+      "seasonZ": 0.9662747368684047,
+      "owgrZ": 1.4454385249832162,
+      "trendRaw": 2.3637500000000005,
+      "trend": "up",
+      "composite": 1.1480251979760385,
+      "_prevRank": 1,
+      "letdownPenalty": 0.42,
+      "letdownFlag": "Won the U.S. Open last week - winners almost never back up the next week",
+      "winProb": 0.04945,
+      "p5": 0.2457,
+      "p10": 0.4687,
+      "p20": 0.79375,
+      "win": {
+        "prob": 0.04945,
+        "decimal": 20.222446916076844,
+        "fractional": "20/1"
+      },
+      "t5": {
+        "prob": 0.2457,
+        "decimal": 4.07000407000407,
+        "fractional": "3/1"
+      },
+      "t10": {
+        "prob": 0.4687,
+        "decimal": 2.1335609131640707,
+        "fractional": "11/10"
+      },
+      "t20": {
+        "prob": 0.79375,
+        "decimal": 1.2598425196850394,
+        "fractional": "1/4"
+      },
+      "confidence": 2,
+      "rationale": "Skillset fits TPC River Highlands: strongest on approach, exactly what wins here. Trending up - recent SG 3.51/rd over last 4 starts, above his season line. A big hitter (312 yds avg).",
+      "ewValue": 4.968655207280081,
+      "modelRank": 3,
+      "points": 2,
+      "stakeGBP": 10,
+      "ewWin": 5,
+      "ewPlace": 5
+    },
+    {
+      "playerId": "40098",
+      "name": "Matt Fitzpatrick",
+      "country": "England",
+      "countryFlag": "ENG",
+      "owgr": "4",
+      "headshot": "https://pga-tour-res.cloudinary.com/image/upload/c_fill,g_face:center,h_240,w_240,q_auto,f_auto/headshots_40098.png",
+      "sg": {
+        "total": 1.486,
+        "ott": 0.23,
+        "app": 0.776,
+        "arg": 0.557,
+        "putt": -0.078
+      },
+      "drivingDistance": 305.8,
+      "drivingAccuracy": 67.05,
+      "recentSG": 1.4146666666666665,
+      "recentEvents": 3,
+      "dataThin": false,
+      "fitScore": 0.8941963439092617,
+      "recentZ": 0.26893705151224734,
+      "seasonZ": 1.480849907912238,
+      "owgrZ": 2.1224493778678166,
+      "trendRaw": -0.07133333333333347,
+      "trend": "flat",
+      "composite": 1.1008146008968471,
+      "_prevRank": 18,
+      "winProb": 0.0473,
+      "p5": 0.2268,
+      "p10": 0.43615,
+      "p20": 0.76335,
+      "win": {
+        "prob": 0.0473,
+        "decimal": 21.14164904862579,
+        "fractional": "20/1"
+      },
+      "t5": {
+        "prob": 0.2268,
+        "decimal": 4.409171075837742,
+        "fractional": "7/2"
+      },
+      "t10": {
+        "prob": 0.43615,
+        "decimal": 2.29278917803508,
+        "fractional": "5/4"
+      },
+      "t20": {
+        "prob": 0.76335,
+        "decimal": 1.3100150651732496,
+        "fractional": "1/3"
+      },
+      "confidence": 2,
+      "rationale": "Skillset fits TPC River Highlands: strongest on approach, exactly what wins here. Steady recent SG of 1.41/rd over last 3 starts. A big hitter (306 yds avg).",
+      "ewValue": 4.79492600422833,
+      "modelRank": 5
+    },
+    {
+      "playerId": "30911",
+      "name": "Tommy Fleetwood",
+      "country": "England",
+      "countryFlag": "ENG",
+      "owgr": "7",
+      "headshot": "https://pga-tour-res.cloudinary.com/image/upload/c_fill,g_face:center,h_240,w_240,q_auto,f_auto/headshots_30911.png",
+      "sg": {
+        "total": 1.408,
+        "ott": 0.462,
+        "app": 0.281,
+        "arg": 0.534,
+        "putt": 0.131
+      },
+      "drivingDistance": 303,
+      "drivingAccuracy": 69.29,
+      "recentSG": 2.4146666666666667,
+      "recentEvents": 3,
+      "dataThin": false,
+      "fitScore": 0.6287319482180471,
+      "recentZ": 1.2014014224751959,
+      "seasonZ": 1.362101791517507,
+      "owgrZ": 1.575861333505018,
+      "trendRaw": 1.0066666666666668,
+      "trend": "up",
+      "composite": 1.0887877740288814,
+      "_prevRank": 8,
+      "letdownPenalty": 0.09,
+      "letdownFlag": "Played the U.S. Open last week - mild fatigue watch",
+      "winProb": 0.048,
+      "p5": 0.2262,
+      "p10": 0.4308,
+      "p20": 0.7531,
+      "win": {
+        "prob": 0.048,
+        "decimal": 20.833333333333332,
+        "fractional": "20/1"
+      },
+      "t5": {
+        "prob": 0.2262,
+        "decimal": 4.420866489832007,
+        "fractional": "7/2"
+      },
+      "t10": {
+        "prob": 0.4308,
+        "decimal": 2.321262766945218,
+        "fractional": "11/8"
+      },
+      "t20": {
+        "prob": 0.7531,
+        "decimal": 1.327844907714779,
+        "fractional": "1/3"
+      },
+      "confidence": 2,
+      "rationale": "Form in his game: gains on around the green (+0.53/rd), gains on off the tee (+0.46/rd). Trending up - recent SG 2.41/rd over last 3 starts, above his season line. An accurate driver (69% fairways).",
+      "ewValue": 4.7125,
+      "modelRank": 4
+    },
+    {
+      "playerId": "59018",
+      "name": "Ryan Gerard",
+      "country": "United States",
+      "countryFlag": "USA",
+      "owgr": "27",
+      "headshot": "https://pga-tour-res.cloudinary.com/image/upload/c_fill,g_face:center,h_240,w_240,q_auto,f_auto/headshots_59018.png",
+      "sg": {
+        "total": 0.814,
+        "ott": 0.119,
+        "app": 0.616,
+        "arg": -0.276,
+        "putt": 0.356
+      },
+      "drivingDistance": 304.3,
+      "drivingAccuracy": 62.93,
+      "recentSG": 2.931,
+      "recentEvents": 2,
+      "dataThin": false,
+      "fitScore": 0.38032056336118625,
+      "recentZ": 1.6828638593490648,
+      "seasonZ": 0.45778921281917334,
+      "owgrZ": 0.2573606404270002,
+      "trendRaw": 2.117,
+      "trend": "up",
+      "composite": 0.9879728407268702,
+      "winProb": 0.0368,
+      "p5": 0.1906,
+      "p10": 0.37925,
+      "p20": 0.69575,
+      "win": {
+        "prob": 0.0368,
+        "decimal": 27.17391304347826,
+        "fractional": "25/1"
+      },
+      "t5": {
+        "prob": 0.1906,
+        "decimal": 5.246589716684156,
+        "fractional": "4/1"
+      },
+      "t10": {
+        "prob": 0.37925,
+        "decimal": 2.636783124588003,
+        "fractional": "7/4"
+      },
+      "t20": {
+        "prob": 0.69575,
+        "decimal": 1.437297879985627,
+        "fractional": "4/9"
+      },
+      "confidence": 2,
+      "rationale": "Skillset fits TPC River Highlands: strongest on approach, exactly what wins here. Trending up - recent SG 2.93/rd over last 2 starts, above his season line.",
+      "ewValue": 5.179347826086956,
+      "modelRank": 6,
+      "points": 1,
+      "stakeGBP": 5,
+      "ewWin": 2.5,
+      "ewPlace": 2.5
+    }
+  ],
+  "top20Sel": [
+    {
+      "playerId": "46046",
+      "name": "Scottie Scheffler",
+      "country": "United States",
+      "countryFlag": "USA",
+      "owgr": "1",
+      "headshot": "https://pga-tour-res.cloudinary.com/image/upload/c_fill,g_face:center,h_240,w_240,q_auto,f_auto/headshots_46046.png",
+      "sg": {
+        "total": 2.204,
+        "ott": 0.68,
+        "app": 0.54,
+        "arg": 0.516,
+        "putt": 0.467
+      },
+      "drivingDistance": 312.8,
+      "drivingAccuracy": 65.25,
+      "recentSG": 2.6833333333333336,
+      "recentEvents": 3,
+      "dataThin": false,
+      "fitScore": 1.3163832475187975,
+      "recentZ": 1.4519235168072413,
+      "seasonZ": 2.5739415434432207,
+      "owgrZ": 3.4764710836370174,
+      "trendRaw": 0.4793333333333334,
+      "trend": "up",
+      "composite": 1.8486176729128456,
+      "_prevRank": 5,
+      "letdownPenalty": 0.2,
+      "letdownFlag": "Contended at the U.S. Open (major) last week - fatigue/hangover risk",
+      "winProb": 0.15915,
+      "p5": 0.5946,
+      "p10": 0.8566,
+      "p20": 0.99035,
+      "win": {
+        "prob": 0.15915,
+        "decimal": 6.283380458686773,
+        "fractional": "11/2"
+      },
+      "t5": {
+        "prob": 0.5946,
+        "decimal": 1.6818028927009754,
+        "fractional": "4/6"
+      },
+      "t10": {
+        "prob": 0.8566,
+        "decimal": 1.1674060238150827,
+        "fractional": "1/5"
+      },
+      "t20": {
+        "prob": 0.99035,
+        "decimal": 1.0416666666666667,
+        "fractional": "1/5"
+      },
+      "confidence": 4,
+      "rationale": "Form in his game: gains on off the tee (+0.68/rd), gains on approach (+0.54/rd). Trending up - recent SG 2.68/rd over last 3 starts, above his season line. A big hitter (313 yds avg).",
+      "ewValue": 3.7360980207351555,
+      "modelRank": 1,
+      "points": 3,
+      "stakeGBP": 15,
+      "ewWin": 7.5,
+      "ewPlace": 7.5
+    },
+    {
+      "playerId": "37455",
+      "name": "Si Woo Kim",
+      "country": "Republic of Korea",
+      "countryFlag": "KOR",
+      "owgr": "21",
+      "headshot": "https://pga-tour-res.cloudinary.com/image/upload/c_fill,g_face:center,h_240,w_240,q_auto,f_auto/headshots_37455.png",
+      "sg": {
+        "total": 1.348,
+        "ott": 0.504,
+        "app": 0.735,
+        "arg": 0.243,
+        "putt": -0.135
+      },
+      "drivingDistance": 300.5,
+      "drivingAccuracy": 69.91,
+      "recentSG": 3.082,
+      "recentEvents": 2,
+      "dataThin": false,
+      "fitScore": 0.6616193808702722,
+      "recentZ": 1.8236659793644698,
+      "seasonZ": 1.2707570865984839,
+      "owgrZ": 0.5028245191016788,
+      "trendRaw": 1.7339999999999998,
+      "trend": "up",
+      "composite": 1.3029211487484238,
+      "winProb": 0.06285,
+      "p5": 0.3027,
+      "p10": 0.5578,
+      "p20": 0.8681,
+      "win": {
+        "prob": 0.06285,
+        "decimal": 15.910898965791567,
+        "fractional": "14/1"
+      },
+      "t5": {
+        "prob": 0.3027,
+        "decimal": 3.3036009250082587,
+        "fractional": "9/4"
+      },
+      "t10": {
+        "prob": 0.5578,
+        "decimal": 1.7927572606669058,
+        "fractional": "4/5"
+      },
+      "t20": {
+        "prob": 0.8681,
+        "decimal": 1.1519410206197442,
+        "fractional": "1/5"
+      },
+      "confidence": 2,
+      "rationale": "Skillset fits TPC River Highlands: strongest on approach, exactly what wins here. Trending up - recent SG 3.08/rd over last 2 starts, above his season line. An accurate driver (70% fairways).",
+      "ewValue": 4.816229116945108,
+      "modelRank": 2,
+      "points": 2,
+      "stakeGBP": 10,
+      "ewWin": 5,
+      "ewPlace": 5
+    },
+    {
+      "playerId": "51766",
+      "name": "Wyndham Clark",
+      "country": "United States",
+      "countryFlag": "USA",
+      "owgr": "8",
+      "headshot": "https://pga-tour-res.cloudinary.com/image/upload/c_fill,g_face:center,h_240,w_240,q_auto,f_auto/headshots_51766.png",
+      "sg": {
+        "total": 1.148,
+        "ott": -0.011,
+        "app": 0.567,
+        "arg": 0.352,
+        "putt": 0.239
+      },
+      "drivingDistance": 311.5,
+      "drivingAccuracy": 58.91,
+      "recentSG": 3.51175,
+      "recentEvents": 4,
+      "dataThin": false,
+      "fitScore": 0.6773410996273623,
+      "recentZ": 2.2243925427857967,
+      "seasonZ": 0.9662747368684047,
+      "owgrZ": 1.4454385249832162,
+      "trendRaw": 2.3637500000000005,
+      "trend": "up",
+      "composite": 1.1480251979760385,
+      "_prevRank": 1,
+      "letdownPenalty": 0.42,
+      "letdownFlag": "Won the U.S. Open last week - winners almost never back up the next week",
+      "winProb": 0.04945,
+      "p5": 0.2457,
+      "p10": 0.4687,
+      "p20": 0.79375,
+      "win": {
+        "prob": 0.04945,
+        "decimal": 20.222446916076844,
+        "fractional": "20/1"
+      },
+      "t5": {
+        "prob": 0.2457,
+        "decimal": 4.07000407000407,
+        "fractional": "3/1"
+      },
+      "t10": {
+        "prob": 0.4687,
+        "decimal": 2.1335609131640707,
+        "fractional": "11/10"
+      },
+      "t20": {
+        "prob": 0.79375,
+        "decimal": 1.2598425196850394,
+        "fractional": "1/4"
+      },
+      "confidence": 2,
+      "rationale": "Skillset fits TPC River Highlands: strongest on approach, exactly what wins here. Trending up - recent SG 3.51/rd over last 4 starts, above his season line. A big hitter (312 yds avg).",
+      "ewValue": 4.968655207280081,
+      "modelRank": 3,
+      "points": 2,
+      "stakeGBP": 10,
+      "ewWin": 5,
+      "ewPlace": 5
+    },
+    {
+      "playerId": "40098",
+      "name": "Matt Fitzpatrick",
+      "country": "England",
+      "countryFlag": "ENG",
+      "owgr": "4",
+      "headshot": "https://pga-tour-res.cloudinary.com/image/upload/c_fill,g_face:center,h_240,w_240,q_auto,f_auto/headshots_40098.png",
+      "sg": {
+        "total": 1.486,
+        "ott": 0.23,
+        "app": 0.776,
+        "arg": 0.557,
+        "putt": -0.078
+      },
+      "drivingDistance": 305.8,
+      "drivingAccuracy": 67.05,
+      "recentSG": 1.4146666666666665,
+      "recentEvents": 3,
+      "dataThin": false,
+      "fitScore": 0.8941963439092617,
+      "recentZ": 0.26893705151224734,
+      "seasonZ": 1.480849907912238,
+      "owgrZ": 2.1224493778678166,
+      "trendRaw": -0.07133333333333347,
+      "trend": "flat",
+      "composite": 1.1008146008968471,
+      "_prevRank": 18,
+      "winProb": 0.0473,
+      "p5": 0.2268,
+      "p10": 0.43615,
+      "p20": 0.76335,
+      "win": {
+        "prob": 0.0473,
+        "decimal": 21.14164904862579,
+        "fractional": "20/1"
+      },
+      "t5": {
+        "prob": 0.2268,
+        "decimal": 4.409171075837742,
+        "fractional": "7/2"
+      },
+      "t10": {
+        "prob": 0.43615,
+        "decimal": 2.29278917803508,
+        "fractional": "5/4"
+      },
+      "t20": {
+        "prob": 0.76335,
+        "decimal": 1.3100150651732496,
+        "fractional": "1/3"
+      },
+      "confidence": 2,
+      "rationale": "Skillset fits TPC River Highlands: strongest on approach, exactly what wins here. Steady recent SG of 1.41/rd over last 3 starts. A big hitter (306 yds avg).",
+      "ewValue": 4.79492600422833,
+      "modelRank": 5
+    },
+    {
+      "playerId": "30911",
+      "name": "Tommy Fleetwood",
+      "country": "England",
+      "countryFlag": "ENG",
+      "owgr": "7",
+      "headshot": "https://pga-tour-res.cloudinary.com/image/upload/c_fill,g_face:center,h_240,w_240,q_auto,f_auto/headshots_30911.png",
+      "sg": {
+        "total": 1.408,
+        "ott": 0.462,
+        "app": 0.281,
+        "arg": 0.534,
+        "putt": 0.131
+      },
+      "drivingDistance": 303,
+      "drivingAccuracy": 69.29,
+      "recentSG": 2.4146666666666667,
+      "recentEvents": 3,
+      "dataThin": false,
+      "fitScore": 0.6287319482180471,
+      "recentZ": 1.2014014224751959,
+      "seasonZ": 1.362101791517507,
+      "owgrZ": 1.575861333505018,
+      "trendRaw": 1.0066666666666668,
+      "trend": "up",
+      "composite": 1.0887877740288814,
+      "_prevRank": 8,
+      "letdownPenalty": 0.09,
+      "letdownFlag": "Played the U.S. Open last week - mild fatigue watch",
+      "winProb": 0.048,
+      "p5": 0.2262,
+      "p10": 0.4308,
+      "p20": 0.7531,
+      "win": {
+        "prob": 0.048,
+        "decimal": 20.833333333333332,
+        "fractional": "20/1"
+      },
+      "t5": {
+        "prob": 0.2262,
+        "decimal": 4.420866489832007,
+        "fractional": "7/2"
+      },
+      "t10": {
+        "prob": 0.4308,
+        "decimal": 2.321262766945218,
+        "fractional": "11/8"
+      },
+      "t20": {
+        "prob": 0.7531,
+        "decimal": 1.327844907714779,
+        "fractional": "1/3"
+      },
+      "confidence": 2,
+      "rationale": "Form in his game: gains on around the green (+0.53/rd), gains on off the tee (+0.46/rd). Trending up - recent SG 2.41/rd over last 3 starts, above his season line. An accurate driver (69% fairways).",
+      "ewValue": 4.7125,
+      "modelRank": 4
+    },
+    {
+      "playerId": "59018",
+      "name": "Ryan Gerard",
+      "country": "United States",
+      "countryFlag": "USA",
+      "owgr": "27",
+      "headshot": "https://pga-tour-res.cloudinary.com/image/upload/c_fill,g_face:center,h_240,w_240,q_auto,f_auto/headshots_59018.png",
+      "sg": {
+        "total": 0.814,
+        "ott": 0.119,
+        "app": 0.616,
+        "arg": -0.276,
+        "putt": 0.356
+      },
+      "drivingDistance": 304.3,
+      "drivingAccuracy": 62.93,
+      "recentSG": 2.931,
+      "recentEvents": 2,
+      "dataThin": false,
+      "fitScore": 0.38032056336118625,
+      "recentZ": 1.6828638593490648,
+      "seasonZ": 0.45778921281917334,
+      "owgrZ": 0.2573606404270002,
+      "trendRaw": 2.117,
+      "trend": "up",
+      "composite": 0.9879728407268702,
+      "winProb": 0.0368,
+      "p5": 0.1906,
+      "p10": 0.37925,
+      "p20": 0.69575,
+      "win": {
+        "prob": 0.0368,
+        "decimal": 27.17391304347826,
+        "fractional": "25/1"
+      },
+      "t5": {
+        "prob": 0.1906,
+        "decimal": 5.246589716684156,
+        "fractional": "4/1"
+      },
+      "t10": {
+        "prob": 0.37925,
+        "decimal": 2.636783124588003,
+        "fractional": "7/4"
+      },
+      "t20": {
+        "prob": 0.69575,
+        "decimal": 1.437297879985627,
+        "fractional": "4/9"
+      },
+      "confidence": 2,
+      "rationale": "Skillset fits TPC River Highlands: strongest on approach, exactly what wins here. Trending up - recent SG 2.93/rd over last 2 starts, above his season line.",
+      "ewValue": 5.179347826086956,
+      "modelRank": 6,
+      "points": 1,
+      "stakeGBP": 5,
+      "ewWin": 2.5,
+      "ewPlace": 2.5
+    },
+    {
+      "playerId": "47504",
+      "name": "Sam Burns",
+      "country": "United States",
+      "countryFlag": "USA",
+      "owgr": "15",
+      "headshot": "https://pga-tour-res.cloudinary.com/image/upload/c_fill,g_face:center,h_240,w_240,q_auto,f_auto/headshots_47504.png",
+      "sg": {
+        "total": 1.045,
+        "ott": 0.186,
+        "app": 0.233,
+        "arg": -0.06,
+        "putt": 0.687
+      },
+      "drivingDistance": 314.4,
+      "drivingAccuracy": 57.85,
+      "recentSG": 2.6646666666666667,
+      "recentEvents": 3,
+      "dataThin": false,
+      "fitScore": 0.47522656945813296,
+      "recentZ": 1.4345175152159328,
+      "seasonZ": 0.8094663267574143,
+      "owgrZ": 0.8314637493772697,
+      "trendRaw": 1.6196666666666668,
+      "trend": "up",
+      "composite": 0.845604720550639,
+      "_prevRank": 2,
+      "letdownPenalty": 0.2,
+      "letdownFlag": "Contended at the U.S. Open (major) last week - fatigue/hangover risk",
+      "winProb": 0.02815,
+      "p5": 0.153,
+      "p10": 0.3163,
+      "p20": 0.61715,
+      "win": {
+        "prob": 0.02815,
+        "decimal": 35.52397868561279,
+        "fractional": "33/1"
+      },
+      "t5": {
+        "prob": 0.153,
+        "decimal": 6.5359477124183005,
+        "fractional": "11/2"
+      },
+      "t10": {
+        "prob": 0.3163,
+        "decimal": 3.161555485298767,
+        "fractional": "9/4"
+      },
+      "t20": {
+        "prob": 0.61715,
+        "decimal": 1.6203516163007374,
+        "fractional": "8/13"
+      },
+      "confidence": 1,
+      "rationale": "Form in his game: gains on putting (+0.69/rd), gains on approach (+0.23/rd). Trending up - recent SG 2.66/rd over last 3 starts, above his season line. A big hitter (314 yds avg).",
+      "ewValue": 5.435168738898756,
+      "modelRank": 9
+    },
+    {
+      "playerId": "46340",
+      "name": "Alex Smalley",
+      "country": "United States",
+      "countryFlag": "USA",
+      "owgr": "43",
+      "headshot": "https://pga-tour-res.cloudinary.com/image/upload/c_fill,g_face:center,h_240,w_240,q_auto,f_auto/headshots_46340.png",
+      "sg": {
+        "total": 0.808,
+        "ott": 0.085,
+        "app": 0.419,
+        "arg": 0.037,
+        "putt": 0.266
+      },
+      "drivingDistance": 307.1,
+      "drivingAccuracy": 59.2,
+      "recentSG": 2.751,
+      "recentEvents": 1,
+      "dataThin": false,
+      "fitScore": 0.3214667067678918,
+      "recentZ": 1.515020272575734,
+      "seasonZ": 0.44865474232727115,
+      "owgrZ": -0.19716904592149698,
+      "trendRaw": 1.9429999999999998,
+      "trend": "up",
+      "composite": 0.8268201744581443,
+      "winProb": 0.02865,
+      "p5": 0.1491,
+      "p10": 0.3077,
+      "p20": 0.60815,
+      "win": {
+        "prob": 0.02865,
+        "decimal": 34.904013961605585,
+        "fractional": "33/1"
+      },
+      "t5": {
+        "prob": 0.1491,
+        "decimal": 6.706908115358819,
+        "fractional": "11/2"
+      },
+      "t10": {
+        "prob": 0.3077,
+        "decimal": 3.2499187520311996,
+        "fractional": "9/4"
+      },
+      "t20": {
+        "prob": 0.60815,
+        "decimal": 1.6443311682972952,
+        "fractional": "4/6"
+      },
+      "confidence": 1,
+      "rationale": "Skillset fits TPC River Highlands: strongest on approach, exactly what wins here. Trending up - recent SG 2.75/rd over last 1 start, above his season line. A big hitter (307 yds avg).",
+      "ewValue": 5.204188481675393,
+      "modelRank": 8,
+      "points": 1,
+      "stakeGBP": 5,
+      "ewWin": 2.5,
+      "ewPlace": 2.5
+    }
+  ],
+  "placesTable": [
+    {
+      "playerId": "46046",
+      "name": "Scottie Scheffler",
+      "country": "United States",
+      "countryFlag": "USA",
+      "owgr": "1",
+      "headshot": "https://pga-tour-res.cloudinary.com/image/upload/c_fill,g_face:center,h_240,w_240,q_auto,f_auto/headshots_46046.png",
+      "sg": {
+        "total": 2.204,
+        "ott": 0.68,
+        "app": 0.54,
+        "arg": 0.516,
+        "putt": 0.467
+      },
+      "drivingDistance": 312.8,
+      "drivingAccuracy": 65.25,
+      "recentSG": 2.6833333333333336,
+      "recentEvents": 3,
+      "dataThin": false,
+      "fitScore": 1.3163832475187975,
+      "recentZ": 1.4519235168072413,
+      "seasonZ": 2.5739415434432207,
+      "owgrZ": 3.4764710836370174,
+      "trendRaw": 0.4793333333333334,
+      "trend": "up",
+      "composite": 1.8486176729128456,
+      "_prevRank": 5,
+      "letdownPenalty": 0.2,
+      "letdownFlag": "Contended at the U.S. Open (major) last week - fatigue/hangover risk",
+      "winProb": 0.15915,
+      "p5": 0.5946,
+      "p10": 0.8566,
+      "p20": 0.99035,
+      "win": {
+        "prob": 0.15915,
+        "decimal": 6.283380458686773,
+        "fractional": "11/2"
+      },
+      "t5": {
+        "prob": 0.5946,
+        "decimal": 1.6818028927009754,
+        "fractional": "4/6"
+      },
+      "t10": {
+        "prob": 0.8566,
+        "decimal": 1.1674060238150827,
+        "fractional": "1/5"
+      },
+      "t20": {
+        "prob": 0.99035,
+        "decimal": 1.0416666666666667,
+        "fractional": "1/5"
+      },
+      "confidence": 4,
+      "rationale": "Form in his game: gains on off the tee (+0.68/rd), gains on approach (+0.54/rd). Trending up - recent SG 2.68/rd over last 3 starts, above his season line. A big hitter (313 yds avg).",
+      "ewValue": 3.7360980207351555,
+      "modelRank": 1,
+      "points": 3,
+      "stakeGBP": 15,
+      "ewWin": 7.5,
+      "ewPlace": 7.5
+    },
+    {
+      "playerId": "37455",
+      "name": "Si Woo Kim",
+      "country": "Republic of Korea",
+      "countryFlag": "KOR",
+      "owgr": "21",
+      "headshot": "https://pga-tour-res.cloudinary.com/image/upload/c_fill,g_face:center,h_240,w_240,q_auto,f_auto/headshots_37455.png",
+      "sg": {
+        "total": 1.348,
+        "ott": 0.504,
+        "app": 0.735,
+        "arg": 0.243,
+        "putt": -0.135
+      },
+      "drivingDistance": 300.5,
+      "drivingAccuracy": 69.91,
+      "recentSG": 3.082,
+      "recentEvents": 2,
+      "dataThin": false,
+      "fitScore": 0.6616193808702722,
+      "recentZ": 1.8236659793644698,
+      "seasonZ": 1.2707570865984839,
+      "owgrZ": 0.5028245191016788,
+      "trendRaw": 1.7339999999999998,
+      "trend": "up",
+      "composite": 1.3029211487484238,
+      "winProb": 0.06285,
+      "p5": 0.3027,
+      "p10": 0.5578,
+      "p20": 0.8681,
+      "win": {
+        "prob": 0.06285,
+        "decimal": 15.910898965791567,
+        "fractional": "14/1"
+      },
+      "t5": {
+        "prob": 0.3027,
+        "decimal": 3.3036009250082587,
+        "fractional": "9/4"
+      },
+      "t10": {
+        "prob": 0.5578,
+        "decimal": 1.7927572606669058,
+        "fractional": "4/5"
+      },
+      "t20": {
+        "prob": 0.8681,
+        "decimal": 1.1519410206197442,
+        "fractional": "1/5"
+      },
+      "confidence": 2,
+      "rationale": "Skillset fits TPC River Highlands: strongest on approach, exactly what wins here. Trending up - recent SG 3.08/rd over last 2 starts, above his season line. An accurate driver (70% fairways).",
+      "ewValue": 4.816229116945108,
+      "modelRank": 2,
+      "points": 2,
+      "stakeGBP": 10,
+      "ewWin": 5,
+      "ewPlace": 5
+    },
+    {
+      "playerId": "51766",
+      "name": "Wyndham Clark",
+      "country": "United States",
+      "countryFlag": "USA",
+      "owgr": "8",
+      "headshot": "https://pga-tour-res.cloudinary.com/image/upload/c_fill,g_face:center,h_240,w_240,q_auto,f_auto/headshots_51766.png",
+      "sg": {
+        "total": 1.148,
+        "ott": -0.011,
+        "app": 0.567,
+        "arg": 0.352,
+        "putt": 0.239
+      },
+      "drivingDistance": 311.5,
+      "drivingAccuracy": 58.91,
+      "recentSG": 3.51175,
+      "recentEvents": 4,
+      "dataThin": false,
+      "fitScore": 0.6773410996273623,
+      "recentZ": 2.2243925427857967,
+      "seasonZ": 0.9662747368684047,
+      "owgrZ": 1.4454385249832162,
+      "trendRaw": 2.3637500000000005,
+      "trend": "up",
+      "composite": 1.1480251979760385,
+      "_prevRank": 1,
+      "letdownPenalty": 0.42,
+      "letdownFlag": "Won the U.S. Open last week - winners almost never back up the next week",
+      "winProb": 0.04945,
+      "p5": 0.2457,
+      "p10": 0.4687,
+      "p20": 0.79375,
+      "win": {
+        "prob": 0.04945,
+        "decimal": 20.222446916076844,
+        "fractional": "20/1"
+      },
+      "t5": {
+        "prob": 0.2457,
+        "decimal": 4.07000407000407,
+        "fractional": "3/1"
+      },
+      "t10": {
+        "prob": 0.4687,
+        "decimal": 2.1335609131640707,
+        "fractional": "11/10"
+      },
+      "t20": {
+        "prob": 0.79375,
+        "decimal": 1.2598425196850394,
+        "fractional": "1/4"
+      },
+      "confidence": 2,
+      "rationale": "Skillset fits TPC River Highlands: strongest on approach, exactly what wins here. Trending up - recent SG 3.51/rd over last 4 starts, above his season line. A big hitter (312 yds avg).",
+      "ewValue": 4.968655207280081,
+      "modelRank": 3,
+      "points": 2,
+      "stakeGBP": 10,
+      "ewWin": 5,
+      "ewPlace": 5
+    },
+    {
+      "playerId": "30911",
+      "name": "Tommy Fleetwood",
+      "country": "England",
+      "countryFlag": "ENG",
+      "owgr": "7",
+      "headshot": "https://pga-tour-res.cloudinary.com/image/upload/c_fill,g_face:center,h_240,w_240,q_auto,f_auto/headshots_30911.png",
+      "sg": {
+        "total": 1.408,
+        "ott": 0.462,
+        "app": 0.281,
+        "arg": 0.534,
+        "putt": 0.131
+      },
+      "drivingDistance": 303,
+      "drivingAccuracy": 69.29,
+      "recentSG": 2.4146666666666667,
+      "recentEvents": 3,
+      "dataThin": false,
+      "fitScore": 0.6287319482180471,
+      "recentZ": 1.2014014224751959,
+      "seasonZ": 1.362101791517507,
+      "owgrZ": 1.575861333505018,
+      "trendRaw": 1.0066666666666668,
+      "trend": "up",
+      "composite": 1.0887877740288814,
+      "_prevRank": 8,
+      "letdownPenalty": 0.09,
+      "letdownFlag": "Played the U.S. Open last week - mild fatigue watch",
+      "winProb": 0.048,
+      "p5": 0.2262,
+      "p10": 0.4308,
+      "p20": 0.7531,
+      "win": {
+        "prob": 0.048,
+        "decimal": 20.833333333333332,
+        "fractional": "20/1"
+      },
+      "t5": {
+        "prob": 0.2262,
+        "decimal": 4.420866489832007,
+        "fractional": "7/2"
+      },
+      "t10": {
+        "prob": 0.4308,
+        "decimal": 2.321262766945218,
+        "fractional": "11/8"
+      },
+      "t20": {
+        "prob": 0.7531,
+        "decimal": 1.327844907714779,
+        "fractional": "1/3"
+      },
+      "confidence": 2,
+      "rationale": "Form in his game: gains on around the green (+0.53/rd), gains on off the tee (+0.46/rd). Trending up - recent SG 2.41/rd over last 3 starts, above his season line. An accurate driver (69% fairways).",
+      "ewValue": 4.7125,
+      "modelRank": 4
+    },
+    {
+      "playerId": "40098",
+      "name": "Matt Fitzpatrick",
+      "country": "England",
+      "countryFlag": "ENG",
+      "owgr": "4",
+      "headshot": "https://pga-tour-res.cloudinary.com/image/upload/c_fill,g_face:center,h_240,w_240,q_auto,f_auto/headshots_40098.png",
+      "sg": {
+        "total": 1.486,
+        "ott": 0.23,
+        "app": 0.776,
+        "arg": 0.557,
+        "putt": -0.078
+      },
+      "drivingDistance": 305.8,
+      "drivingAccuracy": 67.05,
+      "recentSG": 1.4146666666666665,
+      "recentEvents": 3,
+      "dataThin": false,
+      "fitScore": 0.8941963439092617,
+      "recentZ": 0.26893705151224734,
+      "seasonZ": 1.480849907912238,
+      "owgrZ": 2.1224493778678166,
+      "trendRaw": -0.07133333333333347,
+      "trend": "flat",
+      "composite": 1.1008146008968471,
+      "_prevRank": 18,
+      "winProb": 0.0473,
+      "p5": 0.2268,
+      "p10": 0.43615,
+      "p20": 0.76335,
+      "win": {
+        "prob": 0.0473,
+        "decimal": 21.14164904862579,
+        "fractional": "20/1"
+      },
+      "t5": {
+        "prob": 0.2268,
+        "decimal": 4.409171075837742,
+        "fractional": "7/2"
+      },
+      "t10": {
+        "prob": 0.43615,
+        "decimal": 2.29278917803508,
+        "fractional": "5/4"
+      },
+      "t20": {
+        "prob": 0.76335,
+        "decimal": 1.3100150651732496,
+        "fractional": "1/3"
+      },
+      "confidence": 2,
+      "rationale": "Skillset fits TPC River Highlands: strongest on approach, exactly what wins here. Steady recent SG of 1.41/rd over last 3 starts. A big hitter (306 yds avg).",
+      "ewValue": 4.79492600422833,
+      "modelRank": 5
+    },
+    {
+      "playerId": "59018",
+      "name": "Ryan Gerard",
+      "country": "United States",
+      "countryFlag": "USA",
+      "owgr": "27",
+      "headshot": "https://pga-tour-res.cloudinary.com/image/upload/c_fill,g_face:center,h_240,w_240,q_auto,f_auto/headshots_59018.png",
+      "sg": {
+        "total": 0.814,
+        "ott": 0.119,
+        "app": 0.616,
+        "arg": -0.276,
+        "putt": 0.356
+      },
+      "drivingDistance": 304.3,
+      "drivingAccuracy": 62.93,
+      "recentSG": 2.931,
+      "recentEvents": 2,
+      "dataThin": false,
+      "fitScore": 0.38032056336118625,
+      "recentZ": 1.6828638593490648,
+      "seasonZ": 0.45778921281917334,
+      "owgrZ": 0.2573606404270002,
+      "trendRaw": 2.117,
+      "trend": "up",
+      "composite": 0.9879728407268702,
+      "winProb": 0.0368,
+      "p5": 0.1906,
+      "p10": 0.37925,
+      "p20": 0.69575,
+      "win": {
+        "prob": 0.0368,
+        "decimal": 27.17391304347826,
+        "fractional": "25/1"
+      },
+      "t5": {
+        "prob": 0.1906,
+        "decimal": 5.246589716684156,
+        "fractional": "4/1"
+      },
+      "t10": {
+        "prob": 0.37925,
+        "decimal": 2.636783124588003,
+        "fractional": "7/4"
+      },
+      "t20": {
+        "prob": 0.69575,
+        "decimal": 1.437297879985627,
+        "fractional": "4/9"
+      },
+      "confidence": 2,
+      "rationale": "Skillset fits TPC River Highlands: strongest on approach, exactly what wins here. Trending up - recent SG 2.93/rd over last 2 starts, above his season line.",
+      "ewValue": 5.179347826086956,
+      "modelRank": 6,
+      "points": 1,
+      "stakeGBP": 5,
+      "ewWin": 2.5,
+      "ewPlace": 2.5
+    },
+    {
+      "playerId": "50525",
+      "name": "Collin Morikawa",
+      "country": "United States",
+      "countryFlag": "USA",
+      "owgr": "9",
+      "headshot": "https://pga-tour-res.cloudinary.com/image/upload/c_fill,g_face:center,h_240,w_240,q_auto,f_auto/headshots_50525.png",
+      "sg": {
+        "total": 1.162,
+        "ott": 0.35,
+        "app": 0.749,
+        "arg": 0.097,
+        "putt": -0.033
+      },
+      "drivingDistance": 305.2,
+      "drivingAccuracy": 67.52,
+      "recentSG": 1.5665,
+      "recentEvents": 2,
+      "dataThin": false,
+      "fitScore": 0.5802310144845396,
+      "recentZ": 0.4105162251701218,
+      "seasonZ": 0.9875885013495103,
+      "owgrZ": 1.3303974548303392,
+      "trendRaw": 0.4045000000000001,
+      "trend": "up",
+      "composite": 0.8093391752279022,
+      "_prevRank": 16,
+      "winProb": 0.02925,
+      "p5": 0.14895,
+      "p10": 0.29675,
+      "p20": 0.587,
+      "win": {
+        "prob": 0.02925,
+        "decimal": 34.18803418803419,
+        "fractional": "33/1"
+      },
+      "t5": {
+        "prob": 0.14895,
+        "decimal": 6.71366230278617,
+        "fractional": "11/2"
+      },
+      "t10": {
+        "prob": 0.29675,
+        "decimal": 3.369839932603201,
+        "fractional": "9/4"
+      },
+      "t20": {
+        "prob": 0.587,
+        "decimal": 1.7035775127768313,
+        "fractional": "8/11"
+      },
+      "confidence": 1,
+      "rationale": "Skillset fits TPC River Highlands: strongest on approach, exactly what wins here. Trending up - recent SG 1.57/rd over last 2 starts, above his season line. A big hitter (305 yds avg).",
+      "ewValue": 5.092307692307692,
+      "modelRank": 7,
+      "points": 1,
+      "stakeGBP": 5,
+      "ewWin": 2.5,
+      "ewPlace": 2.5
+    },
+    {
+      "playerId": "46340",
+      "name": "Alex Smalley",
+      "country": "United States",
+      "countryFlag": "USA",
+      "owgr": "43",
+      "headshot": "https://pga-tour-res.cloudinary.com/image/upload/c_fill,g_face:center,h_240,w_240,q_auto,f_auto/headshots_46340.png",
+      "sg": {
+        "total": 0.808,
+        "ott": 0.085,
+        "app": 0.419,
+        "arg": 0.037,
+        "putt": 0.266
+      },
+      "drivingDistance": 307.1,
+      "drivingAccuracy": 59.2,
+      "recentSG": 2.751,
+      "recentEvents": 1,
+      "dataThin": false,
+      "fitScore": 0.3214667067678918,
+      "recentZ": 1.515020272575734,
+      "seasonZ": 0.44865474232727115,
+      "owgrZ": -0.19716904592149698,
+      "trendRaw": 1.9429999999999998,
+      "trend": "up",
+      "composite": 0.8268201744581443,
+      "winProb": 0.02865,
+      "p5": 0.1491,
+      "p10": 0.3077,
+      "p20": 0.60815,
+      "win": {
+        "prob": 0.02865,
+        "decimal": 34.904013961605585,
+        "fractional": "33/1"
+      },
+      "t5": {
+        "prob": 0.1491,
+        "decimal": 6.706908115358819,
+        "fractional": "11/2"
+      },
+      "t10": {
+        "prob": 0.3077,
+        "decimal": 3.2499187520311996,
+        "fractional": "9/4"
+      },
+      "t20": {
+        "prob": 0.60815,
+        "decimal": 1.6443311682972952,
+        "fractional": "4/6"
+      },
+      "confidence": 1,
+      "rationale": "Skillset fits TPC River Highlands: strongest on approach, exactly what wins here. Trending up - recent SG 2.75/rd over last 1 start, above his season line. A big hitter (307 yds avg).",
+      "ewValue": 5.204188481675393,
+      "modelRank": 8,
+      "points": 1,
+      "stakeGBP": 5,
+      "ewWin": 2.5,
+      "ewPlace": 2.5
+    },
+    {
+      "playerId": "47504",
+      "name": "Sam Burns",
+      "country": "United States",
+      "countryFlag": "USA",
+      "owgr": "15",
+      "headshot": "https://pga-tour-res.cloudinary.com/image/upload/c_fill,g_face:center,h_240,w_240,q_auto,f_auto/headshots_47504.png",
+      "sg": {
+        "total": 1.045,
+        "ott": 0.186,
+        "app": 0.233,
+        "arg": -0.06,
+        "putt": 0.687
+      },
+      "drivingDistance": 314.4,
+      "drivingAccuracy": 57.85,
+      "recentSG": 2.6646666666666667,
+      "recentEvents": 3,
+      "dataThin": false,
+      "fitScore": 0.47522656945813296,
+      "recentZ": 1.4345175152159328,
+      "seasonZ": 0.8094663267574143,
+      "owgrZ": 0.8314637493772697,
+      "trendRaw": 1.6196666666666668,
+      "trend": "up",
+      "composite": 0.845604720550639,
+      "_prevRank": 2,
+      "letdownPenalty": 0.2,
+      "letdownFlag": "Contended at the U.S. Open (major) last week - fatigue/hangover risk",
+      "winProb": 0.02815,
+      "p5": 0.153,
+      "p10": 0.3163,
+      "p20": 0.61715,
+      "win": {
+        "prob": 0.02815,
+        "decimal": 35.52397868561279,
+        "fractional": "33/1"
+      },
+      "t5": {
+        "prob": 0.153,
+        "decimal": 6.5359477124183005,
+        "fractional": "11/2"
+      },
+      "t10": {
+        "prob": 0.3163,
+        "decimal": 3.161555485298767,
+        "fractional": "9/4"
+      },
+      "t20": {
+        "prob": 0.61715,
+        "decimal": 1.6203516163007374,
+        "fractional": "8/13"
+      },
+      "confidence": 1,
+      "rationale": "Form in his game: gains on putting (+0.69/rd), gains on approach (+0.23/rd). Trending up - recent SG 2.66/rd over last 3 starts, above his season line. A big hitter (314 yds avg).",
+      "ewValue": 5.435168738898756,
+      "modelRank": 9
+    },
+    {
+      "playerId": "46717",
+      "name": "Viktor Hovland",
+      "country": "Norway",
+      "countryFlag": "NOR",
+      "owgr": "30",
+      "headshot": "https://pga-tour-res.cloudinary.com/image/upload/c_fill,g_face:center,h_240,w_240,q_auto,f_auto/headshots_46717.png",
+      "sg": {
+        "total": 0.529,
+        "ott": -0.112,
+        "app": 0.488,
+        "arg": 0.151,
+        "putt": 0.003
+      },
+      "drivingDistance": 302.5,
+      "drivingAccuracy": 65.89,
+      "recentSG": 2.747,
+      "recentEvents": 1,
+      "dataThin": false,
+      "fitScore": 0.15541156422697427,
+      "recentZ": 1.5112904150918822,
+      "seasonZ": 0.02390186445381125,
+      "owgrZ": 0.15445289649266924,
+      "trendRaw": 2.218,
+      "trend": "up",
+      "composite": 0.7314477783148314,
+      "winProb": 0.02425,
+      "p5": 0.1317,
+      "p10": 0.27215,
+      "p20": 0.54555,
+      "win": {
+        "prob": 0.02425,
+        "decimal": 41.23711340206185,
+        "fractional": "40/1"
+      },
+      "t5": {
+        "prob": 0.1317,
+        "decimal": 7.59301442672741,
+        "fractional": "13/2"
+      },
+      "t10": {
+        "prob": 0.27215,
+        "decimal": 3.6744442403086532,
+        "fractional": "11/4"
+      },
+      "t20": {
+        "prob": 0.54555,
+        "decimal": 1.8330125561360096,
+        "fractional": "5/6"
+      },
+      "confidence": 1,
+      "rationale": "Skillset fits TPC River Highlands: strongest on approach, exactly what wins here. Trending up - recent SG 2.75/rd over last 1 start, above his season line. An accurate driver (66% fairways).",
+      "ewValue": 5.430927835051547,
+      "modelRank": 10
     },
     {
       "playerId": "47591",
@@ -673,14 +2439,34 @@
       "trendRaw": 1.3673333333333333,
       "trend": "up",
       "composite": 0.7292920310135678,
-      "winProb": 0.019978142810314996,
-      "modelOdds": {
-        "decimal": 50.05470275663892,
-        "fractional": "50/1"
+      "winProb": 0.02325,
+      "p5": 0.1291,
+      "p10": 0.26955,
+      "p20": 0.5482,
+      "win": {
+        "prob": 0.02325,
+        "decimal": 43.01075268817204,
+        "fractional": "40/1"
       },
-      "confidence": 4,
-      "modelRank": 11,
-      "rationale": "Form in his game: gains on putting (+0.66/rd), gains on around the green (+0.47/rd). Trending up - recent SG 2.14/rd over last 3 starts, above his season line."
+      "t5": {
+        "prob": 0.1291,
+        "decimal": 7.74593338497289,
+        "fractional": "13/2"
+      },
+      "t10": {
+        "prob": 0.26955,
+        "decimal": 3.7098868484511223,
+        "fractional": "11/4"
+      },
+      "t20": {
+        "prob": 0.5482,
+        "decimal": 1.8241517694272162,
+        "fractional": "5/6"
+      },
+      "confidence": 1,
+      "rationale": "Form in his game: gains on putting (+0.66/rd), gains on around the green (+0.47/rd). Trending up - recent SG 2.14/rd over last 3 starts, above his season line.",
+      "ewValue": 5.552688172043011,
+      "modelRank": 11
     },
     {
       "playerId": "52955",
@@ -707,50 +2493,148 @@
       "owgrZ": 0.8988504806204177,
       "trendRaw": -0.605,
       "trend": "down",
-      "composite": 0.7026344258345367,
-      "winProb": 0.018991459281829617,
-      "modelOdds": {
-        "decimal": 52.65524808600495,
+      "composite": 0.6126344258345368,
+      "_prevRank": 13,
+      "letdownPenalty": 0.09,
+      "letdownFlag": "Played the U.S. Open last week - mild fatigue watch",
+      "winProb": 0.02125,
+      "p5": 0.10925,
+      "p10": 0.2252,
+      "p20": 0.47185,
+      "win": {
+        "prob": 0.02125,
+        "decimal": 47.05882352941176,
         "fractional": "50/1"
       },
-      "confidence": 4,
-      "modelRank": 12,
-      "rationale": "Skillset fits TPC River Highlands: strongest on approach, exactly what wins here. Form dipping slightly (recent SG 0.92/rd over 3 starts). A big hitter (317 yds avg)."
+      "t5": {
+        "prob": 0.10925,
+        "decimal": 9.153318077803204,
+        "fractional": "8/1"
+      },
+      "t10": {
+        "prob": 0.2252,
+        "decimal": 4.440497335701599,
+        "fractional": "7/2"
+      },
+      "t20": {
+        "prob": 0.47185,
+        "decimal": 2.1193175797393238,
+        "fractional": "11/10"
+      },
+      "confidence": 1,
+      "rationale": "Skillset fits TPC River Highlands: strongest on approach, exactly what wins here. Form dipping slightly (recent SG 0.92/rd over 3 starts). A big hitter (317 yds avg).",
+      "ewValue": 5.141176470588235,
+      "modelRank": 12
     },
     {
-      "playerId": "56630",
-      "name": "Akshay Bhatia",
+      "playerId": "39324",
+      "name": "J.J. Spaun",
       "country": "United States",
       "countryFlag": "USA",
-      "owgr": "31",
-      "headshot": "https://pga-tour-res.cloudinary.com/image/upload/c_fill,g_face:center,h_240,w_240,q_auto,f_auto/headshots_56630.png",
+      "owgr": "12",
+      "headshot": "https://pga-tour-res.cloudinary.com/image/upload/c_fill,g_face:center,h_240,w_240,q_auto,f_auto/headshots_39324.png",
       "sg": {
-        "total": 0.997,
-        "ott": -0.21,
-        "app": 0.33,
-        "arg": 0.248,
-        "putt": 0.629
+        "total": 0.671,
+        "ott": 0.305,
+        "app": 0.709,
+        "arg": 0.162,
+        "putt": -0.505
       },
-      "drivingDistance": 302.3,
-      "drivingAccuracy": 57.42,
-      "recentSG": 1.4434999999999998,
+      "drivingDistance": 302.4,
+      "drivingAccuracy": 64.9,
+      "recentSG": 2.056,
       "recentEvents": 2,
       "dataThin": false,
-      "fitScore": 0.6009346240456311,
-      "recentZ": 0.29582310754167895,
-      "seasonZ": 0.7363905628221954,
-      "owgrZ": 0.1224264141842584,
-      "trendRaw": 0.4464999999999998,
+      "fitScore": 0.12734648933828097,
+      "recentZ": 0.8669575347564851,
+      "seasonZ": 0.24008433276216717,
+      "owgrZ": 1.0494125634644775,
+      "trendRaw": 1.385,
       "trend": "up",
-      "composite": 0.6304319113008776,
-      "winProb": 0.01655692741234702,
-      "modelOdds": {
-        "decimal": 60.397679780504966,
-        "fractional": "66/1"
+      "composite": 0.5848212524083383,
+      "winProb": 0.01945,
+      "p5": 0.1004,
+      "p10": 0.209,
+      "p20": 0.4536,
+      "win": {
+        "prob": 0.01945,
+        "decimal": 51.41388174807199,
+        "fractional": "50/1"
       },
-      "confidence": 4,
-      "modelRank": 13,
-      "rationale": "Form in his game: gains on putting (+0.63/rd), gains on approach (+0.33/rd). Trending up - recent SG 1.44/rd over last 2 starts, above his season line."
+      "t5": {
+        "prob": 0.1004,
+        "decimal": 9.9601593625498,
+        "fractional": "9/1"
+      },
+      "t10": {
+        "prob": 0.209,
+        "decimal": 4.784688995215311,
+        "fractional": "4/1"
+      },
+      "t20": {
+        "prob": 0.4536,
+        "decimal": 2.204585537918871,
+        "fractional": "5/4"
+      },
+      "confidence": 1,
+      "rationale": "Skillset fits TPC River Highlands: strongest on approach, exactly what wins here. Trending up - recent SG 2.06/rd over last 2 starts, above his season line.",
+      "ewValue": 5.161953727506427,
+      "modelRank": 13
+    },
+    {
+      "playerId": "47420",
+      "name": "Jake Knapp",
+      "country": "United States",
+      "countryFlag": "USA",
+      "owgr": "44",
+      "headshot": "https://pga-tour-res.cloudinary.com/image/upload/c_fill,g_face:center,h_240,w_240,q_auto,f_auto/headshots_47420.png",
+      "sg": {
+        "total": 1.282,
+        "ott": 0.142,
+        "app": 0.397,
+        "arg": 0.013,
+        "putt": 0.73
+      },
+      "drivingDistance": 320.3,
+      "drivingAccuracy": 58.2,
+      "recentSG": null,
+      "recentEvents": 0,
+      "dataThin": false,
+      "fitScore": 0.7376368761017335,
+      "recentZ": -0.5,
+      "seasonZ": 1.1702779111875576,
+      "owgrZ": -0.21962337276177366,
+      "trendRaw": 0,
+      "trend": "flat",
+      "composite": 0.5060229145590128,
+      "winProb": 0.019,
+      "p5": 0.0945,
+      "p10": 0.20035,
+      "p20": 0.41895,
+      "win": {
+        "prob": 0.019,
+        "decimal": 52.631578947368425,
+        "fractional": "50/1"
+      },
+      "t5": {
+        "prob": 0.0945,
+        "decimal": 10.582010582010582,
+        "fractional": "10/1"
+      },
+      "t10": {
+        "prob": 0.20035,
+        "decimal": 4.991265285749938,
+        "fractional": "4/1"
+      },
+      "t20": {
+        "prob": 0.41895,
+        "decimal": 2.386919680152763,
+        "fractional": "11/8"
+      },
+      "confidence": 1,
+      "rationale": "Form in his game: gains on putting (+0.73/rd), gains on approach (+0.40/rd). A big hitter (320 yds avg).",
+      "ewValue": 4.973684210526316,
+      "modelRank": 14
     },
     {
       "playerId": "48081",
@@ -777,15 +2661,38 @@
       "owgrZ": 1.134398333007427,
       "trendRaw": 0.022499999999999964,
       "trend": "flat",
-      "composite": 0.6223423194052383,
-      "winProb": 0.016304389473416583,
-      "modelOdds": {
-        "decimal": 61.33317666573443,
-        "fractional": "66/1"
+      "composite": 0.5323423194052384,
+      "_prevRank": 11,
+      "letdownPenalty": 0.09,
+      "letdownFlag": "Played the U.S. Open last week - mild fatigue watch",
+      "winProb": 0.0178,
+      "p5": 0.0999,
+      "p10": 0.2046,
+      "p20": 0.4333,
+      "win": {
+        "prob": 0.0178,
+        "decimal": 56.17977528089888,
+        "fractional": "50/1"
       },
-      "confidence": 4,
-      "modelRank": 14,
-      "rationale": "Form in his game: gains on off the tee (+0.52/rd), gains on approach (+0.39/rd). Steady recent SG of 1.25/rd over last 2 starts. A big hitter (316 yds avg)."
+      "t5": {
+        "prob": 0.0999,
+        "decimal": 10.01001001001001,
+        "fractional": "9/1"
+      },
+      "t10": {
+        "prob": 0.2046,
+        "decimal": 4.887585532746823,
+        "fractional": "4/1"
+      },
+      "t20": {
+        "prob": 0.4333,
+        "decimal": 2.3078698361412417,
+        "fractional": "5/4"
+      },
+      "confidence": 1,
+      "rationale": "Form in his game: gains on off the tee (+0.52/rd), gains on approach (+0.39/rd). Steady recent SG of 1.25/rd over last 2 starts. A big hitter (316 yds avg).",
+      "ewValue": 5.612359550561798,
+      "modelRank": 15
     },
     {
       "playerId": "22405",
@@ -812,15 +2719,1601 @@
       "owgrZ": 1.726423416349078,
       "trendRaw": 1.3275,
       "trend": "up",
-      "composite": 0.613529223387169,
-      "winProb": 0.016033647486002438,
-      "modelOdds": {
-        "decimal": 62.36884033237052,
+      "composite": 0.523529223387169,
+      "_prevRank": 10,
+      "letdownPenalty": 0.09,
+      "letdownFlag": "Played the U.S. Open last week - mild fatigue watch",
+      "winProb": 0.01725,
+      "p5": 0.0915,
+      "p10": 0.1957,
+      "p20": 0.4265,
+      "win": {
+        "prob": 0.01725,
+        "decimal": 57.97101449275362,
+        "fractional": "50/1"
+      },
+      "t5": {
+        "prob": 0.0915,
+        "decimal": 10.92896174863388,
+        "fractional": "10/1"
+      },
+      "t10": {
+        "prob": 0.1957,
+        "decimal": 5.109862033725089,
+        "fractional": "4/1"
+      },
+      "t20": {
+        "prob": 0.4265,
+        "decimal": 2.3446658851113718,
+        "fractional": "11/8"
+      },
+      "confidence": 1,
+      "rationale": "Skillset fits TPC River Highlands: strongest on approach, exactly what wins here. Trending up - recent SG 1.87/rd over last 2 starts, above his season line. A big hitter (309 yds avg).",
+      "ewValue": 5.304347826086956,
+      "modelRank": 16
+    },
+    {
+      "playerId": "56630",
+      "name": "Akshay Bhatia",
+      "country": "United States",
+      "countryFlag": "USA",
+      "owgr": "31",
+      "headshot": "https://pga-tour-res.cloudinary.com/image/upload/c_fill,g_face:center,h_240,w_240,q_auto,f_auto/headshots_56630.png",
+      "sg": {
+        "total": 0.997,
+        "ott": -0.21,
+        "app": 0.33,
+        "arg": 0.248,
+        "putt": 0.629
+      },
+      "drivingDistance": 302.3,
+      "drivingAccuracy": 57.42,
+      "recentSG": 1.4434999999999998,
+      "recentEvents": 2,
+      "dataThin": false,
+      "fitScore": 0.6009346240456311,
+      "recentZ": 0.29582310754167895,
+      "seasonZ": 0.7363905628221954,
+      "owgrZ": 0.1224264141842584,
+      "trendRaw": 0.4464999999999998,
+      "trend": "up",
+      "composite": 0.5404319113008776,
+      "_prevRank": 14,
+      "letdownPenalty": 0.09,
+      "letdownFlag": "Played the U.S. Open last week - mild fatigue watch",
+      "winProb": 0.01675,
+      "p5": 0.09355,
+      "p10": 0.1994,
+      "p20": 0.43295,
+      "win": {
+        "prob": 0.01675,
+        "decimal": 59.70149253731343,
         "fractional": "66/1"
       },
+      "t5": {
+        "prob": 0.09355,
+        "decimal": 10.689470871191876,
+        "fractional": "10/1"
+      },
+      "t10": {
+        "prob": 0.1994,
+        "decimal": 5.015045135406218,
+        "fractional": "4/1"
+      },
+      "t20": {
+        "prob": 0.43295,
+        "decimal": 2.3097355352812103,
+        "fractional": "5/4"
+      },
+      "confidence": 1,
+      "rationale": "Form in his game: gains on putting (+0.63/rd), gains on approach (+0.33/rd). Trending up - recent SG 1.44/rd over last 2 starts, above his season line.",
+      "ewValue": 5.585074626865671,
+      "modelRank": 17
+    },
+    {
+      "playerId": "60004",
+      "name": "Jacob Bridgeman",
+      "country": "United States",
+      "countryFlag": "USA",
+      "owgr": "25",
+      "headshot": "https://pga-tour-res.cloudinary.com/image/upload/c_fill,g_face:center,h_240,w_240,q_auto,f_auto/headshots_60004.png",
+      "sg": {
+        "total": 1.016,
+        "ott": 0.064,
+        "app": 0.32,
+        "arg": -0.127,
+        "putt": 0.759
+      },
+      "drivingDistance": 306.4,
+      "drivingAccuracy": 61.57,
+      "recentSG": 0.9146666666666666,
+      "recentEvents": 3,
+      "dataThin": false,
+      "fitScore": 0.5271089913666345,
+      "recentZ": -0.19729513396922668,
+      "seasonZ": 0.7653163860465529,
+      "owgrZ": 0.3325300439242004,
+      "trendRaw": -0.10133333333333339,
+      "trend": "flat",
+      "composite": 0.4182346944653896,
+      "_prevRank": 26,
+      "winProb": 0.01625,
+      "p5": 0.07965,
+      "p10": 0.1726,
+      "p20": 0.37295,
+      "win": {
+        "prob": 0.01625,
+        "decimal": 61.53846153846153,
+        "fractional": "66/1"
+      },
+      "t5": {
+        "prob": 0.07965,
+        "decimal": 12.554927809165097,
+        "fractional": "12/1"
+      },
+      "t10": {
+        "prob": 0.1726,
+        "decimal": 5.793742757821553,
+        "fractional": "5/1"
+      },
+      "t20": {
+        "prob": 0.37295,
+        "decimal": 2.681324574339724,
+        "fractional": "7/4"
+      },
+      "confidence": 1,
+      "rationale": "Form in his game: gains on putting (+0.76/rd), gains on approach (+0.32/rd). Steady recent SG of 0.91/rd over last 3 starts. A big hitter (306 yds avg).",
+      "ewValue": 4.901538461538461,
+      "modelRank": 18
+    }
+  ],
+  "worldRankings": [
+    {
+      "owgr": "1",
+      "name": "Scottie Scheffler",
+      "country": "USA",
+      "headshot": "https://pga-tour-res.cloudinary.com/image/upload/c_fill,g_face:center,h_240,w_240,q_auto,f_auto/headshots_46046.png",
+      "winOdds": "11/2",
+      "winProb": 0.15915
+    },
+    {
+      "owgr": "3",
+      "name": "Cameron Young",
+      "country": "USA",
+      "headshot": "https://pga-tour-res.cloudinary.com/image/upload/c_fill,g_face:center,h_240,w_240,q_auto,f_auto/headshots_57366.png",
+      "winOdds": "80/1",
+      "winProb": 0.0131
+    },
+    {
+      "owgr": "4",
+      "name": "Matt Fitzpatrick",
+      "country": "ENG",
+      "headshot": "https://pga-tour-res.cloudinary.com/image/upload/c_fill,g_face:center,h_240,w_240,q_auto,f_auto/headshots_40098.png",
+      "winOdds": "20/1",
+      "winProb": 0.0473
+    },
+    {
+      "owgr": "5",
+      "name": "Russell Henley",
+      "country": "USA",
+      "headshot": "https://pga-tour-res.cloudinary.com/image/upload/c_fill,g_face:center,h_240,w_240,q_auto,f_auto/headshots_34098.png",
+      "winOdds": "66/1",
+      "winProb": 0.0148
+    },
+    {
+      "owgr": "6",
+      "name": "Justin Rose",
+      "country": "ENG",
+      "headshot": "https://pga-tour-res.cloudinary.com/image/upload/c_fill,g_face:center,h_240,w_240,q_auto,f_auto/headshots_22405.png",
+      "winOdds": "50/1",
+      "winProb": 0.01725
+    },
+    {
+      "owgr": "7",
+      "name": "Tommy Fleetwood",
+      "country": "ENG",
+      "headshot": "https://pga-tour-res.cloudinary.com/image/upload/c_fill,g_face:center,h_240,w_240,q_auto,f_auto/headshots_30911.png",
+      "winOdds": "20/1",
+      "winProb": 0.048
+    },
+    {
+      "owgr": "8",
+      "name": "Wyndham Clark",
+      "country": "USA",
+      "headshot": "https://pga-tour-res.cloudinary.com/image/upload/c_fill,g_face:center,h_240,w_240,q_auto,f_auto/headshots_51766.png",
+      "winOdds": "20/1",
+      "winProb": 0.04945
+    },
+    {
+      "owgr": "9",
+      "name": "Collin Morikawa",
+      "country": "USA",
+      "headshot": "https://pga-tour-res.cloudinary.com/image/upload/c_fill,g_face:center,h_240,w_240,q_auto,f_auto/headshots_50525.png",
+      "winOdds": "33/1",
+      "winProb": 0.02925
+    },
+    {
+      "owgr": "11",
+      "name": "Xander Schauffele",
+      "country": "USA",
+      "headshot": "https://pga-tour-res.cloudinary.com/image/upload/c_fill,g_face:center,h_240,w_240,q_auto,f_auto/headshots_48081.png",
+      "winOdds": "50/1",
+      "winProb": 0.0178
+    },
+    {
+      "owgr": "12",
+      "name": "J.J. Spaun",
+      "country": "USA",
+      "headshot": "https://pga-tour-res.cloudinary.com/image/upload/c_fill,g_face:center,h_240,w_240,q_auto,f_auto/headshots_39324.png",
+      "winOdds": "50/1",
+      "winProb": 0.01945
+    },
+    {
+      "owgr": "13",
+      "name": "Chris Gotterup",
+      "country": "USA",
+      "headshot": "https://pga-tour-res.cloudinary.com/image/upload/c_fill,g_face:center,h_240,w_240,q_auto,f_auto/headshots_59095.png",
+      "winOdds": "80/1",
+      "winProb": 0.0127
+    },
+    {
+      "owgr": "14",
+      "name": "Ludvig Åberg",
+      "country": "SWE",
+      "headshot": "https://pga-tour-res.cloudinary.com/image/upload/c_fill,g_face:center,h_240,w_240,q_auto,f_auto/headshots_52955.png",
+      "winOdds": "50/1",
+      "winProb": 0.02125
+    },
+    {
+      "owgr": "15",
+      "name": "Sam Burns",
+      "country": "USA",
+      "headshot": "https://pga-tour-res.cloudinary.com/image/upload/c_fill,g_face:center,h_240,w_240,q_auto,f_auto/headshots_47504.png",
+      "winOdds": "33/1",
+      "winProb": 0.02815
+    },
+    {
+      "owgr": "16",
+      "name": "Aaron Rai",
+      "country": "ENG",
+      "headshot": "https://pga-tour-res.cloudinary.com/image/upload/c_fill,g_face:center,h_240,w_240,q_auto,f_auto/headshots_46414.png",
+      "winOdds": "80/1",
+      "winProb": 0.0126
+    },
+    {
+      "owgr": "17",
+      "name": "Justin Thomas",
+      "country": "USA",
+      "headshot": "https://pga-tour-res.cloudinary.com/image/upload/c_fill,g_face:center,h_240,w_240,q_auto,f_auto/headshots_33448.png",
+      "winOdds": "66/1",
+      "winProb": 0.0148
+    },
+    {
+      "owgr": "18",
+      "name": "Ben Griffin",
+      "country": "USA",
+      "headshot": "https://pga-tour-res.cloudinary.com/image/upload/c_fill,g_face:center,h_240,w_240,q_auto,f_auto/headshots_54591.png",
+      "winOdds": "66/1",
+      "winProb": 0.0155
+    },
+    {
+      "owgr": "19",
+      "name": "Robert MacIntyre",
+      "country": "SCO",
+      "headshot": "https://pga-tour-res.cloudinary.com/image/upload/c_fill,g_face:center,h_240,w_240,q_auto,f_auto/headshots_52215.png",
+      "winOdds": "150/1",
+      "winProb": 0.00645
+    },
+    {
+      "owgr": "21",
+      "name": "Si Woo Kim",
+      "country": "KOR",
+      "headshot": "https://pga-tour-res.cloudinary.com/image/upload/c_fill,g_face:center,h_240,w_240,q_auto,f_auto/headshots_37455.png",
+      "winOdds": "14/1",
+      "winProb": 0.06285
+    },
+    {
+      "owgr": "22",
+      "name": "Sepp Straka",
+      "country": "AUT",
+      "headshot": "https://pga-tour-res.cloudinary.com/image/upload/c_fill,g_face:center,h_240,w_240,q_auto,f_auto/headshots_49960.png",
+      "winOdds": "250/1",
+      "winProb": 0.0029
+    },
+    {
+      "owgr": "23",
+      "name": "Alex Noren",
+      "country": "SWE",
+      "headshot": "https://pga-tour-res.cloudinary.com/image/upload/c_fill,g_face:center,h_240,w_240,q_auto,f_auto/headshots_27349.png",
+      "winOdds": "66/1",
+      "winProb": 0.01615
+    },
+    {
+      "owgr": "24",
+      "name": "Harris English",
+      "country": "USA",
+      "headshot": "https://pga-tour-res.cloudinary.com/image/upload/c_fill,g_face:center,h_240,w_240,q_auto,f_auto/headshots_34099.png",
+      "winOdds": "100/1",
+      "winProb": 0.01065
+    },
+    {
+      "owgr": "25",
+      "name": "Jacob Bridgeman",
+      "country": "USA",
+      "headshot": "https://pga-tour-res.cloudinary.com/image/upload/c_fill,g_face:center,h_240,w_240,q_auto,f_auto/headshots_60004.png",
+      "winOdds": "66/1",
+      "winProb": 0.01625
+    },
+    {
+      "owgr": "26",
+      "name": "Kristoffer Reitan",
+      "country": "NOR",
+      "headshot": "https://pga-tour-res.cloudinary.com/image/upload/c_fill,g_face:center,h_240,w_240,q_auto,f_auto/headshots_49855.png",
+      "winOdds": "200/1",
+      "winProb": 0.00555
+    },
+    {
+      "owgr": "27",
+      "name": "Ryan Gerard",
+      "country": "USA",
+      "headshot": "https://pga-tour-res.cloudinary.com/image/upload/c_fill,g_face:center,h_240,w_240,q_auto,f_auto/headshots_59018.png",
+      "winOdds": "25/1",
+      "winProb": 0.0368
+    },
+    {
+      "owgr": "28",
+      "name": "Hideki Matsuyama",
+      "country": "JPN",
+      "headshot": "https://pga-tour-res.cloudinary.com/image/upload/c_fill,g_face:center,h_240,w_240,q_auto,f_auto/headshots_32839.png",
+      "winOdds": "200/1",
+      "winProb": 0.00495
+    },
+    {
+      "owgr": "30",
+      "name": "Viktor Hovland",
+      "country": "NOR",
+      "headshot": "https://pga-tour-res.cloudinary.com/image/upload/c_fill,g_face:center,h_240,w_240,q_auto,f_auto/headshots_46717.png",
+      "winOdds": "40/1",
+      "winProb": 0.02425
+    },
+    {
+      "owgr": "31",
+      "name": "Akshay Bhatia",
+      "country": "USA",
+      "headshot": "https://pga-tour-res.cloudinary.com/image/upload/c_fill,g_face:center,h_240,w_240,q_auto,f_auto/headshots_56630.png",
+      "winOdds": "66/1",
+      "winProb": 0.01675
+    },
+    {
+      "owgr": "32",
+      "name": "J.T. Poston",
+      "country": "USA",
+      "headshot": "https://pga-tour-res.cloudinary.com/image/upload/c_fill,g_face:center,h_240,w_240,q_auto,f_auto/headshots_49771.png",
+      "winOdds": "125/1",
+      "winProb": 0.00845
+    },
+    {
+      "owgr": "33",
+      "name": "Kurt Kitayama",
+      "country": "USA",
+      "headshot": "https://pga-tour-res.cloudinary.com/image/upload/c_fill,g_face:center,h_240,w_240,q_auto,f_auto/headshots_48117.png",
+      "winOdds": "125/1",
+      "winProb": 0.0078
+    },
+    {
+      "owgr": "35",
+      "name": "Nicolai Højgaard",
+      "country": "DEN",
+      "headshot": "https://pga-tour-res.cloudinary.com/image/upload/c_fill,g_face:center,h_240,w_240,q_auto,f_auto/headshots_52453.png",
+      "winOdds": "100/1",
+      "winProb": 0.01025
+    },
+    {
+      "owgr": "36",
+      "name": "Maverick McNealy",
+      "country": "USA",
+      "headshot": "https://pga-tour-res.cloudinary.com/image/upload/c_fill,g_face:center,h_240,w_240,q_auto,f_auto/headshots_46442.png",
+      "winOdds": "66/1",
+      "winProb": 0.01505
+    },
+    {
+      "owgr": "37",
+      "name": "Patrick Cantlay",
+      "country": "USA",
+      "headshot": "https://pga-tour-res.cloudinary.com/image/upload/c_fill,g_face:center,h_240,w_240,q_auto,f_auto/headshots_35450.png",
+      "winOdds": "80/1",
+      "winProb": 0.01175
+    },
+    {
+      "owgr": "38",
+      "name": "Keegan Bradley",
+      "country": "USA",
+      "headshot": "https://pga-tour-res.cloudinary.com/image/upload/c_fill,g_face:center,h_240,w_240,q_auto,f_auto/headshots_33141.png",
+      "winOdds": "250/1",
+      "winProb": 0.0044
+    },
+    {
+      "owgr": "39",
+      "name": "Min Woo Lee",
+      "country": "AUS",
+      "headshot": "https://pga-tour-res.cloudinary.com/image/upload/c_fill,g_face:center,h_240,w_240,q_auto,f_auto/headshots_37378.png",
+      "winOdds": "100/1",
+      "winProb": 0.0094
+    },
+    {
+      "owgr": "40",
+      "name": "Bud Cauley",
+      "country": "USA",
+      "headshot": "https://pga-tour-res.cloudinary.com/image/upload/c_fill,g_face:center,h_240,w_240,q_auto,f_auto/headshots_34021.png",
+      "winOdds": "125/1",
+      "winProb": 0.0085
+    },
+    {
+      "owgr": "41",
+      "name": "Gary Woodland",
+      "country": "USA",
+      "headshot": "https://pga-tour-res.cloudinary.com/image/upload/c_fill,g_face:center,h_240,w_240,q_auto,f_auto/headshots_31323.png",
+      "winOdds": "100/1",
+      "winProb": 0.0089
+    },
+    {
+      "owgr": "42",
+      "name": "Rickie Fowler",
+      "country": "USA",
+      "headshot": "https://pga-tour-res.cloudinary.com/image/upload/c_fill,g_face:center,h_240,w_240,q_auto,f_auto/headshots_32102.png",
+      "winOdds": "250/1",
+      "winProb": 0.00435
+    },
+    {
+      "owgr": "43",
+      "name": "Alex Smalley",
+      "country": "USA",
+      "headshot": "https://pga-tour-res.cloudinary.com/image/upload/c_fill,g_face:center,h_240,w_240,q_auto,f_auto/headshots_46340.png",
+      "winOdds": "33/1",
+      "winProb": 0.02865
+    },
+    {
+      "owgr": "44",
+      "name": "Jake Knapp",
+      "country": "USA",
+      "headshot": "https://pga-tour-res.cloudinary.com/image/upload/c_fill,g_face:center,h_240,w_240,q_auto,f_auto/headshots_47420.png",
+      "winOdds": "50/1",
+      "winProb": 0.019
+    },
+    {
+      "owgr": "45",
+      "name": "Shane Lowry",
+      "country": "IRL",
+      "headshot": "https://pga-tour-res.cloudinary.com/image/upload/c_fill,g_face:center,h_240,w_240,q_auto,f_auto/headshots_33204.png",
+      "winOdds": "100/1",
+      "winProb": 0.00975
+    },
+    {
+      "owgr": "46",
+      "name": "Sam Stevens",
+      "country": "USA",
+      "headshot": "https://pga-tour-res.cloudinary.com/image/upload/c_fill,g_face:center,h_240,w_240,q_auto,f_auto/headshots_55893.png",
+      "winOdds": "250/1",
+      "winProb": 0.00405
+    },
+    {
+      "owgr": "47",
+      "name": "Jason Day",
+      "country": "AUS",
+      "headshot": "https://pga-tour-res.cloudinary.com/image/upload/c_fill,g_face:center,h_240,w_240,q_auto,f_auto/headshots_28089.png",
+      "winOdds": "250/1",
+      "winProb": 0.00275
+    },
+    {
+      "owgr": "49",
+      "name": "Jordan Spieth",
+      "country": "USA",
+      "headshot": "https://pga-tour-res.cloudinary.com/image/upload/c_fill,g_face:center,h_240,w_240,q_auto,f_auto/headshots_34046.png",
+      "winOdds": "200/1",
+      "winProb": 0.00545
+    },
+    {
+      "owgr": "50",
+      "name": "Daniel Berger",
+      "country": "USA",
+      "headshot": "https://pga-tour-res.cloudinary.com/image/upload/c_fill,g_face:center,h_240,w_240,q_auto,f_auto/headshots_40026.png",
+      "winOdds": "250/1",
+      "winProb": 0.00355
+    },
+    {
+      "owgr": "51",
+      "name": "Michael Kim",
+      "country": "USA",
+      "headshot": "https://pga-tour-res.cloudinary.com/image/upload/c_fill,g_face:center,h_240,w_240,q_auto,f_auto/headshots_39975.png",
+      "winOdds": "250/1",
+      "winProb": 0.00315
+    },
+    {
+      "owgr": "52",
+      "name": "Adam Scott",
+      "country": "AUS",
+      "headshot": "https://pga-tour-res.cloudinary.com/image/upload/c_fill,g_face:center,h_240,w_240,q_auto,f_auto/headshots_24502.png",
+      "winOdds": "66/1",
+      "winProb": 0.01435
+    },
+    {
+      "owgr": "53",
+      "name": "Nico Echavarria",
+      "country": "COL",
+      "headshot": "https://pga-tour-res.cloudinary.com/image/upload/c_fill,g_face:center,h_240,w_240,q_auto,f_auto/headshots_51349.png",
+      "winOdds": "250/1",
+      "winProb": 0.00205
+    },
+    {
+      "owgr": "54",
+      "name": "Ryan Fox",
+      "country": "NZL",
+      "headshot": "https://pga-tour-res.cloudinary.com/image/upload/c_fill,g_face:center,h_240,w_240,q_auto,f_auto/headshots_29936.png",
+      "winOdds": "125/1",
+      "winProb": 0.0079
+    },
+    {
+      "owgr": "55",
+      "name": "Corey Conners",
+      "country": "CAN",
+      "headshot": "https://pga-tour-res.cloudinary.com/image/upload/c_fill,g_face:center,h_240,w_240,q_auto,f_auto/headshots_39997.png",
+      "winOdds": "250/1",
+      "winProb": 0.0008
+    },
+    {
+      "owgr": "56",
+      "name": "Matt McCarty",
+      "country": "USA",
+      "headshot": "https://pga-tour-res.cloudinary.com/image/upload/c_fill,g_face:center,h_240,w_240,q_auto,f_auto/headshots_59141.png",
+      "winOdds": "250/1",
+      "winProb": 0.00185
+    },
+    {
+      "owgr": "58",
+      "name": "Brian Harman",
+      "country": "USA",
+      "headshot": "https://pga-tour-res.cloudinary.com/image/upload/c_fill,g_face:center,h_240,w_240,q_auto,f_auto/headshots_27644.png",
+      "winOdds": "250/1",
+      "winProb": 0.00385
+    },
+    {
+      "owgr": "62",
+      "name": "Ryo Hisatsune",
+      "country": "JPN",
+      "headshot": "https://pga-tour-res.cloudinary.com/image/upload/c_fill,g_face:center,h_240,w_240,q_auto,f_auto/headshots_51287.png",
+      "winOdds": "250/1",
+      "winProb": 0.00215
+    },
+    {
+      "owgr": "63",
+      "name": "Andrew Novak",
+      "country": "USA",
+      "headshot": "https://pga-tour-res.cloudinary.com/image/upload/c_fill,g_face:center,h_240,w_240,q_auto,f_auto/headshots_51997.png",
+      "winOdds": "250/1",
+      "winProb": 0.00205
+    },
+    {
+      "owgr": "65",
+      "name": "Nick Taylor",
+      "country": "CAN",
+      "headshot": "https://pga-tour-res.cloudinary.com/image/upload/c_fill,g_face:center,h_240,w_240,q_auto,f_auto/headshots_25493.png",
+      "winOdds": "250/1",
+      "winProb": 0.0017
+    },
+    {
+      "owgr": "66",
+      "name": "Eric Cole",
+      "country": "USA",
+      "headshot": "https://pga-tour-res.cloudinary.com/image/upload/c_fill,g_face:center,h_240,w_240,q_auto,f_auto/headshots_47591.png",
+      "winOdds": "40/1",
+      "winProb": 0.02325
+    },
+    {
+      "owgr": "67",
+      "name": "Alex Fitzpatrick",
+      "country": "ENG",
+      "headshot": "https://pga-tour-res.cloudinary.com/image/upload/c_fill,g_face:center,h_240,w_240,q_auto,f_auto/headshots_55721.png",
+      "winOdds": "250/1",
+      "winProb": 0.001
+    },
+    {
+      "owgr": "68",
+      "name": "Keith Mitchell",
+      "country": "USA",
+      "headshot": "https://pga-tour-res.cloudinary.com/image/upload/c_fill,g_face:center,h_240,w_240,q_auto,f_auto/headshots_39546.png",
+      "winOdds": "125/1",
+      "winProb": 0.0085
+    },
+    {
+      "owgr": "70",
+      "name": "Harry Hall",
+      "country": "ENG",
+      "headshot": "https://pga-tour-res.cloudinary.com/image/upload/c_fill,g_face:center,h_240,w_240,q_auto,f_auto/headshots_57975.png",
+      "winOdds": "250/1",
+      "winProb": 0.0039
+    },
+    {
+      "owgr": "73",
+      "name": "Sahith Theegala",
+      "country": "USA",
+      "headshot": "https://pga-tour-res.cloudinary.com/image/upload/c_fill,g_face:center,h_240,w_240,q_auto,f_auto/headshots_51634.png",
+      "winOdds": "200/1",
+      "winProb": 0.00565
+    },
+    {
+      "owgr": "79",
+      "name": "Sungjae Im",
+      "country": "KOR",
+      "headshot": "https://pga-tour-res.cloudinary.com/image/upload/c_fill,g_face:center,h_240,w_240,q_auto,f_auto/headshots_39971.png",
+      "winOdds": "250/1",
+      "winProb": 0.0032
+    },
+    {
+      "owgr": "90",
+      "name": "Mac Meissner",
+      "country": "USA",
+      "headshot": "https://pga-tour-res.cloudinary.com/image/upload/c_fill,g_face:center,h_240,w_240,q_auto,f_auto/headshots_59143.png",
+      "winOdds": "150/1",
+      "winProb": 0.00605
+    },
+    {
+      "owgr": "93",
+      "name": "Taylor Pendrith",
+      "country": "CAN",
+      "headshot": "https://pga-tour-res.cloudinary.com/image/upload/c_fill,g_face:center,h_240,w_240,q_auto,f_auto/headshots_40250.png",
+      "winOdds": "250/1",
+      "winProb": 0.00175
+    },
+    {
+      "owgr": "103",
+      "name": "Denny McCarthy",
+      "country": "USA",
+      "headshot": "https://pga-tour-res.cloudinary.com/image/upload/c_fill,g_face:center,h_240,w_240,q_auto,f_auto/headshots_47993.png",
+      "winOdds": "250/1",
+      "winProb": 0.00195
+    },
+    {
+      "owgr": "109",
+      "name": "Lucas Glover",
+      "country": "USA",
+      "headshot": "https://pga-tour-res.cloudinary.com/image/upload/c_fill,g_face:center,h_240,w_240,q_auto,f_auto/headshots_25900.png",
+      "winOdds": "250/1",
+      "winProb": 0.0003
+    },
+    {
+      "owgr": "110",
+      "name": "Tony Finau",
+      "country": "USA",
+      "headshot": "https://pga-tour-res.cloudinary.com/image/upload/c_fill,g_face:center,h_240,w_240,q_auto,f_auto/headshots_29725.png",
+      "winOdds": "250/1",
+      "winProb": 0.00375
+    },
+    {
+      "owgr": "112",
+      "name": "Tom Hoge",
+      "country": "USA",
+      "headshot": "https://pga-tour-res.cloudinary.com/image/upload/c_fill,g_face:center,h_240,w_240,q_auto,f_auto/headshots_35532.png",
+      "winOdds": "250/1",
+      "winProb": 0.00075
+    },
+    {
+      "owgr": "121",
+      "name": "Brandt Snedeker",
+      "country": "USA",
+      "headshot": "https://pga-tour-res.cloudinary.com/image/upload/c_fill,g_face:center,h_240,w_240,q_auto,f_auto/headshots_27649.png",
+      "winOdds": "200/1",
+      "winProb": 0.0053
+    },
+    {
+      "owgr": "122",
+      "name": "Mark Hubbard",
+      "country": "USA",
+      "headshot": "https://pga-tour-res.cloudinary.com/image/upload/c_fill,g_face:center,h_240,w_240,q_auto,f_auto/headshots_36801.png",
+      "winOdds": "250/1",
+      "winProb": 0.00165
+    },
+    {
+      "owgr": "127",
+      "name": "Brian Campbell",
+      "country": "USA",
+      "headshot": "https://pga-tour-res.cloudinary.com/image/upload/c_fill,g_face:center,h_240,w_240,q_auto,f_auto/headshots_46443.png",
+      "winOdds": "250/1",
+      "winProb": 0.0004
+    },
+    {
+      "owgr": "130",
+      "name": "Jackson Suber",
+      "country": "USA",
+      "headshot": "https://pga-tour-res.cloudinary.com/image/upload/c_fill,g_face:center,h_240,w_240,q_auto,f_auto/headshots_60019.png",
+      "winOdds": "150/1",
+      "winProb": 0.0062
+    },
+    {
+      "owgr": "154",
+      "name": "Jhonattan Vegas",
+      "country": "VEN",
+      "headshot": "https://pga-tour-res.cloudinary.com/image/upload/c_fill,g_face:center,h_240,w_240,q_auto,f_auto/headshots_27064.png",
+      "winOdds": "250/1",
+      "winProb": 0.00025
+    },
+    {
+      "owgr": "680",
+      "name": "Ben James",
+      "country": "USA",
+      "headshot": "https://pga-tour-res.cloudinary.com/image/upload/c_fill,g_face:center,h_240,w_240,q_auto,f_auto/headshots_57869.png",
+      "winOdds": "250/1",
+      "winProb": 0.00015
+    }
+  ],
+  "fieldRanking": [
+    {
+      "playerId": "46046",
+      "name": "Scottie Scheffler",
+      "country": "United States",
+      "countryFlag": "USA",
+      "owgr": "1",
+      "headshot": "https://pga-tour-res.cloudinary.com/image/upload/c_fill,g_face:center,h_240,w_240,q_auto,f_auto/headshots_46046.png",
+      "sg": {
+        "total": 2.204,
+        "ott": 0.68,
+        "app": 0.54,
+        "arg": 0.516,
+        "putt": 0.467
+      },
+      "drivingDistance": 312.8,
+      "drivingAccuracy": 65.25,
+      "recentSG": 2.6833333333333336,
+      "recentEvents": 3,
+      "dataThin": false,
+      "fitScore": 1.3163832475187975,
+      "recentZ": 1.4519235168072413,
+      "seasonZ": 2.5739415434432207,
+      "owgrZ": 3.4764710836370174,
+      "trendRaw": 0.4793333333333334,
+      "trend": "up",
+      "composite": 1.8486176729128456,
+      "_prevRank": 5,
+      "letdownPenalty": 0.2,
+      "letdownFlag": "Contended at the U.S. Open (major) last week - fatigue/hangover risk",
+      "winProb": 0.15915,
+      "p5": 0.5946,
+      "p10": 0.8566,
+      "p20": 0.99035,
+      "win": {
+        "prob": 0.15915,
+        "decimal": 6.283380458686773,
+        "fractional": "11/2"
+      },
+      "t5": {
+        "prob": 0.5946,
+        "decimal": 1.6818028927009754,
+        "fractional": "4/6"
+      },
+      "t10": {
+        "prob": 0.8566,
+        "decimal": 1.1674060238150827,
+        "fractional": "1/5"
+      },
+      "t20": {
+        "prob": 0.99035,
+        "decimal": 1.0416666666666667,
+        "fractional": "1/5"
+      },
       "confidence": 4,
-      "modelRank": 15,
-      "rationale": "Skillset fits TPC River Highlands: strongest on approach, exactly what wins here. Trending up - recent SG 1.87/rd over last 2 starts, above his season line. A big hitter (309 yds avg)."
+      "rationale": "Form in his game: gains on off the tee (+0.68/rd), gains on approach (+0.54/rd). Trending up - recent SG 2.68/rd over last 3 starts, above his season line. A big hitter (313 yds avg).",
+      "ewValue": 3.7360980207351555,
+      "modelRank": 1,
+      "points": 3,
+      "stakeGBP": 15,
+      "ewWin": 7.5,
+      "ewPlace": 7.5
+    },
+    {
+      "playerId": "37455",
+      "name": "Si Woo Kim",
+      "country": "Republic of Korea",
+      "countryFlag": "KOR",
+      "owgr": "21",
+      "headshot": "https://pga-tour-res.cloudinary.com/image/upload/c_fill,g_face:center,h_240,w_240,q_auto,f_auto/headshots_37455.png",
+      "sg": {
+        "total": 1.348,
+        "ott": 0.504,
+        "app": 0.735,
+        "arg": 0.243,
+        "putt": -0.135
+      },
+      "drivingDistance": 300.5,
+      "drivingAccuracy": 69.91,
+      "recentSG": 3.082,
+      "recentEvents": 2,
+      "dataThin": false,
+      "fitScore": 0.6616193808702722,
+      "recentZ": 1.8236659793644698,
+      "seasonZ": 1.2707570865984839,
+      "owgrZ": 0.5028245191016788,
+      "trendRaw": 1.7339999999999998,
+      "trend": "up",
+      "composite": 1.3029211487484238,
+      "winProb": 0.06285,
+      "p5": 0.3027,
+      "p10": 0.5578,
+      "p20": 0.8681,
+      "win": {
+        "prob": 0.06285,
+        "decimal": 15.910898965791567,
+        "fractional": "14/1"
+      },
+      "t5": {
+        "prob": 0.3027,
+        "decimal": 3.3036009250082587,
+        "fractional": "9/4"
+      },
+      "t10": {
+        "prob": 0.5578,
+        "decimal": 1.7927572606669058,
+        "fractional": "4/5"
+      },
+      "t20": {
+        "prob": 0.8681,
+        "decimal": 1.1519410206197442,
+        "fractional": "1/5"
+      },
+      "confidence": 2,
+      "rationale": "Skillset fits TPC River Highlands: strongest on approach, exactly what wins here. Trending up - recent SG 3.08/rd over last 2 starts, above his season line. An accurate driver (70% fairways).",
+      "ewValue": 4.816229116945108,
+      "modelRank": 2,
+      "points": 2,
+      "stakeGBP": 10,
+      "ewWin": 5,
+      "ewPlace": 5
+    },
+    {
+      "playerId": "51766",
+      "name": "Wyndham Clark",
+      "country": "United States",
+      "countryFlag": "USA",
+      "owgr": "8",
+      "headshot": "https://pga-tour-res.cloudinary.com/image/upload/c_fill,g_face:center,h_240,w_240,q_auto,f_auto/headshots_51766.png",
+      "sg": {
+        "total": 1.148,
+        "ott": -0.011,
+        "app": 0.567,
+        "arg": 0.352,
+        "putt": 0.239
+      },
+      "drivingDistance": 311.5,
+      "drivingAccuracy": 58.91,
+      "recentSG": 3.51175,
+      "recentEvents": 4,
+      "dataThin": false,
+      "fitScore": 0.6773410996273623,
+      "recentZ": 2.2243925427857967,
+      "seasonZ": 0.9662747368684047,
+      "owgrZ": 1.4454385249832162,
+      "trendRaw": 2.3637500000000005,
+      "trend": "up",
+      "composite": 1.1480251979760385,
+      "_prevRank": 1,
+      "letdownPenalty": 0.42,
+      "letdownFlag": "Won the U.S. Open last week - winners almost never back up the next week",
+      "winProb": 0.04945,
+      "p5": 0.2457,
+      "p10": 0.4687,
+      "p20": 0.79375,
+      "win": {
+        "prob": 0.04945,
+        "decimal": 20.222446916076844,
+        "fractional": "20/1"
+      },
+      "t5": {
+        "prob": 0.2457,
+        "decimal": 4.07000407000407,
+        "fractional": "3/1"
+      },
+      "t10": {
+        "prob": 0.4687,
+        "decimal": 2.1335609131640707,
+        "fractional": "11/10"
+      },
+      "t20": {
+        "prob": 0.79375,
+        "decimal": 1.2598425196850394,
+        "fractional": "1/4"
+      },
+      "confidence": 2,
+      "rationale": "Skillset fits TPC River Highlands: strongest on approach, exactly what wins here. Trending up - recent SG 3.51/rd over last 4 starts, above his season line. A big hitter (312 yds avg).",
+      "ewValue": 4.968655207280081,
+      "modelRank": 3,
+      "points": 2,
+      "stakeGBP": 10,
+      "ewWin": 5,
+      "ewPlace": 5
+    },
+    {
+      "playerId": "30911",
+      "name": "Tommy Fleetwood",
+      "country": "England",
+      "countryFlag": "ENG",
+      "owgr": "7",
+      "headshot": "https://pga-tour-res.cloudinary.com/image/upload/c_fill,g_face:center,h_240,w_240,q_auto,f_auto/headshots_30911.png",
+      "sg": {
+        "total": 1.408,
+        "ott": 0.462,
+        "app": 0.281,
+        "arg": 0.534,
+        "putt": 0.131
+      },
+      "drivingDistance": 303,
+      "drivingAccuracy": 69.29,
+      "recentSG": 2.4146666666666667,
+      "recentEvents": 3,
+      "dataThin": false,
+      "fitScore": 0.6287319482180471,
+      "recentZ": 1.2014014224751959,
+      "seasonZ": 1.362101791517507,
+      "owgrZ": 1.575861333505018,
+      "trendRaw": 1.0066666666666668,
+      "trend": "up",
+      "composite": 1.0887877740288814,
+      "_prevRank": 8,
+      "letdownPenalty": 0.09,
+      "letdownFlag": "Played the U.S. Open last week - mild fatigue watch",
+      "winProb": 0.048,
+      "p5": 0.2262,
+      "p10": 0.4308,
+      "p20": 0.7531,
+      "win": {
+        "prob": 0.048,
+        "decimal": 20.833333333333332,
+        "fractional": "20/1"
+      },
+      "t5": {
+        "prob": 0.2262,
+        "decimal": 4.420866489832007,
+        "fractional": "7/2"
+      },
+      "t10": {
+        "prob": 0.4308,
+        "decimal": 2.321262766945218,
+        "fractional": "11/8"
+      },
+      "t20": {
+        "prob": 0.7531,
+        "decimal": 1.327844907714779,
+        "fractional": "1/3"
+      },
+      "confidence": 2,
+      "rationale": "Form in his game: gains on around the green (+0.53/rd), gains on off the tee (+0.46/rd). Trending up - recent SG 2.41/rd over last 3 starts, above his season line. An accurate driver (69% fairways).",
+      "ewValue": 4.7125,
+      "modelRank": 4
+    },
+    {
+      "playerId": "40098",
+      "name": "Matt Fitzpatrick",
+      "country": "England",
+      "countryFlag": "ENG",
+      "owgr": "4",
+      "headshot": "https://pga-tour-res.cloudinary.com/image/upload/c_fill,g_face:center,h_240,w_240,q_auto,f_auto/headshots_40098.png",
+      "sg": {
+        "total": 1.486,
+        "ott": 0.23,
+        "app": 0.776,
+        "arg": 0.557,
+        "putt": -0.078
+      },
+      "drivingDistance": 305.8,
+      "drivingAccuracy": 67.05,
+      "recentSG": 1.4146666666666665,
+      "recentEvents": 3,
+      "dataThin": false,
+      "fitScore": 0.8941963439092617,
+      "recentZ": 0.26893705151224734,
+      "seasonZ": 1.480849907912238,
+      "owgrZ": 2.1224493778678166,
+      "trendRaw": -0.07133333333333347,
+      "trend": "flat",
+      "composite": 1.1008146008968471,
+      "_prevRank": 18,
+      "winProb": 0.0473,
+      "p5": 0.2268,
+      "p10": 0.43615,
+      "p20": 0.76335,
+      "win": {
+        "prob": 0.0473,
+        "decimal": 21.14164904862579,
+        "fractional": "20/1"
+      },
+      "t5": {
+        "prob": 0.2268,
+        "decimal": 4.409171075837742,
+        "fractional": "7/2"
+      },
+      "t10": {
+        "prob": 0.43615,
+        "decimal": 2.29278917803508,
+        "fractional": "5/4"
+      },
+      "t20": {
+        "prob": 0.76335,
+        "decimal": 1.3100150651732496,
+        "fractional": "1/3"
+      },
+      "confidence": 2,
+      "rationale": "Skillset fits TPC River Highlands: strongest on approach, exactly what wins here. Steady recent SG of 1.41/rd over last 3 starts. A big hitter (306 yds avg).",
+      "ewValue": 4.79492600422833,
+      "modelRank": 5
+    },
+    {
+      "playerId": "59018",
+      "name": "Ryan Gerard",
+      "country": "United States",
+      "countryFlag": "USA",
+      "owgr": "27",
+      "headshot": "https://pga-tour-res.cloudinary.com/image/upload/c_fill,g_face:center,h_240,w_240,q_auto,f_auto/headshots_59018.png",
+      "sg": {
+        "total": 0.814,
+        "ott": 0.119,
+        "app": 0.616,
+        "arg": -0.276,
+        "putt": 0.356
+      },
+      "drivingDistance": 304.3,
+      "drivingAccuracy": 62.93,
+      "recentSG": 2.931,
+      "recentEvents": 2,
+      "dataThin": false,
+      "fitScore": 0.38032056336118625,
+      "recentZ": 1.6828638593490648,
+      "seasonZ": 0.45778921281917334,
+      "owgrZ": 0.2573606404270002,
+      "trendRaw": 2.117,
+      "trend": "up",
+      "composite": 0.9879728407268702,
+      "winProb": 0.0368,
+      "p5": 0.1906,
+      "p10": 0.37925,
+      "p20": 0.69575,
+      "win": {
+        "prob": 0.0368,
+        "decimal": 27.17391304347826,
+        "fractional": "25/1"
+      },
+      "t5": {
+        "prob": 0.1906,
+        "decimal": 5.246589716684156,
+        "fractional": "4/1"
+      },
+      "t10": {
+        "prob": 0.37925,
+        "decimal": 2.636783124588003,
+        "fractional": "7/4"
+      },
+      "t20": {
+        "prob": 0.69575,
+        "decimal": 1.437297879985627,
+        "fractional": "4/9"
+      },
+      "confidence": 2,
+      "rationale": "Skillset fits TPC River Highlands: strongest on approach, exactly what wins here. Trending up - recent SG 2.93/rd over last 2 starts, above his season line.",
+      "ewValue": 5.179347826086956,
+      "modelRank": 6,
+      "points": 1,
+      "stakeGBP": 5,
+      "ewWin": 2.5,
+      "ewPlace": 2.5
+    },
+    {
+      "playerId": "50525",
+      "name": "Collin Morikawa",
+      "country": "United States",
+      "countryFlag": "USA",
+      "owgr": "9",
+      "headshot": "https://pga-tour-res.cloudinary.com/image/upload/c_fill,g_face:center,h_240,w_240,q_auto,f_auto/headshots_50525.png",
+      "sg": {
+        "total": 1.162,
+        "ott": 0.35,
+        "app": 0.749,
+        "arg": 0.097,
+        "putt": -0.033
+      },
+      "drivingDistance": 305.2,
+      "drivingAccuracy": 67.52,
+      "recentSG": 1.5665,
+      "recentEvents": 2,
+      "dataThin": false,
+      "fitScore": 0.5802310144845396,
+      "recentZ": 0.4105162251701218,
+      "seasonZ": 0.9875885013495103,
+      "owgrZ": 1.3303974548303392,
+      "trendRaw": 0.4045000000000001,
+      "trend": "up",
+      "composite": 0.8093391752279022,
+      "_prevRank": 16,
+      "winProb": 0.02925,
+      "p5": 0.14895,
+      "p10": 0.29675,
+      "p20": 0.587,
+      "win": {
+        "prob": 0.02925,
+        "decimal": 34.18803418803419,
+        "fractional": "33/1"
+      },
+      "t5": {
+        "prob": 0.14895,
+        "decimal": 6.71366230278617,
+        "fractional": "11/2"
+      },
+      "t10": {
+        "prob": 0.29675,
+        "decimal": 3.369839932603201,
+        "fractional": "9/4"
+      },
+      "t20": {
+        "prob": 0.587,
+        "decimal": 1.7035775127768313,
+        "fractional": "8/11"
+      },
+      "confidence": 1,
+      "rationale": "Skillset fits TPC River Highlands: strongest on approach, exactly what wins here. Trending up - recent SG 1.57/rd over last 2 starts, above his season line. A big hitter (305 yds avg).",
+      "ewValue": 5.092307692307692,
+      "modelRank": 7,
+      "points": 1,
+      "stakeGBP": 5,
+      "ewWin": 2.5,
+      "ewPlace": 2.5
+    },
+    {
+      "playerId": "46340",
+      "name": "Alex Smalley",
+      "country": "United States",
+      "countryFlag": "USA",
+      "owgr": "43",
+      "headshot": "https://pga-tour-res.cloudinary.com/image/upload/c_fill,g_face:center,h_240,w_240,q_auto,f_auto/headshots_46340.png",
+      "sg": {
+        "total": 0.808,
+        "ott": 0.085,
+        "app": 0.419,
+        "arg": 0.037,
+        "putt": 0.266
+      },
+      "drivingDistance": 307.1,
+      "drivingAccuracy": 59.2,
+      "recentSG": 2.751,
+      "recentEvents": 1,
+      "dataThin": false,
+      "fitScore": 0.3214667067678918,
+      "recentZ": 1.515020272575734,
+      "seasonZ": 0.44865474232727115,
+      "owgrZ": -0.19716904592149698,
+      "trendRaw": 1.9429999999999998,
+      "trend": "up",
+      "composite": 0.8268201744581443,
+      "winProb": 0.02865,
+      "p5": 0.1491,
+      "p10": 0.3077,
+      "p20": 0.60815,
+      "win": {
+        "prob": 0.02865,
+        "decimal": 34.904013961605585,
+        "fractional": "33/1"
+      },
+      "t5": {
+        "prob": 0.1491,
+        "decimal": 6.706908115358819,
+        "fractional": "11/2"
+      },
+      "t10": {
+        "prob": 0.3077,
+        "decimal": 3.2499187520311996,
+        "fractional": "9/4"
+      },
+      "t20": {
+        "prob": 0.60815,
+        "decimal": 1.6443311682972952,
+        "fractional": "4/6"
+      },
+      "confidence": 1,
+      "rationale": "Skillset fits TPC River Highlands: strongest on approach, exactly what wins here. Trending up - recent SG 2.75/rd over last 1 start, above his season line. A big hitter (307 yds avg).",
+      "ewValue": 5.204188481675393,
+      "modelRank": 8,
+      "points": 1,
+      "stakeGBP": 5,
+      "ewWin": 2.5,
+      "ewPlace": 2.5
+    },
+    {
+      "playerId": "47504",
+      "name": "Sam Burns",
+      "country": "United States",
+      "countryFlag": "USA",
+      "owgr": "15",
+      "headshot": "https://pga-tour-res.cloudinary.com/image/upload/c_fill,g_face:center,h_240,w_240,q_auto,f_auto/headshots_47504.png",
+      "sg": {
+        "total": 1.045,
+        "ott": 0.186,
+        "app": 0.233,
+        "arg": -0.06,
+        "putt": 0.687
+      },
+      "drivingDistance": 314.4,
+      "drivingAccuracy": 57.85,
+      "recentSG": 2.6646666666666667,
+      "recentEvents": 3,
+      "dataThin": false,
+      "fitScore": 0.47522656945813296,
+      "recentZ": 1.4345175152159328,
+      "seasonZ": 0.8094663267574143,
+      "owgrZ": 0.8314637493772697,
+      "trendRaw": 1.6196666666666668,
+      "trend": "up",
+      "composite": 0.845604720550639,
+      "_prevRank": 2,
+      "letdownPenalty": 0.2,
+      "letdownFlag": "Contended at the U.S. Open (major) last week - fatigue/hangover risk",
+      "winProb": 0.02815,
+      "p5": 0.153,
+      "p10": 0.3163,
+      "p20": 0.61715,
+      "win": {
+        "prob": 0.02815,
+        "decimal": 35.52397868561279,
+        "fractional": "33/1"
+      },
+      "t5": {
+        "prob": 0.153,
+        "decimal": 6.5359477124183005,
+        "fractional": "11/2"
+      },
+      "t10": {
+        "prob": 0.3163,
+        "decimal": 3.161555485298767,
+        "fractional": "9/4"
+      },
+      "t20": {
+        "prob": 0.61715,
+        "decimal": 1.6203516163007374,
+        "fractional": "8/13"
+      },
+      "confidence": 1,
+      "rationale": "Form in his game: gains on putting (+0.69/rd), gains on approach (+0.23/rd). Trending up - recent SG 2.66/rd over last 3 starts, above his season line. A big hitter (314 yds avg).",
+      "ewValue": 5.435168738898756,
+      "modelRank": 9
+    },
+    {
+      "playerId": "46717",
+      "name": "Viktor Hovland",
+      "country": "Norway",
+      "countryFlag": "NOR",
+      "owgr": "30",
+      "headshot": "https://pga-tour-res.cloudinary.com/image/upload/c_fill,g_face:center,h_240,w_240,q_auto,f_auto/headshots_46717.png",
+      "sg": {
+        "total": 0.529,
+        "ott": -0.112,
+        "app": 0.488,
+        "arg": 0.151,
+        "putt": 0.003
+      },
+      "drivingDistance": 302.5,
+      "drivingAccuracy": 65.89,
+      "recentSG": 2.747,
+      "recentEvents": 1,
+      "dataThin": false,
+      "fitScore": 0.15541156422697427,
+      "recentZ": 1.5112904150918822,
+      "seasonZ": 0.02390186445381125,
+      "owgrZ": 0.15445289649266924,
+      "trendRaw": 2.218,
+      "trend": "up",
+      "composite": 0.7314477783148314,
+      "winProb": 0.02425,
+      "p5": 0.1317,
+      "p10": 0.27215,
+      "p20": 0.54555,
+      "win": {
+        "prob": 0.02425,
+        "decimal": 41.23711340206185,
+        "fractional": "40/1"
+      },
+      "t5": {
+        "prob": 0.1317,
+        "decimal": 7.59301442672741,
+        "fractional": "13/2"
+      },
+      "t10": {
+        "prob": 0.27215,
+        "decimal": 3.6744442403086532,
+        "fractional": "11/4"
+      },
+      "t20": {
+        "prob": 0.54555,
+        "decimal": 1.8330125561360096,
+        "fractional": "5/6"
+      },
+      "confidence": 1,
+      "rationale": "Skillset fits TPC River Highlands: strongest on approach, exactly what wins here. Trending up - recent SG 2.75/rd over last 1 start, above his season line. An accurate driver (66% fairways).",
+      "ewValue": 5.430927835051547,
+      "modelRank": 10
+    },
+    {
+      "playerId": "47591",
+      "name": "Eric Cole",
+      "country": "United States",
+      "countryFlag": "USA",
+      "owgr": "66",
+      "headshot": "https://pga-tour-res.cloudinary.com/image/upload/c_fill,g_face:center,h_240,w_240,q_auto,f_auto/headshots_47591.png",
+      "sg": {
+        "total": 0.771,
+        "ott": -0.613,
+        "app": 0.253,
+        "arg": 0.471,
+        "putt": 0.66
+      },
+      "drivingDistance": 298.9,
+      "drivingAccuracy": 51.3,
+      "recentSG": 2.138333333333333,
+      "recentEvents": 3,
+      "dataThin": false,
+      "fitScore": 0.5430923150434159,
+      "recentZ": 0.9437304346324342,
+      "seasonZ": 0.3923255076272065,
+      "owgrZ": -0.615649334280512,
+      "trendRaw": 1.3673333333333333,
+      "trend": "up",
+      "composite": 0.7292920310135678,
+      "winProb": 0.02325,
+      "p5": 0.1291,
+      "p10": 0.26955,
+      "p20": 0.5482,
+      "win": {
+        "prob": 0.02325,
+        "decimal": 43.01075268817204,
+        "fractional": "40/1"
+      },
+      "t5": {
+        "prob": 0.1291,
+        "decimal": 7.74593338497289,
+        "fractional": "13/2"
+      },
+      "t10": {
+        "prob": 0.26955,
+        "decimal": 3.7098868484511223,
+        "fractional": "11/4"
+      },
+      "t20": {
+        "prob": 0.5482,
+        "decimal": 1.8241517694272162,
+        "fractional": "5/6"
+      },
+      "confidence": 1,
+      "rationale": "Form in his game: gains on putting (+0.66/rd), gains on around the green (+0.47/rd). Trending up - recent SG 2.14/rd over last 3 starts, above his season line.",
+      "ewValue": 5.552688172043011,
+      "modelRank": 11
+    },
+    {
+      "playerId": "52955",
+      "name": "Ludvig Åberg",
+      "country": "Sweden",
+      "countryFlag": "SWE",
+      "owgr": "14",
+      "headshot": "https://pga-tour-res.cloudinary.com/image/upload/c_fill,g_face:center,h_240,w_240,q_auto,f_auto/headshots_52955.png",
+      "sg": {
+        "total": 1.521,
+        "ott": 0.533,
+        "app": 0.551,
+        "arg": 0.165,
+        "putt": 0.272
+      },
+      "drivingDistance": 316.9,
+      "drivingAccuracy": 62.64,
+      "recentSG": 0.9159999999999999,
+      "recentEvents": 3,
+      "dataThin": false,
+      "fitScore": 0.7869581817093962,
+      "recentZ": -0.1960518481412761,
+      "seasonZ": 1.5341343191150014,
+      "owgrZ": 0.8988504806204177,
+      "trendRaw": -0.605,
+      "trend": "down",
+      "composite": 0.6126344258345368,
+      "_prevRank": 13,
+      "letdownPenalty": 0.09,
+      "letdownFlag": "Played the U.S. Open last week - mild fatigue watch",
+      "winProb": 0.02125,
+      "p5": 0.10925,
+      "p10": 0.2252,
+      "p20": 0.47185,
+      "win": {
+        "prob": 0.02125,
+        "decimal": 47.05882352941176,
+        "fractional": "50/1"
+      },
+      "t5": {
+        "prob": 0.10925,
+        "decimal": 9.153318077803204,
+        "fractional": "8/1"
+      },
+      "t10": {
+        "prob": 0.2252,
+        "decimal": 4.440497335701599,
+        "fractional": "7/2"
+      },
+      "t20": {
+        "prob": 0.47185,
+        "decimal": 2.1193175797393238,
+        "fractional": "11/10"
+      },
+      "confidence": 1,
+      "rationale": "Skillset fits TPC River Highlands: strongest on approach, exactly what wins here. Form dipping slightly (recent SG 0.92/rd over 3 starts). A big hitter (317 yds avg).",
+      "ewValue": 5.141176470588235,
+      "modelRank": 12
+    },
+    {
+      "playerId": "39324",
+      "name": "J.J. Spaun",
+      "country": "United States",
+      "countryFlag": "USA",
+      "owgr": "12",
+      "headshot": "https://pga-tour-res.cloudinary.com/image/upload/c_fill,g_face:center,h_240,w_240,q_auto,f_auto/headshots_39324.png",
+      "sg": {
+        "total": 0.671,
+        "ott": 0.305,
+        "app": 0.709,
+        "arg": 0.162,
+        "putt": -0.505
+      },
+      "drivingDistance": 302.4,
+      "drivingAccuracy": 64.9,
+      "recentSG": 2.056,
+      "recentEvents": 2,
+      "dataThin": false,
+      "fitScore": 0.12734648933828097,
+      "recentZ": 0.8669575347564851,
+      "seasonZ": 0.24008433276216717,
+      "owgrZ": 1.0494125634644775,
+      "trendRaw": 1.385,
+      "trend": "up",
+      "composite": 0.5848212524083383,
+      "winProb": 0.01945,
+      "p5": 0.1004,
+      "p10": 0.209,
+      "p20": 0.4536,
+      "win": {
+        "prob": 0.01945,
+        "decimal": 51.41388174807199,
+        "fractional": "50/1"
+      },
+      "t5": {
+        "prob": 0.1004,
+        "decimal": 9.9601593625498,
+        "fractional": "9/1"
+      },
+      "t10": {
+        "prob": 0.209,
+        "decimal": 4.784688995215311,
+        "fractional": "4/1"
+      },
+      "t20": {
+        "prob": 0.4536,
+        "decimal": 2.204585537918871,
+        "fractional": "5/4"
+      },
+      "confidence": 1,
+      "rationale": "Skillset fits TPC River Highlands: strongest on approach, exactly what wins here. Trending up - recent SG 2.06/rd over last 2 starts, above his season line.",
+      "ewValue": 5.161953727506427,
+      "modelRank": 13
+    },
+    {
+      "playerId": "47420",
+      "name": "Jake Knapp",
+      "country": "United States",
+      "countryFlag": "USA",
+      "owgr": "44",
+      "headshot": "https://pga-tour-res.cloudinary.com/image/upload/c_fill,g_face:center,h_240,w_240,q_auto,f_auto/headshots_47420.png",
+      "sg": {
+        "total": 1.282,
+        "ott": 0.142,
+        "app": 0.397,
+        "arg": 0.013,
+        "putt": 0.73
+      },
+      "drivingDistance": 320.3,
+      "drivingAccuracy": 58.2,
+      "recentSG": null,
+      "recentEvents": 0,
+      "dataThin": false,
+      "fitScore": 0.7376368761017335,
+      "recentZ": -0.5,
+      "seasonZ": 1.1702779111875576,
+      "owgrZ": -0.21962337276177366,
+      "trendRaw": 0,
+      "trend": "flat",
+      "composite": 0.5060229145590128,
+      "winProb": 0.019,
+      "p5": 0.0945,
+      "p10": 0.20035,
+      "p20": 0.41895,
+      "win": {
+        "prob": 0.019,
+        "decimal": 52.631578947368425,
+        "fractional": "50/1"
+      },
+      "t5": {
+        "prob": 0.0945,
+        "decimal": 10.582010582010582,
+        "fractional": "10/1"
+      },
+      "t10": {
+        "prob": 0.20035,
+        "decimal": 4.991265285749938,
+        "fractional": "4/1"
+      },
+      "t20": {
+        "prob": 0.41895,
+        "decimal": 2.386919680152763,
+        "fractional": "11/8"
+      },
+      "confidence": 1,
+      "rationale": "Form in his game: gains on putting (+0.73/rd), gains on approach (+0.40/rd). A big hitter (320 yds avg).",
+      "ewValue": 4.973684210526316,
+      "modelRank": 14
+    },
+    {
+      "playerId": "48081",
+      "name": "Xander Schauffele",
+      "country": "United States",
+      "countryFlag": "USA",
+      "owgr": "11",
+      "headshot": "https://pga-tour-res.cloudinary.com/image/upload/c_fill,g_face:center,h_240,w_240,q_auto,f_auto/headshots_48081.png",
+      "sg": {
+        "total": 1.226,
+        "ott": 0.518,
+        "app": 0.391,
+        "arg": 0.032,
+        "putt": 0.286
+      },
+      "drivingDistance": 316.4,
+      "drivingAccuracy": 59.91,
+      "recentSG": 1.2485,
+      "recentEvents": 2,
+      "dataThin": false,
+      "fitScore": 0.5052494616339397,
+      "recentZ": 0.11399255520390421,
+      "seasonZ": 1.0850228532631356,
+      "owgrZ": 1.134398333007427,
+      "trendRaw": 0.022499999999999964,
+      "trend": "flat",
+      "composite": 0.5323423194052384,
+      "_prevRank": 11,
+      "letdownPenalty": 0.09,
+      "letdownFlag": "Played the U.S. Open last week - mild fatigue watch",
+      "winProb": 0.0178,
+      "p5": 0.0999,
+      "p10": 0.2046,
+      "p20": 0.4333,
+      "win": {
+        "prob": 0.0178,
+        "decimal": 56.17977528089888,
+        "fractional": "50/1"
+      },
+      "t5": {
+        "prob": 0.0999,
+        "decimal": 10.01001001001001,
+        "fractional": "9/1"
+      },
+      "t10": {
+        "prob": 0.2046,
+        "decimal": 4.887585532746823,
+        "fractional": "4/1"
+      },
+      "t20": {
+        "prob": 0.4333,
+        "decimal": 2.3078698361412417,
+        "fractional": "5/4"
+      },
+      "confidence": 1,
+      "rationale": "Form in his game: gains on off the tee (+0.52/rd), gains on approach (+0.39/rd). Steady recent SG of 1.25/rd over last 2 starts. A big hitter (316 yds avg).",
+      "ewValue": 5.612359550561798,
+      "modelRank": 15
     }
   ],
   "bankroll": {
@@ -833,6 +4326,7 @@
   },
   "ewTerms": "5 places at 1/5 odds (Bet365 often enhances places for these events - check before betting)",
   "notes": [
-    "Odds are model estimates (fair price from win probability). Live market prices fill in mid-week once books publish them."
+    "Last week was the U.S. Open (a major), so players who contended - especially winner Wyndham Clark - are docked for the post-major let-down. Affected players carry a let-down flag.",
+    "Win / Top-5 / Top-10 / Top-20 probabilities come from a 20,000-run Monte Carlo simulation of the field. Odds shown are the fair model price - compare against your bookie to find value."
   ]
 }

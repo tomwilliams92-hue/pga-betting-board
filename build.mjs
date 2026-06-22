@@ -16,6 +16,10 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const SG = { total: '02675', ott: '02567', app: '02568', arg: '02569', putt: '02564' };
 const DRIVE = { distance: '101', accuracy: '102' };
 
+// The four men's majors (+ the Players, a near-major) trigger the strongest let-down.
+const MAJOR_RE = /(Masters Tournament|PGA Championship|U\.?S\.? Open|The Open Championship|THE PLAYERS)/i;
+const isMajor = (name) => MAJOR_RE.test(name || '') && !/Scottish|Canadian|Mexico|Australian/i.test(name || '');
+
 function fmtRange(startMs) {
   const start = new Date(startMs);
   const end = new Date(startMs + 3 * 86400000); // Thu -> Sun
@@ -56,19 +60,31 @@ async function main() {
 
   const recentEvents = recentSrc.map((e, i) => ({ id: e.id, name: e.tournamentName, map: recent[i].map }));
 
+  // last week's event drives the let-down factor
+  const prev = completed[completed.length - 1];
+  const previousEvent = prev ? {
+    name: prev.tournamentName,
+    isMajor: isMajor(prev.tournamentName),
+    champion: prev.champion || null,
+    sgMap: recentEvents[0]?.map,
+  } : null;
+  if (previousEvent) console.error(`[build] last week: ${previousEvent.name}${previousEvent.isMajor ? ' (MAJOR)' : ''} won by ${previousEvent.champion}`);
+
   const model = buildModel({
     field,
     profile,
     sg: { total: sgTotal.map, ott: sgOTT.map, app: sgAPP.map, arg: sgARG.map, putt: sgPUTT.map },
     driving: { distance: dDist.map, accuracy: dAcc.map },
     recentEvents,
+    previousEvent,
     weekNumber: completed.length + 1,
   });
 
   const notes = [];
   const thin = model.fieldRanking.filter((r) => r.dataThin).length;
   if (thin) notes.push(`${thin} players in the field have little/no PGA Tour strokes-gained data - their ratings are estimated and flagged.`);
-  notes.push('Odds are model estimates (fair price from win probability). Live market prices fill in mid-week once books publish them.');
+  if (previousEvent?.isMajor) notes.push(`Last week was the ${previousEvent.name} (a major), so players who contended - especially winner ${previousEvent.champion} - are docked for the post-major let-down. Affected players carry a let-down flag.`);
+  notes.push('Win / Top-5 / Top-10 / Top-20 probabilities come from a 20,000-run Monte Carlo simulation of the field. Odds shown are the fair model price - compare against your bookie to find value.');
 
   const board = {
     generatedAt: new Date().toISOString(),
@@ -90,8 +106,16 @@ async function main() {
       yards: profile.yards || null,
     },
     recentEventsUsed: recentEvents.map((e) => e.name),
+    previousEvent: previousEvent ? { name: previousEvent.name, isMajor: previousEvent.isMajor, champion: previousEvent.champion } : null,
     winPicks: model.winPicks,
     outsidePicks: model.outsidePicks,
+    bestBet: model.bestBet,
+    eachWayValue: model.eachWayValue,
+    top5Sel: model.top5Sel,
+    top10Sel: model.top10Sel,
+    top20Sel: model.top20Sel,
+    placesTable: model.placesTable,
+    worldRankings: model.worldRankings,
     fieldRanking: model.fieldRanking,
     bankroll: model.bankroll,
     ewTerms: model.ewTerms,
@@ -101,8 +125,9 @@ async function main() {
   fs.writeFileSync(path.join(__dirname, 'data.js'), 'window.BOARD = ' + JSON.stringify(board) + ';\n');
   fs.writeFileSync(path.join(__dirname, 'data.json'), JSON.stringify(board, null, 2));
   console.error('[build] wrote data.js');
-  console.error('[build] WIN:', model.winPicks.map((p) => `${p.name} ${p.modelOdds.fractional}`).join(' | '));
-  console.error('[build] OUT:', model.outsidePicks.map((p) => `${p.name} ${p.modelOdds.fractional}`).join(' | '));
+  console.error('[build] WIN:', model.winPicks.map((p) => `${p.name} ${p.win.fractional}`).join(' | '));
+  console.error('[build] OUT:', model.outsidePicks.map((p) => `${p.name} ${p.win.fractional}`).join(' | '));
+  console.error('[build] BEST BET:', model.bestBet ? `${model.bestBet.name} ${model.bestBet.win.fractional}` : 'none');
 }
 
 main().catch((e) => { console.error('[build] FAILED:', e.message); process.exit(1); });
