@@ -16,6 +16,9 @@ import { loadLedger, saveLedger, appendWeek, settle, summary } from './ledger.mj
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const SG = { total: '02675', ott: '02567', app: '02568', arg: '02569', putt: '02564' };
 const DRIVE = { distance: '101', accuracy: '102' };
+const AFFILIATE = ''; // e.g. 'affil=YOURCODE' - appended to the oddschecker "Back it" links
+const slugify = (s) => s.toLowerCase().replace(/&/g, 'and').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+const logoUrl = (a) => (a && a.imagePath ? `https://res.cloudinary.com/pgatour-prod/image/upload/q_auto,f_auto/${a.imagePath}` : null);
 
 // The four men's majors (+ the Players, a near-major) trigger the strongest let-down.
 const MAJOR_RE = /(Masters Tournament|PGA Championship|U\.?S\.? Open|The Open Championship|THE PLAYERS)/i;
@@ -61,15 +64,16 @@ async function main() {
 
   const recentEvents = recentSrc.map((e, i) => ({ id: e.id, name: e.tournamentName, map: recent[i].map }));
 
-  // last week's event drives the let-down factor
+  // last week's event drives the let-down factor - pull its final leaderboard for finishes
   const prev = completed[completed.length - 1];
+  const prevLb = prev ? await getLeaderboard(prev.id).catch(() => null) : null;
   const previousEvent = prev ? {
     name: prev.tournamentName,
     isMajor: isMajor(prev.tournamentName),
     champion: prev.champion || null,
-    sgMap: recentEvents[0]?.map,
+    finishPositions: prevLb?.positions || null,
   } : null;
-  if (previousEvent) console.error(`[build] last week: ${previousEvent.name}${previousEvent.isMajor ? ' (MAJOR)' : ''} won by ${previousEvent.champion}`);
+  if (previousEvent) console.error(`[build] last week: ${previousEvent.name}${previousEvent.isMajor ? ' (MAJOR)' : ''} won by ${previousEvent.champion} | finishes: ${prevLb?.positions.size || 0}`);
 
   const model = buildModel({
     field,
@@ -79,6 +83,8 @@ async function main() {
     recentEvents,
     previousEvent,
     weekNumber: completed.length + 1,
+    eventSlug: slugify(event.tournamentName),
+    affiliate: AFFILIATE,
   });
 
   const notes = [];
@@ -97,10 +103,12 @@ async function main() {
       state: event.state || null,
       dateRange: event.startDate ? fmtRange(Number(event.startDate)) : null,
       fieldSize: field.players.length,
+      logo: logoUrl(event.tournamentLogoAsset),
     },
     courseProfile: {
       archetype: profile.archetype,
       summary: profile.summary,
+      narrative: profile.narrative || profile.summary,
       tags: profile.tags,
       weights: profile.weights,
       par: profile.par || null,

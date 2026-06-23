@@ -73,15 +73,30 @@ export function summary(ledger) {
   const staked = settled.reduce((a, b) => a + b.stakeGBP, 0);
   const profit = settled.reduce((a, b) => a + b.profitGBP, 0);
   const won = settled.filter((b) => b.profitGBP > 0).length;
+  const returned = settled.reduce((a, b) => a + (b.returnGBP || 0), 0);
+  // per-market breakdown (settled only)
+  const byMarket = {};
+  for (const b of settled) {
+    const k = b.marketLabel || b.market;
+    (byMarket[k] ||= { market: k, bets: 0, staked: 0, profit: 0, won: 0 });
+    byMarket[k].bets++; byMarket[k].staked += b.stakeGBP; byMarket[k].profit += b.profitGBP; if (b.profitGBP > 0) byMarket[k].won++;
+  }
+  // running cumulative profit by settle order (for the trend)
+  let run = 0; const curve = settled.map((b) => { run += b.profitGBP; return Math.round(run * 100) / 100; });
+
   return {
     bankrollStartGBP: ledger.bankrollStartGBP, unitGBP: ledger.unitGBP,
     settledCount: settled.length, won, lost: settled.length - won,
-    stakedGBP: Math.round(staked * 100) / 100, profitGBP: Math.round(profit * 100) / 100,
+    stakedGBP: Math.round(staked * 100) / 100, returnedGBP: Math.round(returned * 100) / 100, profitGBP: Math.round(profit * 100) / 100,
     bankrollNowGBP: Math.round((ledger.bankrollStartGBP + profit) * 100) / 100,
     roiPct: staked > 0 ? Math.round((profit / staked) * 1000) / 10 : 0,
     strikeRatePct: settled.length ? Math.round((won / settled.length) * 100) : 0,
     pendingCount: pending.length, pendingStakeGBP: pending.reduce((a, b) => a + b.stakeGBP, 0),
+    totalBets: ledger.bets.length,
+    byMarket: Object.values(byMarket).map((m) => ({ ...m, staked: Math.round(m.staked * 100) / 100, profit: Math.round(m.profit * 100) / 100, roiPct: m.staked ? Math.round((m.profit / m.staked) * 1000) / 10 : 0 })),
+    curve,
     history: settled.slice(-30).reverse(),
-    openBets: pending.reverse(),
+    openBets: pending.slice().reverse(),
+    allBets: ledger.bets.slice().reverse(),
   };
 }

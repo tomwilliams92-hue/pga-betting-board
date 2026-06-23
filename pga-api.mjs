@@ -114,7 +114,7 @@ const TOUR = 'R'; // PGA Tour
 export async function getSchedule(year) {
   const q = `query S($t:String!,$y:String){schedule(tourCode:$t,year:$y){
     seasonYear
-    upcoming{tournaments{id startDate sortDate tournamentName courseName city state}}
+    upcoming{tournaments{id startDate sortDate tournamentName courseName city state tournamentLogoAsset{imagePath}}}
     completed{tournaments{id startDate sortDate tournamentName courseName champion}}
   }}`;
   const d = await gql(q, { t: TOUR, y: String(year) });

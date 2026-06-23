@@ -23,6 +23,8 @@ export const COURSE_PROFILES = {
     archetype: 'Precision irons & hot putter',
     summary:
       'One of the shortest, most scoreable tracks on tour. A par 70 with small greens where birdies are made with sharp approach play and putting, not raw power. Straight, accurate iron players beat the bombers here.',
+    narrative:
+      'At 6,841 yards TPC River Highlands is one of the shortest stops on the PGA Tour, and length is close to irrelevant - the driver often stays in the bag as players position off the tee and attack with wedges and short irons. The defence is the green complexes: they are small, quick and tightly bunkered, so it is a relentless second-shot and putting test where winning scores routinely reach 15-under or lower. The stretch from 15 to 17 (a drivable par 4 and the island-ish 17th) creates birdie-and-bogey swings, rewarding bold, in-form scorers with hot putters over methodical plodders. Course history matters here too - the same names keep contending - so we lean on approach play, putting and short game, and discount raw distance.',
     tags: [
       'Short par 70 - among the shortest on tour',
       'Small greens reward pinpoint approach play',

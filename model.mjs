@@ -8,6 +8,11 @@
 // ranked by value, not by who is simply most likely to win. Markets: Win / Top-5 /
 // Top-10 / Top-20, so each-way and place value both surface.
 
+import { noteFor } from './player-notes.mjs';
+
+// oddschecker market slugs for the "Back it" deep links
+const OC_MARKET = { win: 'winner', top5: 'top-5-finish', top10: 'top-10-finish', top20: 'top-20-finish' };
+
 // ---- stats helpers --------------------------------------------------------
 function stats(values) {
   const v = values.filter((x) => Number.isFinite(x));
@@ -69,26 +74,33 @@ const LETDOWN = { majorWinner: 0.42, majorTop5: 0.20, majorTop15: 0.09, regularW
 function applyLetdown(rows, prev) {
   if (!prev || !prev.name) return;
   const champ = prev.champion ? norm(prev.champion) : null;
-  const present = rows.map((r) => ({ r, sg: prev.sgMap?.get(r.playerId)?.values?.Avg })).filter((x) => Number.isFinite(x.sg)).sort((a, b) => b.sg - a.sg);
-  present.forEach((x, i) => { x.r._prevRank = i + 1; });
+  const pos = prev.finishPositions; // Map(playerId -> {pos,posText,cut})
   for (const r of rows) {
+    const fr = pos?.get(r.playerId);
+    r.playedLastWeek = pos ? !!fr : null;          // null if we have no leaderboard
+    r.lastWeekFinish = fr ? (fr.cut ? 'MC' : fr.posText) : null;
+    const finishPos = fr && !fr.cut ? fr.pos : null;
     let penalty = 0, flag = null;
     if (champ && norm(r.name) === champ) {
       penalty = prev.isMajor ? LETDOWN.majorWinner : LETDOWN.regularWinner;
       flag = prev.isMajor ? `Won the ${prev.name} last week - winners almost never back up the next week` : `Won last week - watch for a winner's let-down`;
-    } else if (prev.isMajor && r._prevRank) {
-      if (r._prevRank <= 5) { penalty = LETDOWN.majorTop5; flag = `Contended at the ${prev.name} (major) last week - fatigue risk`; }
-      else if (r._prevRank <= 15) { penalty = LETDOWN.majorTop15; flag = `Played the ${prev.name} last week - mild fatigue watch`; }
+    } else if (prev.isMajor && Number.isFinite(finishPos)) {
+      if (finishPos <= 5) { penalty = LETDOWN.majorTop5; flag = `Finished ${r.lastWeekFinish} at the ${prev.name} (a major) last week - real fatigue risk`; }
+      else if (finishPos <= 20) { penalty = LETDOWN.majorTop15; flag = `Played the ${prev.name} last week (${r.lastWeekFinish}) - mild fatigue watch`; }
     }
     if (penalty > 0) { r.composite -= penalty; r.letdownPenalty = penalty; r.letdownFlag = flag; }
   }
 }
 
 // ---- Monte Carlo: run the field, return finish-position probabilities ------
-const T_SIM = 1.65, N_SIM = 16000;
-const gumbel = () => -Math.log(-Math.log(Math.random()));
+const T_SIM = 1.65, N_SIM = 16000, SEED = 0x9e3779b9;
+// Seeded RNG so the same data always yields the same picks (deterministic, reproducible).
+// Both sims share the seed = common random numbers, which also stabilises the edge estimates.
+function mulberry32(a) { return function () { a |= 0; a = a + 0x6d2b79f5 | 0; let t = Math.imul(a ^ a >>> 15, 1 | a); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
 function runSim(comps) {
   const n = comps.length;
+  const rng = mulberry32(SEED);
+  const gumbel = () => -Math.log(-Math.log(rng()));
   const c1 = new Array(n).fill(0), c5 = new Array(n).fill(0), c10 = new Array(n).fill(0), c20 = new Array(n).fill(0);
   const perf = new Array(n), idx = new Array(n);
   for (let s = 0; s < N_SIM; s++) {
@@ -100,7 +112,7 @@ function runSim(comps) {
 }
 
 // ---- the model ------------------------------------------------------------
-export function buildModel({ field, profile, sg, driving, recentEvents, previousEvent, weekNumber, bankrollPoints = 20 }) {
+export function buildModel({ field, profile, sg, driving, recentEvents, previousEvent, weekNumber, bankrollPoints = 20, eventSlug = '', affiliate = '' }) {
   const players = field.players.filter((p) => !p.amateur);
   const sgVal = (which, id) => sg[which]?.get(String(id))?.values?.Avg;
 
@@ -149,6 +161,8 @@ export function buildModel({ field, profile, sg, driving, recentEvents, previous
     r.marketComposite = base + DAMP * fitContribution;  // market: course-fit dampened, no let-down
   }
   applyLetdown(rows, previousEvent); // docks the MODEL composite only -> our edge to fade them
+  // qualitative news/injury layer (overrides the numbers where we know better)
+  for (const r of rows) { const nt = noteFor(r.name); if (nt) { r.composite += nt.adjust; r.playerNote = nt; } }
 
   // Put the market anchor on the SAME mean/spread as the model so the two sims are
   // comparable - otherwise differing variance creates huge phantom edges. Edges then
@@ -173,16 +187,25 @@ export function buildModel({ field, profile, sg, driving, recentEvents, previous
   // ---- build value bet candidates (best market per player) ----
   function candidate(r, m) {
     const modelProb = r[m].prob, marketProb = r['m_' + m].prob, edge = r['edge_' + m];
-    const bits = [`Model rates him ${pct(modelProb)} to finish ${MK_LABEL[m].toLowerCase()} vs an estimated ${pct(marketProb)} market price - a +${Math.round(edge * 100)}% edge`];
-    const st = strengthText(r.sg, profile); if (st) bits.push(st);
+    const label = MK_LABEL[m].toLowerCase();
+    const bits = [];
+    const st = strengthText(r.sg, profile);
+    bits.push(st || `solid all-round numbers for ${profile.course || 'this test'}`);
     const ft = formText(r); if (ft) bits.push(ft);
-    if (r.letdownFlag) bits.push('note: ' + r.letdownFlag.toLowerCase());
+    if (r.playedLastWeek === false) bits.push('did not play last week, so arrives fresh');
+    else if (r.lastWeekFinish && !r.letdownFlag) bits.push(`finished ${r.lastWeekFinish} last week`);
+    if (r.playerNote) bits.push(r.playerNote.note);
+    else if (r.letdownFlag) bits.push(r.letdownFlag.toLowerCase());
+    bits.push(`the value: model makes him ${pct(modelProb)} to finish ${label} where the market implies about ${pct(marketProb)} - a +${Math.round(edge * 100)}% edge at ${r['m_' + m].fractional}`);
     return {
       playerId: r.playerId, name: r.name, headshot: r.headshot, country: r.countryFlag || r.country, owgr: r.owgr,
       market: m, marketLabel: MK_LABEL[m], eachWay: m === 'win',
       modelProb, modelOdds: r[m], marketProb, marketOdds: r['m_' + m], edgePct: Math.round(edge * 100),
       valueScore: edge * Math.sqrt(modelProb), confidence: r.confidence, trend: r.trend,
-      sg: r.sg, recentSG: r.recentSG, recentEvents: r.recentEvents, dataThin: r.dataThin, letdownFlag: r.letdownFlag || null,
+      sg: r.sg, recentSG: r.recentSG, recentEvents: r.recentEvents, dataThin: r.dataThin,
+      letdownFlag: r.letdownFlag || null, playerNote: r.playerNote ? r.playerNote.note : null, playerNoteTag: r.playerNote ? r.playerNote.tag : null,
+      lastWeekFinish: r.lastWeekFinish || null, playedLastWeek: r.playedLastWeek ?? null,
+      backLink: `https://www.oddschecker.com/golf/${eventSlug}/${OC_MARKET[m]}${affiliate ? '?' + affiliate : ''}`,
       rationale: bits.map((b) => b.charAt(0).toUpperCase() + b.slice(1)).join('. ') + '.',
     };
   }
@@ -193,16 +216,28 @@ export function buildModel({ field, profile, sg, driving, recentEvents, previous
   for (const r of rows) { const bm = bestMarket(r); if (bm && !r.dataThin) candidates.push(candidate(r, bm.m)); }
   candidates.sort((a, b) => b.valueScore - a.valueScore);
 
-  // tracked = top value bets (one per player), staked, feed the P&L
-  const trackedBets = candidates.slice(0, 6);
-  const stakePts = [3, 2, 2, 1, 1, 1];
-  trackedBets.forEach((c, i) => {
-    c.points = stakePts[i] || 1; c.stakeGBP = c.points * 5; c.tracked = true;
+  // five best value bets (any market)...
+  const valueBets = candidates.slice(0, 5);
+  const valueIds = new Set(valueBets.map((c) => c.playerId));
+  // ...plus a guaranteed EACH-WAY TO-WIN bet for the big P&L upside: best win-market value
+  // among genuine contenders, skipping anyone injured/flagged or already picked.
+  const winCand = rows.filter((r) => !r.dataThin && !valueIds.has(r.playerId) && r.winProb >= 0.02 && !r.playerNote && !r.letdownPenalty)
+    .map((r) => ({ r, vs: r['edge_win'] * Math.sqrt(r.winProb) })).sort((a, b) => b.vs - a.vs)[0];
+  const winBet = winCand ? candidate(winCand.r, 'win') : null;
+  if (winBet) winBet.marquee = 'Each-way to win';
+
+  const trackedBets = [...valueBets];
+  if (winBet) trackedBets.push(winBet);
+  const valueStake = [3, 2, 2, 1, 1];
+  valueBets.forEach((c, i) => { c.points = valueStake[i] || 1; });
+  if (winBet) winBet.points = 2; // small stake each-way, big return if it lands
+  trackedBets.forEach((c) => {
+    c.tracked = true; c.stakeGBP = c.points * 5;
     c.priceDecimal = c.marketOdds.decimal; c.priceFractional = c.marketOdds.fractional;
     if (c.eachWay) { c.ewWin = c.stakeGBP / 2; c.ewPlace = c.stakeGBP / 2; }
   });
   const trackedIds = new Set(trackedBets.map((c) => c.playerId));
-  const bestBet = trackedBets[0] || null;
+  const bestBet = valueBets[0] || null;
 
   // untracked flutters: a favourite punt + a longshot punt (NOT in the P&L)
   const flutters = [];
@@ -212,18 +247,22 @@ export function buildModel({ field, profile, sg, driving, recentEvents, previous
   if (longshot) flutters.push({ ...candidate(longshot, 'win'), kind: 'Longshot punt', tracked: false });
   flutters.forEach((f) => { f.suggestGBP = 5; });
 
-  // watchlist: improving players we are NOT backing this week (ones to watch)
+  // watchlist: ones to watch we are NOT backing - injury/news flags first, then improvers
   const usedIds = new Set([...trackedIds, ...flutters.map((f) => f.playerId)]);
-  const watchlist = rows.filter((r) => !usedIds.has(r.playerId) && !r.dataThin)
-    .map((r) => ({ r, score: r.recentZ - r.seasonZ + 0.3 * r.recentZ }))
-    .sort((a, b) => b.score - a.score).slice(0, 5)
+  const wlRow = (r, why, tag) => ({ playerId: r.playerId, name: r.name, headshot: r.headshot, country: r.countryFlag || r.country, owgr: r.owgr, trend: r.trend, recentSG: r.recentSG, recentEvents: r.recentEvents, winOdds: r.win.fractional, why, tag: tag || null });
+  const flagged = rows.filter((r) => r.playerNote && !usedIds.has(r.playerId)).map((r) => wlRow(r, r.playerNote.note, r.playerNote.tag));
+  flagged.forEach((w) => usedIds.add(w.playerId));
+  const improvers = rows.filter((r) => !usedIds.has(r.playerId) && !r.dataThin)
+    .map((r) => ({ r, score: r.recentZ - r.seasonZ + 0.3 * r.recentZ })).sort((a, b) => b.score - a.score)
+    .slice(0, Math.max(0, 6 - flagged.length))
     .map(({ r }) => {
       let why;
       if (r.trend === 'up') why = `Form spiking (${r.recentSG.toFixed(2)} SG/rd lately) but no value at the current price - watch for a bigger number.`;
       else if (r.owgr <= 30) why = `Class act (OWGR #${r.owgr}); numbers not quite firing this week - one to monitor.`;
       else { const st = strengthText(r.sg, profile); why = st ? `${st.charAt(0).toUpperCase() + st.slice(1)} - building, not yet a bet.` : 'Underlying numbers improving - monitor.'; }
-      return { playerId: r.playerId, name: r.name, headshot: r.headshot, country: r.countryFlag || r.country, owgr: r.owgr, trend: r.trend, recentSG: r.recentSG, recentEvents: r.recentEvents, winOdds: r.win.fractional, why };
+      return wlRow(r, why, r.trend === 'up' ? 'In form' : null);
     });
+  const watchlist = [...flagged, ...improvers];
 
   // place-market value selections (ranked by edge) - surfaces e.g. value top-20 plays
   const selFor = (m, k) => rows.filter((r) => r[m].prob >= FLOOR[m]).map((r) => candidate(r, m)).sort((a, b) => b.edgePct - a.edgePct).slice(0, k);
