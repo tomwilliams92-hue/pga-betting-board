@@ -1,17 +1,14 @@
 // model.mjs
-// Turns raw pgatour.com data into picks across multiple markets.
-//
-// Per player we build a composite rating from:
-//   - course-fit strokes-gained  (SG re-weighted to what THIS course rewards)
-//   - recent form                (avg SG:Total over the last ~5 events they played)
-//   - trend                      (recent SG vs season SG - heating up?)
-//   - season quality + OWGR      (stabilisers)
-// then apply a POST-EVENT LET-DOWN adjustment (the major/winner hangover), and finally
-// run a Monte Carlo simulation of the tournament to get calibrated Win / Top-5 / Top-10 /
-// Top-20 probabilities -> estimated odds for every market.
+// Value-driven picks. We build TWO probability estimates per player per market:
+//   - MODEL  = course fit + recent form + trend + quality + post-major let-down
+//   - MARKET = an anchor based only on world ranking + season quality (what the
+//              market mostly prices on). When live Bet365 odds are wired in, they
+//              replace this anchor directly.
+// EDGE = modelProb / marketProb - 1. Positive edge = value. Recommendations are
+// ranked by value, not by who is simply most likely to win. Markets: Win / Top-5 /
+// Top-10 / Top-20, so each-way and place value both surface.
 
 // ---- stats helpers --------------------------------------------------------
-
 function stats(values) {
   const v = values.filter((x) => Number.isFinite(x));
   const n = v.length || 1;
@@ -20,12 +17,12 @@ function stats(values) {
   return { mean, sd };
 }
 const z = (x, m, s) => (Number.isFinite(x) ? (x - m) / s : null);
+const pct = (p) => (p * 100).toFixed(p < 0.1 ? 1 : 0) + '%';
 const norm = (s) => s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z ]/g, '').trim();
 
 // ---- odds formatting (covers odds-on for place markets) -------------------
-
 const STD_FRACTIONS = [
-  [1, 5], [1, 4], [2, 7], [1, 3], [2, 5], [4, 9], [1, 2], [8, 15], [4, 7], [8, 13], [4, 6],
+  [1, 6], [1, 5], [1, 4], [2, 7], [1, 3], [2, 5], [4, 9], [1, 2], [8, 15], [4, 7], [8, 13], [4, 6],
   [8, 11], [4, 5], [5, 6], [10, 11], [1, 1], [11, 10], [5, 4], [11, 8], [6, 4], [7, 4], [15, 8],
   [2, 1], [9, 4], [5, 2], [11, 4], [3, 1], [7, 2], [4, 1], [9, 2], [5, 1], [11, 2], [6, 1],
   [13, 2], [7, 1], [15, 2], [8, 1], [9, 1], [10, 1], [11, 1], [12, 1], [14, 1], [16, 1], [18, 1],
@@ -35,106 +32,74 @@ const STD_FRACTIONS = [
 function toFractional(decimal) {
   const target = decimal - 1;
   let best = STD_FRACTIONS[0], bestErr = Infinity;
-  for (const [n, d] of STD_FRACTIONS) {
-    const err = Math.abs(n / d - target);
-    if (err < bestErr) { bestErr = err; best = [n, d]; }
-  }
+  for (const [n, d] of STD_FRACTIONS) { const e = Math.abs(n / d - target); if (e < bestErr) { bestErr = e; best = [n, d]; } }
   return `${best[0]}/${best[1]}`;
 }
-function marketOdds(prob) {
-  const p = Math.max(1 / 251, Math.min(0.96, prob));
+function oddsFrom(prob) {
+  const p = Math.max(1 / 251, Math.min(0.97, prob));
   const decimal = 1 / p;
   return { prob, decimal, fractional: toFractional(decimal) };
 }
 
-// ---- player display helpers ----------------------------------------------
-
-const headshot = (id) =>
-  `https://pga-tour-res.cloudinary.com/image/upload/c_fill,g_face:center,h_240,w_240,q_auto,f_auto/headshots_${id}.png`;
+// ---- player helpers -------------------------------------------------------
+const headshot = (id) => `https://pga-tour-res.cloudinary.com/image/upload/c_fill,g_face:center,h_240,w_240,q_auto,f_auto/headshots_${id}.png`;
 const SG_LABELS = { ott: 'off the tee', app: 'approach', arg: 'around the green', putt: 'putting' };
+const MARKETS = ['win', 'top5', 'top10', 'top20'];
+const MK_LABEL = { win: 'To Win', top5: 'Top 5', top10: 'Top 10', top20: 'Top 20' };
+const FLOOR = { win: 0.02, top5: 0.10, top10: 0.20, top20: 0.33 }; // min model prob to bet a market
+const EDGE_MIN = 0.08; // 8% edge to count as value
 
-function describeStrengths(sg, profile) {
-  const comps = ['ott', 'app', 'arg', 'putt'].map((k) => ({ k, val: sg[k] ?? -99 }));
-  const ranked = comps.filter((c) => c.val > -90).sort((a, b) => b.val - a.val);
-  const tags = [];
-  for (const c of ranked.slice(0, 2)) if (c.val > 0.2) tags.push(`gains on ${SG_LABELS[c.k]} (+${c.val.toFixed(2)}/rd)`);
+function strengthText(sg, profile) {
+  const comps = ['ott', 'app', 'arg', 'putt'].map((k) => ({ k, val: sg[k] ?? -99 })).filter((c) => c.val > -90).sort((a, b) => b.val - a.val);
   const courseTop = Object.entries(profile.weights).sort((a, b) => b[1] - a[1])[0][0];
-  const fitsCourse = ranked[0] && ranked[0].k === courseTop && ranked[0].val > 0.1;
-  return { tags, fitsCourse, courseTop };
+  if (comps[0] && comps[0].k === courseTop && comps[0].val > 0.1) return `fits ${profile.course || 'the course'} - strongest on ${SG_LABELS[courseTop]}, what wins here`;
+  if (comps[0] && comps[0].val > 0.2) return `gaining on ${SG_LABELS[comps[0].k]} (+${comps[0].val.toFixed(2)}/rd)`;
+  return null;
 }
-function buildRationale(p, profile) {
-  const bits = [];
-  const { tags, fitsCourse, courseTop } = describeStrengths(p.sg, profile);
-  if (fitsCourse) bits.push(`skillset fits ${profile.course || 'the course'}: strongest on ${SG_LABELS[courseTop]}, exactly what wins here`);
-  else if (tags.length) bits.push(`form in his game: ${tags.join(', ')}`);
+function formText(p) {
+  if (!p.recentEvents) return null;
   const starts = `${p.recentEvents} start${p.recentEvents === 1 ? '' : 's'}`;
-  if (p.recentEvents > 0) {
-    if (p.trend === 'up') bits.push(`trending up - recent SG ${p.recentSG.toFixed(2)}/rd over last ${starts}, above his season line`);
-    else if (p.trend === 'down') bits.push(`form dipping slightly (recent SG ${p.recentSG.toFixed(2)}/rd over ${starts})`);
-    else bits.push(`steady recent SG of ${p.recentSG.toFixed(2)}/rd over last ${starts}`);
-  }
-  if (Number.isFinite(p.drivingDistance) && Number.isFinite(p.drivingAccuracy)) {
-    if (p.drivingDistance >= 305) bits.push(`a big hitter (${Math.round(p.drivingDistance)} yds avg)`);
-    else if (p.drivingAccuracy >= 65) bits.push(`an accurate driver (${p.drivingAccuracy.toFixed(0)}% fairways)`);
-  }
-  return bits.map((b) => b.charAt(0).toUpperCase() + b.slice(1)).join('. ') + '.';
+  if (p.trend === 'up') return `trending up (${p.recentSG.toFixed(2)} SG/rd over last ${starts})`;
+  if (p.trend === 'down') return `form cooling (${p.recentSG.toFixed(2)} SG/rd over ${starts})`;
+  return `steady (${p.recentSG.toFixed(2)} SG/rd over last ${starts})`;
 }
 
-// ---- post-event let-down (major / winner hangover) ------------------------
-// The week after a draining major, last week's winner and contenders rarely
-// back up. We dock their composite and flag it so it's transparent.
-// Winner hangover is the strongest, best-documented effect; contender fatigue is milder
-// so the genuine elite aren't over-faded just for being in contention.
+// ---- post-event let-down --------------------------------------------------
 const LETDOWN = { majorWinner: 0.42, majorTop5: 0.20, majorTop15: 0.09, regularWinner: 0.20 };
-
 function applyLetdown(rows, prev) {
   if (!prev || !prev.name) return;
   const champ = prev.champion ? norm(prev.champion) : null;
-  // rank field players by how they struck it in last week's event (SG proxy for contention)
-  const present = rows
-    .map((r) => ({ r, sg: prev.sgMap?.get(r.playerId)?.values?.Avg }))
-    .filter((x) => Number.isFinite(x.sg))
-    .sort((a, b) => b.sg - a.sg);
+  const present = rows.map((r) => ({ r, sg: prev.sgMap?.get(r.playerId)?.values?.Avg })).filter((x) => Number.isFinite(x.sg)).sort((a, b) => b.sg - a.sg);
   present.forEach((x, i) => { x.r._prevRank = i + 1; });
-
   for (const r of rows) {
     let penalty = 0, flag = null;
     if (champ && norm(r.name) === champ) {
       penalty = prev.isMajor ? LETDOWN.majorWinner : LETDOWN.regularWinner;
       flag = prev.isMajor ? `Won the ${prev.name} last week - winners almost never back up the next week` : `Won last week - watch for a winner's let-down`;
     } else if (prev.isMajor && r._prevRank) {
-      if (r._prevRank <= 5) { penalty = LETDOWN.majorTop5; flag = `Contended at the ${prev.name} (major) last week - fatigue/hangover risk`; }
+      if (r._prevRank <= 5) { penalty = LETDOWN.majorTop5; flag = `Contended at the ${prev.name} (major) last week - fatigue risk`; }
       else if (r._prevRank <= 15) { penalty = LETDOWN.majorTop15; flag = `Played the ${prev.name} last week - mild fatigue watch`; }
     }
     if (penalty > 0) { r.composite -= penalty; r.letdownPenalty = penalty; r.letdownFlag = flag; }
   }
 }
 
-// ---- Monte Carlo: simulate the event for place-market probabilities -------
-const T_SIM = 1.65; // spread of player strengths (tuned so the favourite ~20% to win)
+// ---- Monte Carlo: run the field, return finish-position probabilities ------
+const T_SIM = 1.65, N_SIM = 16000;
 const gumbel = () => -Math.log(-Math.log(Math.random()));
-
-function simulate(rows, N = 20000) {
-  const n = rows.length;
+function runSim(comps) {
+  const n = comps.length;
   const c1 = new Array(n).fill(0), c5 = new Array(n).fill(0), c10 = new Array(n).fill(0), c20 = new Array(n).fill(0);
   const perf = new Array(n), idx = new Array(n);
-  for (let s = 0; s < N; s++) {
-    for (let i = 0; i < n; i++) { perf[i] = T_SIM * rows[i].composite + gumbel(); idx[i] = i; }
+  for (let s = 0; s < N_SIM; s++) {
+    for (let i = 0; i < n; i++) { perf[i] = T_SIM * comps[i] + gumbel(); idx[i] = i; }
     idx.sort((a, b) => perf[b] - perf[a]);
-    for (let r = 0; r < n; r++) {
-      const p = idx[r];
-      if (r < 1) c1[p]++; if (r < 5) c5[p]++; if (r < 10) c10[p]++; if (r < 20) c20[p]++;
-    }
+    for (let r = 0; r < n; r++) { const p = idx[r]; if (r < 1) c1[p]++; if (r < 5) c5[p]++; if (r < 10) c10[p]++; if (r < 20) c20[p]++; }
   }
-  rows.forEach((row, i) => {
-    row.winProb = c1[i] / N; row.p5 = c5[i] / N; row.p10 = c10[i] / N; row.p20 = c20[i] / N;
-    row.win = marketOdds(row.winProb); row.t5 = marketOdds(row.p5);
-    row.t10 = marketOdds(row.p10); row.t20 = marketOdds(row.p20);
-  });
+  return comps.map((_, i) => ({ win: c1[i] / N_SIM, top5: c5[i] / N_SIM, top10: c10[i] / N_SIM, top20: c20[i] / N_SIM }));
 }
 
 // ---- the model ------------------------------------------------------------
-
 export function buildModel({ field, profile, sg, driving, recentEvents, previousEvent, weekNumber, bankrollPoints = 20 }) {
   const players = field.players.filter((p) => !p.amateur);
   const sgVal = (which, id) => sg[which]?.get(String(id))?.values?.Avg;
@@ -147,8 +112,7 @@ export function buildModel({ field, profile, sg, driving, recentEvents, previous
     return {
       playerId: id, name: `${p.firstName} ${p.lastName}`.trim(), country: p.country, countryFlag: p.countryFlag,
       owgr: p.owgr || 999, headshot: headshot(id), sg: comp,
-      drivingDistance: driving.distance?.get(id)?.values?.Avg,
-      drivingAccuracy: driving.accuracy?.get(id)?.values?.['%'],
+      drivingDistance: driving.distance?.get(id)?.values?.Avg, drivingAccuracy: driving.accuracy?.get(id)?.values?.['%'],
       recentSG, recentEvents: recentVals.length, dataThin: !Number.isFinite(comp.total),
     };
   });
@@ -171,62 +135,116 @@ export function buildModel({ field, profile, sg, driving, recentEvents, previous
   }
   const fitDist = stats(rows.map((r) => r.fitScore));
   const trendDist = stats(rows.map((r) => r.trendRaw));
+  // A real market efficiently prices class, season quality and recent form. Where it is
+  // slower is course-fit nuance and the post-major let-down. So the market anchor shares
+  // the model's "base" and most of its course-fit, and our edge is only the residual.
+  const DAMP = 0.55; // market captures ~55% of the course-fit signal
   for (const r of rows) {
     const fitZ = z(r.fitScore, fitDist.mean, fitDist.sd) ?? 0;
     const trendZ = z(r.trendRaw, trendDist.mean, trendDist.sd) ?? 0;
-    r.composite = 0.42 * fitZ + 0.22 * r.recentZ + 0.12 * trendZ + 0.12 * r.seasonZ + 0.12 * r.owgrZ;
+    const base = 0.22 * r.recentZ + 0.12 * trendZ + 0.12 * r.seasonZ + 0.12 * r.owgrZ;
+    const fitContribution = 0.42 * fitZ;
+    r.composite = base + fitContribution;               // full model: course-fit at 100%
     if (r.dataThin) r.composite -= 0.6;
+    r.marketComposite = base + DAMP * fitContribution;  // market: course-fit dampened, no let-down
   }
+  applyLetdown(rows, previousEvent); // docks the MODEL composite only -> our edge to fade them
 
-  applyLetdown(rows, previousEvent);
-  simulate(rows);
-
-  for (const r of rows) {
+  // Put the market anchor on the SAME mean/spread as the model so the two sims are
+  // comparable - otherwise differing variance creates huge phantom edges. Edges then
+  // reflect genuine re-ordering (model rating a player above/below the market), not scale.
+  const cStat = stats(rows.map((r) => r.composite));
+  const mStat = stats(rows.map((r) => r.marketComposite));
+  const modelP = runSim(rows.map((r) => r.composite));
+  const marketP = runSim(rows.map((r) => cStat.mean + (r.marketComposite - mStat.mean) * (cStat.sd / mStat.sd)));
+  rows.forEach((r, i) => {
+    r.winProb = modelP[i].win;
+    for (const m of MARKETS) {
+      r[m] = oddsFrom(modelP[i][m]);          // model odds
+      r['m_' + m] = oddsFrom(marketP[i][m]);  // estimated market odds
+      r['edge_' + m] = marketP[i][m] > 0 ? modelP[i][m] / marketP[i][m] - 1 : 0;
+    }
     r.confidence = Math.max(1, Math.min(5, Math.round(1 + r.winProb * 16)));
-    r.rationale = buildRationale(r, profile);
-    r.ewValue = r.winProb > 0 ? r.p5 / r.winProb : 0; // places far more often than wins = e/w value
-  }
+  });
 
   const byWin = [...rows].sort((a, b) => b.winProb - a.winProb);
   byWin.forEach((r, i) => { r.modelRank = i + 1; });
 
-  // --- selections ---
-  const winPicks = byWin.slice(0, 3);
-  const outsidePicks = byWin.filter((r) => !winPicks.includes(r) && r.win.decimal >= 26 && r.win.decimal <= 121).slice(0, 3);
-  let i = 3; while (outsidePicks.length < 3 && i < byWin.length) { if (!winPicks.includes(byWin[i])) outsidePicks.push(byWin[i]); i++; }
-
-  // Best Bet of the week: blend likelihood, form and each-way value/price
-  const wD = stats(byWin.slice(0, 30).map((r) => r.winProb));
-  const tD = stats(byWin.slice(0, 30).map((r) => r.trendRaw));
-  const eD = stats(byWin.slice(0, 30).map((r) => r.ewValue));
-  let bestBet = null, bestScore = -Infinity;
-  for (const r of byWin.slice(0, 25)) {
-    const score = 0.50 * (z(r.winProb, wD.mean, wD.sd) ?? 0) + 0.20 * (z(r.trendRaw, tD.mean, tD.sd) ?? 0) + 0.30 * (z(r.ewValue, eD.mean, eD.sd) ?? 0);
-    if (score > bestScore && !r.letdownPenalty) { bestScore = score; bestBet = r; }
+  // ---- build value bet candidates (best market per player) ----
+  function candidate(r, m) {
+    const modelProb = r[m].prob, marketProb = r['m_' + m].prob, edge = r['edge_' + m];
+    const bits = [`Model rates him ${pct(modelProb)} to finish ${MK_LABEL[m].toLowerCase()} vs an estimated ${pct(marketProb)} market price - a +${Math.round(edge * 100)}% edge`];
+    const st = strengthText(r.sg, profile); if (st) bits.push(st);
+    const ft = formText(r); if (ft) bits.push(ft);
+    if (r.letdownFlag) bits.push('note: ' + r.letdownFlag.toLowerCase());
+    return {
+      playerId: r.playerId, name: r.name, headshot: r.headshot, country: r.countryFlag || r.country, owgr: r.owgr,
+      market: m, marketLabel: MK_LABEL[m], eachWay: m === 'win',
+      modelProb, modelOdds: r[m], marketProb, marketOdds: r['m_' + m], edgePct: Math.round(edge * 100),
+      valueScore: edge * Math.sqrt(modelProb), confidence: r.confidence, trend: r.trend,
+      sg: r.sg, recentSG: r.recentSG, recentEvents: r.recentEvents, dataThin: r.dataThin, letdownFlag: r.letdownFlag || null,
+      rationale: bits.map((b) => b.charAt(0).toUpperCase() + b.slice(1)).join('. ') + '.',
+    };
   }
+  const bestMarket = (r) => MARKETS.filter((m) => r[m].prob >= FLOOR[m] && r['edge_' + m] >= EDGE_MIN)
+    .map((m) => ({ m, vs: r['edge_' + m] * Math.sqrt(r[m].prob) })).sort((a, b) => b.vs - a.vs)[0];
 
-  // Each-way value: strong place chance at a real price
-  const eachWayValue = byWin.filter((r) => r.win.decimal >= 14 && r.p5 >= 0.12).sort((a, b) => b.ewValue - a.ewValue).slice(0, 4);
+  const candidates = [];
+  for (const r of rows) { const bm = bestMarket(r); if (bm && !r.dataThin) candidates.push(candidate(r, bm.m)); }
+  candidates.sort((a, b) => b.valueScore - a.valueScore);
 
-  const topBy = (key, k) => [...rows].sort((a, b) => b[key] - a[key]).slice(0, k);
-  const placesTable = byWin.slice(0, 18);
+  // tracked = top value bets (one per player), staked, feed the P&L
+  const trackedBets = candidates.slice(0, 6);
+  const stakePts = [3, 2, 2, 1, 1, 1];
+  trackedBets.forEach((c, i) => {
+    c.points = stakePts[i] || 1; c.stakeGBP = c.points * 5; c.tracked = true;
+    c.priceDecimal = c.marketOdds.decimal; c.priceFractional = c.marketOdds.fractional;
+    if (c.eachWay) { c.ewWin = c.stakeGBP / 2; c.ewPlace = c.stakeGBP / 2; }
+  });
+  const trackedIds = new Set(trackedBets.map((c) => c.playerId));
+  const bestBet = trackedBets[0] || null;
 
-  // world rankings reference (this week's field, by OWGR)
+  // untracked flutters: a favourite punt + a longshot punt (NOT in the P&L)
+  const flutters = [];
+  const fav = byWin.find((r) => !trackedIds.has(r.playerId) && !r.letdownPenalty);
+  if (fav) flutters.push({ ...candidate(fav, 'win'), kind: 'Favourite punt', tracked: false });
+  const longshot = byWin.slice(0, 25).filter((r) => !trackedIds.has(r.playerId) && r.win.decimal >= 40 && !flutters.find((f) => f.playerId === r.playerId)).sort((a, b) => b.composite - a.composite)[0];
+  if (longshot) flutters.push({ ...candidate(longshot, 'win'), kind: 'Longshot punt', tracked: false });
+  flutters.forEach((f) => { f.suggestGBP = 5; });
+
+  // watchlist: improving players we are NOT backing this week (ones to watch)
+  const usedIds = new Set([...trackedIds, ...flutters.map((f) => f.playerId)]);
+  const watchlist = rows.filter((r) => !usedIds.has(r.playerId) && !r.dataThin)
+    .map((r) => ({ r, score: r.recentZ - r.seasonZ + 0.3 * r.recentZ }))
+    .sort((a, b) => b.score - a.score).slice(0, 5)
+    .map(({ r }) => {
+      let why;
+      if (r.trend === 'up') why = `Form spiking (${r.recentSG.toFixed(2)} SG/rd lately) but no value at the current price - watch for a bigger number.`;
+      else if (r.owgr <= 30) why = `Class act (OWGR #${r.owgr}); numbers not quite firing this week - one to monitor.`;
+      else { const st = strengthText(r.sg, profile); why = st ? `${st.charAt(0).toUpperCase() + st.slice(1)} - building, not yet a bet.` : 'Underlying numbers improving - monitor.'; }
+      return { playerId: r.playerId, name: r.name, headshot: r.headshot, country: r.countryFlag || r.country, owgr: r.owgr, trend: r.trend, recentSG: r.recentSG, recentEvents: r.recentEvents, winOdds: r.win.fractional, why };
+    });
+
+  // place-market value selections (ranked by edge) - surfaces e.g. value top-20 plays
+  const selFor = (m, k) => rows.filter((r) => r[m].prob >= FLOOR[m]).map((r) => candidate(r, m)).sort((a, b) => b.edgePct - a.edgePct).slice(0, k);
+  const eachWayValue = rows.filter((r) => r.top5.prob >= 0.12 && r['edge_top5'] >= 0.05).map((r) => candidate(r, 'top5')).sort((a, b) => b.valueScore - a.valueScore).slice(0, 4);
+
+  const placesTable = byWin.slice(0, 18).map((r) => ({
+    modelRank: r.modelRank, name: r.name, headshot: r.headshot, letdownFlag: r.letdownFlag || null,
+    win: r.win, top5: r.top5, top10: r.top10, top20: r.top20,
+    m_win: r.m_win, edge_win: Math.round(r.edge_win * 100), edge_top20: Math.round(r.edge_top20 * 100),
+  }));
+  const fieldRanking = byWin.slice(0, 15).map((r) => ({ modelRank: r.modelRank, name: r.name, headshot: r.headshot, win: r.win, winProb: r.winProb, trend: r.trend, recentSG: r.recentSG, recentEvents: r.recentEvents }));
   const worldRankings = rows.filter((r) => r.owgr < 999).sort((a, b) => a.owgr - b.owgr)
-    .map((r) => ({ owgr: r.owgr, name: r.name, country: r.countryFlag || r.country, headshot: r.headshot, winOdds: r.win.fractional, winProb: r.winProb }));
+    .map((r) => ({ owgr: r.owgr, name: r.name, country: r.countryFlag || r.country, headshot: r.headshot, winOdds: r.win.fractional, value: trackedIds.has(r.playerId) }));
 
-  // staking
-  const winPts = [3, 2, 2], outPts = [1, 1, 1];
-  const stake = (pts) => ({ points: pts, stakeGBP: pts * 5, ewWin: pts * 5 / 2, ewPlace: pts * 5 / 2 });
-  winPicks.forEach((p, n) => Object.assign(p, stake(winPts[n])));
-  outsidePicks.forEach((p, n) => Object.assign(p, stake(outPts[n])));
-  const totalPts = winPts.slice(0, winPicks.length).reduce((a, b) => a + b, 0) + outPts.slice(0, outsidePicks.length).reduce((a, b) => a + b, 0);
-
+  const totalPts = trackedBets.reduce((a, c) => a + c.points, 0);
   return {
-    winPicks, outsidePicks, bestBet, eachWayValue,
-    top5Sel: topBy('p5', 5), top10Sel: topBy('p10', 6), top20Sel: topBy('p20', 8),
-    placesTable, fieldRanking: byWin.slice(0, 15), worldRankings,
-    ewTerms: '5 places at 1/5 odds (Bet365 often enhances places for these events - check before betting)',
+    dataThinCount: rows.filter((r) => r.dataThin).length,
+    trackedBets, flutters, bestBet, watchlist, eachWayValue,
+    top5Sel: selFor('top5', 6), top10Sel: selFor('top10', 6), top20Sel: selFor('top20', 8),
+    placesTable, fieldRanking, worldRankings,
+    ewTerms: '5 places at 1/5 odds (Bet365 often enhances places - check before betting)',
     bankroll: { startPoints: bankrollPoints, startGBP: bankrollPoints * 5, unitGBP: 5, stakedThisWeekPoints: totalPts, stakedThisWeekGBP: totalPts * 5, weekNumber },
   };
 }

@@ -20,11 +20,11 @@ LOG="weekly-update.log"
   fi
 
   if git rev-parse --git-dir > /dev/null 2>&1; then
-    if git diff --quiet -- data.js data.json index.html; then
+    if git diff --quiet -- data.js data.json index.html ledger.json; then
       echo "No change in picks - nothing to publish."
       exit 0
     fi
-    git add data.js data.json index.html
+    git add data.js data.json index.html ledger.json
     git commit -m "Board update $(date +%F)" && git push && echo "✓ Published to GitHub Pages." \
       || echo "✗ Commit/push failed - check git auth / remote."
   else

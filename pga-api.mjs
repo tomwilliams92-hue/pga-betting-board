@@ -157,3 +157,21 @@ export async function getEventSG(tournamentId, year) {
   // SG:Total for a single completed event (recent form input).
   return getStat('02675', year, { tournamentId, queryType: 'EVENT_ONLY' });
 }
+
+// Final finishing positions for a completed event - used to settle P&L bets.
+// Returns Map(playerId -> { pos:Int|null, posText:String, cut:Boolean }).
+export async function getLeaderboard(tournamentId) {
+  const q = `query L($id:ID!){leaderboardV3(id:$id){tournamentStatus
+    players{... on PlayerRowV3{player{id} scoringData{position}}}}}`;
+  const d = await gql(q, { id: tournamentId });
+  const lb = d.leaderboardV3;
+  const map = new Map();
+  for (const row of lb?.players || []) {
+    if (!row.player?.id) continue;
+    const txt = row.scoringData?.position || '';
+    const num = /^T?(\d+)$/.exec(txt);
+    const cut = /CUT|WD|DQ|MDF/i.test(txt);
+    map.set(String(row.player.id), { pos: num ? parseInt(num[1], 10) : null, posText: txt, cut });
+  }
+  return { status: lb?.tournamentStatus, positions: map };
+}

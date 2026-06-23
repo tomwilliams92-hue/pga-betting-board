@@ -8,9 +8,10 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { getSchedule, getField, getStat, getEventSG } from './pga-api.mjs';
+import { getSchedule, getField, getStat, getEventSG, getLeaderboard } from './pga-api.mjs';
 import { profileFor } from './course-profiles.mjs';
 import { buildModel } from './model.mjs';
+import { loadLedger, saveLedger, appendWeek, settle, summary } from './ledger.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const SG = { total: '02675', ott: '02567', app: '02568', arg: '02569', putt: '02564' };
@@ -81,10 +82,10 @@ async function main() {
   });
 
   const notes = [];
-  const thin = model.fieldRanking.filter((r) => r.dataThin).length;
-  if (thin) notes.push(`${thin} players in the field have little/no PGA Tour strokes-gained data - their ratings are estimated and flagged.`);
+  if (model.dataThinCount) notes.push(`${model.dataThinCount} players in the field have little/no PGA Tour strokes-gained data - they are excluded from value bets and flagged.`);
   if (previousEvent?.isMajor) notes.push(`Last week was the ${previousEvent.name} (a major), so players who contended - especially winner ${previousEvent.champion} - are docked for the post-major let-down. Affected players carry a let-down flag.`);
-  notes.push('Win / Top-5 / Top-10 / Top-20 probabilities come from a 20,000-run Monte Carlo simulation of the field. Odds shown are the fair model price - compare against your bookie to find value.');
+  notes.push('Recommendations are ranked by VALUE: the model probability vs an estimated market price (the edge). Win/Top-5/Top-10/Top-20 probabilities come from a 16,000-run Monte Carlo simulation. Market prices are estimated until live Bet365 odds are wired in.');
+  notes.push('Tracked bets feed the P&L. Untracked "flutters" do not. Bets are settled the following week off the final leaderboard.');
 
   const board = {
     generatedAt: new Date().toISOString(),
@@ -107,9 +108,10 @@ async function main() {
     },
     recentEventsUsed: recentEvents.map((e) => e.name),
     previousEvent: previousEvent ? { name: previousEvent.name, isMajor: previousEvent.isMajor, champion: previousEvent.champion } : null,
-    winPicks: model.winPicks,
-    outsidePicks: model.outsidePicks,
+    trackedBets: model.trackedBets,
+    flutters: model.flutters,
     bestBet: model.bestBet,
+    watchlist: model.watchlist,
     eachWayValue: model.eachWayValue,
     top5Sel: model.top5Sel,
     top10Sel: model.top10Sel,
@@ -122,12 +124,20 @@ async function main() {
     notes,
   };
 
+  // ---- P&L ledger: settle finished events, then record this week's tracked bets ----
+  const ledger = loadLedger();
+  const completedIds = new Set(completed.map((t) => t.id));
+  await settle(ledger, completedIds, getLeaderboard);
+  appendWeek(ledger, board);
+  saveLedger(ledger);
+  board.pnl = summary(ledger);
+
   fs.writeFileSync(path.join(__dirname, 'data.js'), 'window.BOARD = ' + JSON.stringify(board) + ';\n');
   fs.writeFileSync(path.join(__dirname, 'data.json'), JSON.stringify(board, null, 2));
   console.error('[build] wrote data.js');
-  console.error('[build] WIN:', model.winPicks.map((p) => `${p.name} ${p.win.fractional}`).join(' | '));
-  console.error('[build] OUT:', model.outsidePicks.map((p) => `${p.name} ${p.win.fractional}`).join(' | '));
-  console.error('[build] BEST BET:', model.bestBet ? `${model.bestBet.name} ${model.bestBet.win.fractional}` : 'none');
+  console.error('[build] TRACKED:', model.trackedBets.map((c) => `${c.name} ${c.marketLabel} ${c.priceFractional} (+${c.edgePct}%)`).join(' | '));
+  console.error('[build] BEST BET:', model.bestBet ? `${model.bestBet.name} ${model.bestBet.marketLabel} ${model.bestBet.priceFractional}` : 'none');
+  console.error('[build] P&L:', `bank £${board.pnl.bankrollNowGBP} | settled ${board.pnl.settledCount} | pending ${board.pnl.pendingCount} (£${board.pnl.pendingStakeGBP})`);
 }
 
 main().catch((e) => { console.error('[build] FAILED:', e.message); process.exit(1); });
