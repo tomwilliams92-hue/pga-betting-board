@@ -49,6 +49,8 @@ function applyDeepDive(board, dd, makeBet) {
 }
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
+// load .env (keys) for manual runs too - the launchd job also sources it
+try { process.loadEnvFile(path.join(__dirname, '.env')); } catch { /* no .env - fine */ }
 const SG = { total: '02675', ott: '02567', app: '02568', arg: '02569', putt: '02564' };
 const DRIVE = { distance: '101', accuracy: '102' };
 const AFFILIATE = ''; // e.g. 'affil=YOURCODE' - appended to the oddschecker "Back it" links

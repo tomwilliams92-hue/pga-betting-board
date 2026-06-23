@@ -7,7 +7,6 @@
 // Set THE_ODDS_API_KEY in the environment to activate. Without it, this returns null and
 // the build falls back to the model's estimated prices.
 
-const KEY = process.env.THE_ODDS_API_KEY || '';
 const norm = (s) => (s || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z ]/g, '').trim();
 
 const STD = [[1,5],[1,4],[2,7],[1,3],[2,5],[4,9],[1,2],[8,15],[4,7],[8,13],[4,6],[8,11],[4,5],[5,6],[10,11],[1,1],[11,10],[5,4],[11,8],[6,4],[7,4],[15,8],[2,1],[9,4],[5,2],[11,4],[3,1],[7,2],[4,1],[9,2],[5,1],[11,2],[6,1],[13,2],[7,1],[15,2],[8,1],[9,1],[10,1],[11,1],[12,1],[14,1],[16,1],[18,1],[20,1],[22,1],[25,1],[28,1],[33,1],[40,1],[50,1],[66,1],[80,1],[100,1],[125,1],[150,1],[200,1],[250,1]];
@@ -31,30 +30,37 @@ export const BOOKIE_BRAND = {
 };
 const brand = (key) => BOOKIE_BRAND[key] || { name: key, bg: '#1657b0', fg: '#ffffff' };
 
-async function listGolfSports() {
+async function listGolfSports(KEY) {
   const r = await fetch(`https://api.the-odds-api.com/v4/sports/?apiKey=${KEY}&all=true`, { signal: AbortSignal.timeout(20000) });
   if (!r.ok) throw new Error('sports list ' + r.status);
   return (await r.json()).filter((s) => /golf/i.test(s.group || '') && /winner|outright/i.test((s.title || '') + (s.key || '')));
 }
 
-// Find the sport key whose title/description matches this week's event name.
+// Find the golf-major sport whose key/title matches this week's event name.
 function matchSport(sports, eventName) {
-  const evWords = norm(eventName).split(' ').filter((w) => w.length > 3 && !['championship', 'open', 'classic', 'tournament', 'presented'].includes(w));
+  const ev = norm(eventName); // e.g. "the open championship", "us open", "pga championship"
+  for (const s of sports) {
+    const hay = norm((s.key || '').replace(/_/g, ' ') + ' ' + (s.title || '') + ' ' + (s.description || ''));
+    if (ev && hay.includes(ev)) return s; // full event name appears in the sport key/title
+  }
+  // token-overlap fallback (require >=2 shared distinctive words to avoid e.g. "open" alone)
+  const evWords = ev.split(' ').filter((w) => w.length > 2 && !['the', 'winner', 'golf', 'tournament'].includes(w));
   let best = null, bestScore = 0;
   for (const s of sports) {
-    const hay = norm((s.title || '') + ' ' + (s.description || ''));
+    const hay = norm((s.key || '').replace(/_/g, ' ') + ' ' + (s.title || ''));
     const score = evWords.filter((w) => hay.includes(w)).length;
     if (score > bestScore) { bestScore = score; best = s; }
   }
-  return bestScore > 0 ? best : null;
+  return bestScore >= 2 ? best : null;
 }
 
 // Returns Map(normalisedPlayerName -> { decimal, fractional, bookieKey, bookie:{name,bg,fg} }) or null.
 export async function getRealWinnerOdds(eventName) {
+  const KEY = process.env.THE_ODDS_API_KEY || ''; // read at call time (after .env is loaded)
   if (!KEY) return null;
   try {
-    const sport = matchSport(await listGolfSports(), eventName);
-    if (!sport) { console.error('[odds-api] no matching golf sport for', eventName); return null; }
+    const sport = matchSport(await listGolfSports(KEY), eventName);
+    if (!sport) { console.error('[odds-api] no matching golf sport for', eventName, '(the-odds-api only covers the 4 majors)'); return null; }
     const r = await fetch(`https://api.the-odds-api.com/v4/sports/${sport.key}/odds/?apiKey=${KEY}&regions=uk&markets=outrights&oddsFormat=decimal`, { signal: AbortSignal.timeout(20000) });
     if (!r.ok) throw new Error('odds ' + r.status);
     const events = await r.json();
@@ -73,7 +79,15 @@ export async function getRealWinnerOdds(eventName) {
     }
     const out = new Map();
     for (const [k, v] of best) out.set(k, { decimal: v.decimal, fractional: toFractional(v.decimal), bookieKey: v.bookieKey, bookie: brand(v.bookieKey) });
-    console.error(`[odds-api] real odds for ${ev.bookmakers?.length || 0} books, ${out.size} players (best-price)`);
+    // quality guard: golf outright data is often a single illiquid exchange with absurd prices
+    // (e.g. a favourite at 1.1). Only trust it with a real book panel and sane prices.
+    const bookieCount = (ev.bookmakers || []).length;
+    const minDec = out.size ? Math.min(...[...out.values()].map((v) => v.decimal)) : 0;
+    if (out.size < 12 || bookieCount < 3 || minDec < 3) {
+      console.error(`[odds-api] data looks unreliable (books=${bookieCount}, players=${out.size}, shortest=${minDec}) - using model estimates`);
+      return null;
+    }
+    console.error(`[odds-api] real odds for ${bookieCount} books, ${out.size} players (best-price)`);
     return out;
   } catch (e) {
     console.error('[odds-api] failed, falling back to estimates:', e.message);
