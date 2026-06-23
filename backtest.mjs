@@ -1,0 +1,98 @@
+// backtest.mjs
+// Point-in-time backtest of the model's TRACKED picks over recent completed events.
+// For each past event it reconstructs the inputs AS THEY WERE before that event
+// (season strokes-gained THROUGH the prior event, recent form from the prior 5 events,
+// last week's leaderboard for the let-down), runs the exact picks engine, then settles
+// against the real final leaderboard.
+//
+// IMPORTANT: this proves model SKILL (do the picks finish well / is it calibrated?), not
+// profit vs the market - prices here are the model's own estimate, so P&L is notional.
+// Proving profit vs real bookmaker odds needs a historical-odds feed (DataGolf).
+//
+//   node backtest.mjs [N]      N = how many recent events to test (default 10)
+
+import { getSchedule, getField, getStat, getEventSG, getLeaderboard } from './pga-api.mjs';
+import { profileFor } from './course-profiles.mjs';
+import { buildModel } from './model.mjs';
+
+const SG = { total: '02675', ott: '02567', app: '02568', arg: '02569', putt: '02564' };
+const DRIVE = { distance: '101', accuracy: '102' };
+const MAJOR_RE = /(Masters Tournament|PGA Championship|U\.?S\.? Open|The Open Championship|THE PLAYERS)/i;
+const isMajor = (n) => MAJOR_RE.test(n || '') && !/Scottish|Canadian|Mexico|Australian/i.test(n || '');
+
+// season-to-date stat THROUGH a given (prior) event = the state going into the next one
+const seasonThrough = (statId, year, throughId) => getStat(statId, year, { tournamentId: throughId, queryType: 'THROUGH_EVENT' });
+
+function settle(bet, fr) {
+  const pos = fr && !fr.cut ? fr.pos : null;
+  const placed = (n) => Number.isFinite(pos) && pos <= n;
+  const need = { win: 1, top5: 5, top10: 10, top20: 20 }[bet.market];
+  let ret = 0;
+  if (bet.market === 'win') { // each-way: half win, half top-5 place at 1/5
+    const side = bet.points / 2;
+    if (pos === 1) ret += side * bet.priceDecimal;
+    if (placed(5)) ret += side * (1 + (bet.priceDecimal - 1) / 5);
+  } else {
+    ret = placed(need) ? bet.points * bet.priceDecimal : 0;
+  }
+  const hit = placed(need);
+  return { hit, profit: ret - bet.points, finishPos: fr ? (fr.cut ? 'MC' : fr.posText) : 'n/a' };
+}
+
+async function main() {
+  const N = parseInt(process.argv[2] || '10', 10);
+  const year = new Date().getFullYear();
+  let { completed } = await getSchedule(year);
+  if (completed.length < 8) ({ completed } = await getSchedule(year - 1));
+  const start = Math.max(6, completed.length - N);
+  console.error(`[backtest] season ${year}, testing events ${start + 1}-${completed.length} of ${completed.length}`);
+
+  const rowsOut = [];
+  let staked = 0, profit = 0, hits = 0, bets = 0;
+  const byMarket = {};
+
+  for (let i = start; i < completed.length; i++) {
+    const E = completed[i], prev = completed[i - 1];
+    const recentSrc = completed.slice(Math.max(0, i - 5), i).reverse();
+    try {
+      const [field, sgT, sgO, sgA, sgAr, sgP, dD, dA, prevLb, resultLb, ...recent] = await Promise.all([
+        getField(E.id),
+        seasonThrough(SG.total, year, prev.id), seasonThrough(SG.ott, year, prev.id), seasonThrough(SG.app, year, prev.id),
+        seasonThrough(SG.arg, year, prev.id), seasonThrough(SG.putt, year, prev.id),
+        seasonThrough(DRIVE.distance, year, prev.id), seasonThrough(DRIVE.accuracy, year, prev.id),
+        getLeaderboard(prev.id), getLeaderboard(E.id),
+        ...recentSrc.map((e) => getEventSG(e.id, year)),
+      ]);
+      if (!field?.players?.length || !resultLb?.positions?.size) { console.error(`  skip ${E.tournamentName} (no field/result)`); continue; }
+      const recentEvents = recentSrc.map((e, j) => ({ id: e.id, name: e.tournamentName, map: recent[j].map }));
+      const previousEvent = { name: prev.tournamentName, isMajor: isMajor(prev.tournamentName), champion: prev.champion || null, finishPositions: prevLb?.positions || null };
+      const model = buildModel({
+        field, profile: profileFor(E.id),
+        sg: { total: sgT.map, ott: sgO.map, app: sgA.map, arg: sgAr.map, putt: sgP.map },
+        driving: { distance: dD.map, accuracy: dA.map },
+        recentEvents, previousEvent, weekNumber: i + 1,
+      });
+      const picks = model.trackedBets;
+      let evProfit = 0;
+      for (const c of picks) {
+        const fr = resultLb.positions.get(String(c.playerId));
+        const r = settle(c, fr);
+        bets++; staked += c.points; profit += r.profit; evProfit += r.profit; if (r.hit) hits++;
+        (byMarket[c.marketLabel] ||= { n: 0, hit: 0, profit: 0 });
+        byMarket[c.marketLabel].n++; if (r.hit) byMarket[c.marketLabel].hit++; byMarket[c.marketLabel].profit += r.profit;
+        rowsOut.push({ event: E.tournamentName, player: c.name, market: c.marketLabel, price: c.priceFractional, finish: r.finishPos, hit: r.hit, profit: Math.round(r.profit * 10) / 10 });
+      }
+      console.error(`  ${E.tournamentName.slice(0, 34).padEnd(34)} picks ${picks.length}  net ${evProfit >= 0 ? '+' : ''}${evProfit.toFixed(1)}pt`);
+    } catch (e) { console.error(`  ERROR ${E.tournamentName}: ${e.message}`); }
+  }
+
+  console.log('\n================ BACKTEST RESULT (model skill - notional prices) ================');
+  console.log(`Events: ${start + 1}-${completed.length}  |  Bets: ${bets}  |  Strike (hit market): ${bets ? Math.round((hits / bets) * 100) : 0}%`);
+  console.log(`Staked: ${staked} pts  |  Net: ${profit >= 0 ? '+' : ''}${profit.toFixed(1)} pts  |  ROI: ${staked ? (profit / staked * 100).toFixed(1) : 0}%`);
+  console.log('\nBy market:');
+  for (const [m, s] of Object.entries(byMarket)) console.log(`  ${m.padEnd(7)}  ${s.n} bets  hit ${Math.round(s.hit / s.n * 100)}%  net ${s.profit >= 0 ? '+' : ''}${s.profit.toFixed(1)}pt`);
+  console.log('\nNOTE: prices are the model\'s own estimate, so ROI is NOT proof of beating the market.');
+  console.log('It shows whether the picks finish where the model expects. Profit-vs-market needs real historical odds (DataGolf).');
+}
+
+main().catch((e) => { console.error('[backtest] FAILED:', e.message); process.exit(1); });
