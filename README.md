@@ -34,6 +34,19 @@ The composite rating becomes a win probability (softmax), which becomes the esti
 | `weekly-update.sh` | Monday job: rebuild + commit + push |
 | `com.pga.board.update.plist` | launchd schedule (Mondays 07:05) |
 
+## API keys (optional - the board runs without them)
+
+Create a `.env` file (gitignored) to activate the two paid/keyed upgrades. Without it, the board falls back to the deterministic algorithmic engine and estimated prices.
+
+```
+THE_ODDS_API_KEY=your_the_odds_api_key   # the-odds-api.com free tier - real best-price WIN odds across UK books
+ANTHROPIC_API_KEY=your_anthropic_key     # powers the weekly AI deep-dive pick selection (claude-opus-4-8)
+```
+
+- **the-odds-api** gives the genuine best price per player for the winner market and names the bookmaker. Place markets (top 5/10/20) stay model estimates (not on the free tier).
+- **Anthropic** runs `deepdive.mjs` each week: a fixed value-first methodology applied by Claude to select the best-value bets and write the reasoning. Falls back to `model.mjs` if absent.
+- `npm install` once so `@anthropic-ai/sdk` is present. The weekly job loads `.env` automatically.
+
 ## Run it by hand
 ```bash
 node build.mjs                 # this week's next event

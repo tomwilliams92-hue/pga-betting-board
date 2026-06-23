@@ -10,6 +10,9 @@ cd "$(dirname "$0")" || exit 1
 # launchd starts with a bare PATH - make sure node + git are findable.
 export PATH="/usr/local/bin:/opt/homebrew/bin:/usr/bin:/bin:/usr/sbin:/sbin:$PATH"
 
+# API keys (gitignored): THE_ODDS_API_KEY for live odds, ANTHROPIC_API_KEY for the AI deep-dive.
+[ -f .env ] && set -a && . ./.env && set +a
+
 LOG="weekly-update.log"
 {
   echo "──────── $(date '+%Y-%m-%d %H:%M:%S') ────────"

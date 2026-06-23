@@ -111,7 +111,7 @@ function runSim(comps) {
 }
 
 // ---- the model ------------------------------------------------------------
-export function buildModel({ field, profile, sg, driving, recentEvents, previousEvent, weekNumber, bankrollPoints = 100, eventSlug = '', affiliate = '' }) {
+export function buildModel({ field, profile, sg, driving, recentEvents, previousEvent, weekNumber, bankrollPoints = 100, eventSlug = '', affiliate = '', realOdds = null }) {
   const players = field.players.filter((p) => !p.amateur);
   const sgVal = (which, id) => sg[which]?.get(String(id))?.values?.Avg;
 
@@ -177,6 +177,16 @@ export function buildModel({ field, profile, sg, driving, recentEvents, previous
       r['m_' + m] = oddsFrom(marketP[i][m]);  // estimated market odds
       r['edge_' + m] = marketP[i][m] > 0 ? modelP[i][m] / marketP[i][m] - 1 : 0;
     }
+    // real best-price WINNER odds (the-odds-api) override the win-market estimate when present
+    if (realOdds) {
+      const ro = realOdds.get(norm(r.name));
+      if (ro) {
+        const implied = 1 / ro.decimal;
+        r.m_win = { prob: implied, decimal: ro.decimal, fractional: ro.fractional };
+        r.edge_win = implied > 0 ? modelP[i].win / implied - 1 : 0;
+        r.winBookie = ro.bookie;
+      }
+    }
     r.confidence = Math.max(1, Math.min(5, Math.round(1 + r.winProb * 16)));
   });
 
@@ -195,7 +205,8 @@ export function buildModel({ field, profile, sg, driving, recentEvents, previous
     else if (r.lastWeekFinish && !r.letdownFlag) bits.push(`finished ${r.lastWeekFinish} last week`);
     if (r.playerNote) bits.push(r.playerNote.note);
     else if (r.letdownFlag) bits.push(r.letdownFlag.toLowerCase());
-    const valueLine = `the value: the model makes him ${pct(modelProb)} to finish ${label} where the best price implies about ${pct(marketProb)} - a +${Math.round(edge * 100)}% edge`;
+    const phrase = m === 'win' ? 'to win' : 'to finish ' + label;
+    const valueLine = `the value: the model makes him ${pct(modelProb)} ${phrase} where the best price implies about ${pct(marketProb)} - a +${Math.round(edge * 100)}% edge`;
     bits.push(valueLine);
     const dataRationale = bits.map((b) => b.charAt(0).toUpperCase() + b.slice(1)).join('. ') + '.';
     // an editorial storyline (player-notes) takes over the lead, with the value line kept
@@ -209,6 +220,7 @@ export function buildModel({ field, profile, sg, driving, recentEvents, previous
       sg: r.sg, recentSG: r.recentSG, recentEvents: r.recentEvents, dataThin: r.dataThin,
       letdownFlag: r.letdownFlag || null, playerNote: r.playerNote ? r.playerNote.note : null, playerNoteTag: r.playerNote ? r.playerNote.tag : null,
       lastWeekFinish: r.lastWeekFinish || null, playedLastWeek: r.playedLastWeek ?? null,
+      bookie: m === 'win' ? (r.winBookie || null) : null,
       ocLink: `https://www.oddschecker.com/golf/${eventSlug}/${OC_MARKET[m]}${affiliate ? '?' + affiliate : ''}`,
       rationale,
     };
@@ -224,11 +236,16 @@ export function buildModel({ field, profile, sg, driving, recentEvents, previous
   // a real edge (>=15%) AND at least 2 recent starts of form (no thin samples).
   const valueBets = candidates.filter((c) => c.edgePct >= 15 && c.recentEvents >= 2).slice(0, 5);
   const valueIds = new Set(valueBets.map((c) => c.playerId));
-  // ...plus a guaranteed EACH-WAY TO-WIN bet for the big P&L upside: best win-market value
-  // among genuine contenders, skipping anyone injured/flagged or already picked.
-  const winCand = rows.filter((r) => !r.dataThin && !valueIds.has(r.playerId) && r.winProb >= 0.02 && !r.playerNote && !r.letdownPenalty)
-    .map((r) => ({ r, vs: r['edge_win'] * Math.sqrt(r.winProb) })).sort((a, b) => b.vs - a.vs)[0];
-  const winBet = winCand ? candidate(winCand.r, 'win') : null;
+  // ...plus a guaranteed EACH-WAY TO-WIN bet. Each-way only pays off at a price, so this is
+  // deliberately a bigger-priced contender (~16/1-66/1) with a strong place chance - never the
+  // favourite (whose place fraction is too short to be worth backing each-way).
+  const elig = (r) => !r.dataThin && !valueIds.has(r.playerId) && !r.playerNote && !r.letdownPenalty;
+  const ewVal = (r) => r.top5.prob * (1 + (r.win.decimal - 1) / 5) - 1; // each-way PLACE-part expected value (the real e/w edge)
+  const inBand = rows.filter((r) => elig(r) && r.win.decimal >= 16 && r.win.decimal <= 66);
+  const pool = inBand.length ? inBand : rows.filter((r) => elig(r) && r.win.decimal >= 16);
+  const winRow = pool.map((r) => ({ r, vs: ewVal(r) })).sort((a, b) => b.vs - a.vs)[0];
+  const winBet = winRow ? candidate(winRow.r, 'win') : null;
+  if (winBet) winBet.edgePct = Math.max(0, Math.round(ewVal(winRow.r) * 100)); // display the each-way place value, not the win edge
   if (winBet) winBet.marquee = 'Each-way to win';
 
   const trackedBets = [...valueBets];
@@ -282,12 +299,25 @@ export function buildModel({ field, profile, sg, driving, recentEvents, previous
     .map((r) => ({ owgr: r.owgr, name: r.name, country: r.countryFlag || r.country, headshot: r.headshot, winOdds: r.win.fractional, value: trackedIds.has(r.playerId) }));
 
   const totalPts = trackedBets.reduce((a, c) => a + c.points, 0);
+
+  // for the AI deep-dive: a materialiser for any (player, market) candidate, and a compact
+  // payload of every player's value picture. Not serialised into the board.
+  const rowById = new Map(rows.map((r) => [r.playerId, r]));
+  const makeBet = (playerId, market) => { const r = rowById.get(String(playerId)); return r ? candidate(r, market) : null; };
+  const deepDivePayload = rows.filter((r) => !r.dataThin).map((r) => ({
+    id: r.playerId, name: r.name, owgr: r.owgr, sg: r.sg,
+    recentSG: r.recentSG != null ? Math.round(r.recentSG * 100) / 100 : null, recentEvents: r.recentEvents, trend: r.trend,
+    lastWeekFinish: r.lastWeekFinish || null, injury: r.playerNote ? r.playerNote.note : null,
+    markets: Object.fromEntries(MARKETS.map((m) => [m, { modelProb: Math.round(r[m].prob * 1000) / 1000, marketProb: Math.round(r['m_' + m].prob * 1000) / 1000, edgePct: Math.round(r['edge_' + m] * 100), price: r['m_' + m].fractional }])),
+  }));
+
   return {
     dataThinCount: rows.filter((r) => r.dataThin).length,
     trackedBets, flutters, bestBet, watchlist, eachWayValue,
     top5Sel: selFor('top5', 6), top10Sel: selFor('top10', 6), top20Sel: selFor('top20', 8),
     placesTable, fieldRanking, worldRankings,
-    ewTerms: '5 places at 1/5 odds (Bet365 often enhances places - check before betting)',
+    ewTerms: '5 places at 1/5 odds (best price varies by book - check before betting)',
     bankroll: { startPoints: bankrollPoints, stakedThisWeekPoints: totalPts, weekNumber },
+    makeBet, deepDivePayload,
   };
 }

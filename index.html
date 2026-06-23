@@ -175,24 +175,29 @@ const sgCls = (v)=>v>=0?'pos':'neg';
 const stars = (n)=>Array.from({length:5},(_,i)=>i<n?'★':'<span class="off">★</span>').join('');
 const arrow = (t)=>t==='up'?'▲ trending up':t==='down'?'▼ cooling off':'▬ steady';
 const pct = (p)=>(p*100).toFixed(p<0.1?1:0)+'%';
+const edgeStr = (e)=>(e>=0?'+':'−')+Math.abs(e)+'%';
 const pts = (n)=>`${n} pt${Math.abs(n)===1?'':'s'}`;
 const signedPts = (n)=>`${n>=0?'+':''}${n} pts`;
 const shot=(p,cls,size)=>`<img class="${cls}" src="${p.headshot}" alt="${p.name}" loading="lazy" onerror="this.outerHTML='<div class=\\'${cls} fallback\\' style=\\'font-size:${size}px\\'>${initials(p.name)}</div>'">`;
 
-// bookmaker (featured) - branded button. Swap FEATURED or add your affiliate URL.
-const BOOKIES = {
-  bet365: { name:'bet365', bg:'#027b5b', fg:'#ffe600', url:'https://www.bet365.com/#/AS/B14/' },
-  williamhill: { name:'William Hill', bg:'#011e41', fg:'#ffb80c', url:'https://sports.williamhill.com/betting/en-gb/golf' },
+// Branded "Back it" button — uses the actual best-price bookmaker per pick (from live odds)
+// when available, else a sensible default. Add your affiliate links to BOOKIE_URLS.
+const BOOKIE_URLS = {
+  'bet365':'https://www.bet365.com/#/AS/B14/', 'william hill':'https://sports.williamhill.com/betting/en-gb/golf',
+  'paddy power':'https://www.paddypower.com/golf', 'sky bet':'https://m.skybet.com/golf',
+  'betfair':'https://www.betfair.com/sport/golf', 'ladbrokes':'https://sports.ladbrokes.com/sport/golf',
+  'coral':'https://sports.coral.co.uk/sport/golf', 'unibet':'https://www.unibet.co.uk/betting/sports/filter/golf',
+  'betvictor':'https://www.betvictor.com/sports/en/golf',
 };
-const FEATURED = 'bet365';
-const bookBtn = (extraStyle='')=>{const b=BOOKIES[FEATURED];return {b,style:`background:${b.bg};color:${b.fg};${extraStyle}`};};
+const DEFAULT_BOOKIE = { name:'bet365', bg:'#027b5b', fg:'#ffe600' };
+const bookieFor = (c)=>{ const b=(c && c.bookie) ? c.bookie : DEFAULT_BOOKIE; return { name:b.name, bg:b.bg, fg:b.fg, url:BOOKIE_URLS[(b.name||'').toLowerCase()]||(c&&c.ocLink)||BOOKIE_URLS['bet365'] }; };
 
 const FLAGS={USA:'us',ENG:'gb-eng',SCO:'gb-sct',WAL:'gb-wls',NIR:'gb-nir',IRL:'ie',RSA:'za',AUS:'au',ESP:'es',SWE:'se',KOR:'kr',JPN:'jp',CAN:'ca',NOR:'no',GER:'de',FRA:'fr',ITA:'it',ARG:'ar',COL:'co',MEX:'mx',NZL:'nz',AUT:'at',BEL:'be',DEN:'dk',FIN:'fi',IND:'in',PHI:'ph',TPE:'tw',VEN:'ve',ZWE:'zw',CHI:'cl',CHL:'cl',NED:'nl',CZE:'cz',POL:'pl',COP:'co'};
 const flag=(code)=>{const c=FLAGS[(code||'').toUpperCase()];return c?`<img class="natflag" src="https://flagcdn.com/24x18/${c}.png" alt="${code}">`:'';};
 
 function valueCard(c) {
   const flut = !c.tracked;
-  const bk = bookBtn();
+  const bk = bookieFor(c);
   const stakeBox = flut
     ? `<div class="stake flut"><div class="big">Flutter &middot; ${pts(c.points)}${c.eachWay?' each-way':''}</div><div class="ew">Just for fun - not tracked in the P&L</div></div>`
     : `<div class="stake"><div class="big">Suggested stake: ${pts(c.points)}${c.eachWay?' each-way':''}</div><div class="ew">tracked in the P&L (points only - set your own unit)</div></div>`;
@@ -211,8 +216,8 @@ function valueCard(c) {
       </div>
     </div>
     <div class="odds-row">
-      <div class="price">${c.marketOdds.fractional}<small>Best Price &middot; <b>+${c.edgePct}% edge</b></small></div>
-      <a class="backbtn" style="${bk.style}" href="${bk.b.url}" target="_blank" rel="noopener">Back at ${bk.b.name} →</a>
+      <div class="price">${c.marketOdds.fractional}<small>Best Price &middot; <b>${edgeStr(c.edgePct)} edge</b></small></div>
+      <a class="backbtn" style="background:${bk.bg};color:${bk.fg}" href="${bk.url}" target="_blank" rel="noopener">Back ${bk.name} →</a>
     </div>
     <div class="mvm">
       <div class="r"><span class="lab">Model</span><div class="track"><i style="width:${Math.min(100,c.modelProb*100)}%"></i></div><span class="v">${pct(c.modelProb)}</span></div>
@@ -229,13 +234,13 @@ function valueCard(c) {
     <div class="why2">${c.rationale}</div>
   </div>`);
 }
-const selCol=(title,list)=>`<div class="card-base selcol"><h3>${title}</h3>${list.map(c=>`<div class="selrow">${shot(c,'tshot',11)}<span class="nm">${flag(c.country)} ${c.name}</span><span class="od">${c.modelOdds.fractional}</span><span class="ed">+${c.edgePct}%</span></div>`).join('')}</div>`;
+const selCol=(title,list)=>`<div class="card-base selcol"><h3>${title}</h3>${list.map(c=>`<div class="selrow">${shot(c,'tshot',11)}<span class="nm">${flag(c.country)} ${c.name}</span><span class="od">${c.modelOdds.fractional}</span><span class="ed">${edgeStr(c.edgePct)}</span></div>`).join('')}</div>`;
 
 function render() {
   document.getElementById('updated').innerHTML = `Updated<br><b>${new Date(B.generatedAt).toLocaleDateString('en-GB',{weekday:'short',day:'numeric',month:'short'})}</b>`;
   const app = document.getElementById('app');
   const cp = B.courseProfile, wlabels={ott:'Off the tee',app:'Approach play',arg:'Short game',putt:'Putting'};
-  const bk = bookBtn();
+  const bk = bookieFor(B.bestBet);
 
   app.appendChild($(`<div class="event">
     ${B.event.logo?`<img class="logo" src="${B.event.logo}" alt="${B.event.name} logo" onerror="this.style.display='none'">`:''}
@@ -246,7 +251,7 @@ function render() {
 
   app.appendChild($(`<details class="key"><summary>How to read this board (key)</summary><div class="body">
     <p><b>Value Edge</b> - how much higher our model rates a player's chance than the <b>Best Price</b> implies. +25% edge means the model thinks he's 25% more likely than the price suggests. Positive edge = potential value. It's the whole game: we back prices that are too big, not just good players.</p>
-    <p><b>Best Price</b> - the most generous odds we'd expect across the major UK bookies (estimated until live odds are connected). The "Back at ${bk.b.name}" button takes you to the bookmaker.</p>
+    <p><b>Best Price</b> - the most generous odds across the major UK bookmakers (live for the win market when a feed is connected; estimated otherwise). The "Back" button on each pick takes you to the bookmaker offering that price.</p>
     <p><b>Model vs Market</b> - the two bars: our model's probability (blue) vs the price-implied probability (gold). The gap is the edge.</p>
     <p><b>Confidence ★</b> - the model's conviction in the player's overall level this week (1-5 stars). Not the world ranking.</p>
     <p><b>Each-way (e/w)</b> - half the stake on the win, half on a top-5 place, so you collect even if he just contends. <b>Points</b> - all staking and the P&L are in points/units; pick your own £ per point.</p>
@@ -265,8 +270,8 @@ function render() {
   const bb = B.bestBet;
   if (bb) t1.appendChild($(`<div class="card-base bestbet"><div class="bb-tag">★ Best Bet of the Week &middot; ${bb.marketLabel}</div>
     <div class="bb-main">${shot(bb,'shot',24)}<div class="bb-info"><div class="nm">${flag(bb.country)} ${bb.name}</div><div class="why">${bb.rationale}</div></div>
-    <div class="bb-odds"><div class="o">${bb.marketOdds.fractional}</div><div class="l">Best Price</div><div class="edgechip">+${bb.edgePct}% edge</div>
-      <a class="backbtn" style="${bk.style}" href="${bk.b.url}" target="_blank" rel="noopener">Back at ${bk.b.name} →</a></div></div></div>`));
+    <div class="bb-odds"><div class="o">${bb.marketOdds.fractional}</div><div class="l">Best Price</div><div class="edgechip">${edgeStr(bb.edgePct)} edge</div>
+      <a class="backbtn" style="background:${bk.bg};color:${bk.fg}" href="${bk.url}" target="_blank" rel="noopener">Back ${bk.name} →</a></div></div></div>`));
 
   t1.appendChild($(`<div class="shead accent-blue"><h2>Tracked Bets</h2><div class="ln"></div><div class="tag">value-ranked &middot; feed the P&L</div></div>`));
   const g1=$(`<div class="grid3"></div>`); B.trackedBets.forEach(c=>g1.appendChild(valueCard(c))); t1.appendChild(g1);
@@ -290,7 +295,7 @@ function render() {
   const t2=$(`<div class="panel-tab" id="tab-places"></div>`);
   t2.appendChild($(`<div class="shead accent-gold"><h2>Best Each-Way Value</h2><div class="ln"></div><div class="tag">strong top-5 chance at a price</div></div>`));
   const g4=$(`<div class="grid4"></div>`);
-  (B.eachWayValue||[]).forEach(c=>g4.appendChild($(`<div class="card-base ewcard">${shot(c,'bshot',16)}<div class="nm">${flag(c.country)} ${c.name}</div><div class="o">${c.marketOdds.fractional}<small>Top 5 &middot; ${pct(c.modelProb)}</small></div><div class="ed">+${c.edgePct}% edge</div></div>`)));
+  (B.eachWayValue||[]).forEach(c=>g4.appendChild($(`<div class="card-base ewcard">${shot(c,'bshot',16)}<div class="nm">${flag(c.country)} ${c.name}</div><div class="o">${c.marketOdds.fractional}<small>Top 5 &middot; ${pct(c.modelProb)}</small></div><div class="ed">${edgeStr(c.edgePct)} edge</div></div>`)));
   t2.appendChild(g4);
   t2.appendChild($(`<div class="shead accent-blue"><h2>Place Selections</h2><div class="ln"></div><div class="tag">ranked by value</div></div>`));
   t2.appendChild($(`<div class="sel3">${selCol('To Finish Top 5',B.top5Sel)}${selCol('To Finish Top 10',B.top10Sel)}${selCol('To Finish Top 20',B.top20Sel)}</div>`));

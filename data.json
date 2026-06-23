@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-23T09:26:18.684Z",
+  "generatedAt": "2026-06-23T19:02:02.041Z",
   "event": {
     "id": "R2026034",
     "name": "Travelers Championship",
@@ -82,6 +82,7 @@
       "playerNoteTag": null,
       "lastWeekFinish": "T17",
       "playedLastWeek": true,
+      "bookie": null,
       "ocLink": "https://www.oddschecker.com/golf/travelers-championship/top-10-finish",
       "rationale": "Sweden's smooth-swinging heir apparent has looked a major champion in waiting since turning pro, a runner-up at the 2024 Masters in his very first start there. His game is built on towering, pure iron play, the single most valuable skill on a tight, second-shot course like River Highlands, and he arrives in good order off a T17 at the U.S. Open. The value: the model makes him 25% to finish top 10 where the best price implies about 19% - a +34% edge.",
       "points": 3,
@@ -129,6 +130,7 @@
       "playerNoteTag": null,
       "lastWeekFinish": "T39",
       "playedLastWeek": true,
+      "bookie": null,
       "ocLink": "https://www.oddschecker.com/golf/travelers-championship/top-20-finish",
       "rationale": "One of the most improved young Americans on tour, Bridgeman has quietly become a relentless scorer with a red-hot putter (+0.76 strokes a round). On a birdie-fest where someone always goes deep, a player holing everything is dangerous at a three-figure-friendly price. The value: the model makes him 36% to finish top 20 where the best price implies about 30% - a +21% edge.",
       "points": 2,
@@ -176,6 +178,7 @@
       "playerNoteTag": null,
       "lastWeekFinish": "22",
       "playedLastWeek": true,
+      "bookie": null,
       "ocLink": "https://www.oddschecker.com/golf/travelers-championship/top-10-finish",
       "rationale": "Golf's great perfectionist, the 2022 U.S. Open champion who logs every shot he hits and sharpens his approach play to a razor's edge. That precision iron game is tailor-made for River Highlands' small greens, and he was already in the mix (22nd) at Shinnecock last week. The value: the model makes him 43% to finish top 10 where the best price implies about 36% - a +17% edge.",
       "points": 2,
@@ -223,6 +226,7 @@
       "playerNoteTag": null,
       "lastWeekFinish": "T17",
       "playedLastWeek": true,
+      "bookie": null,
       "ocLink": "https://www.oddschecker.com/golf/travelers-championship/top-10-finish",
       "rationale": "The aggressive young left-hander is one of the tour's most natural scorers, and when the irons are sharp he goes very low. A short, attackable course plays straight into his birdie-making hands. The value: the model makes him 22% to finish top 10 where the best price implies about 18% - a +22% edge.",
       "points": 1,
@@ -270,6 +274,7 @@
       "playerNoteTag": null,
       "lastWeekFinish": "T11",
       "playedLastWeek": true,
+      "bookie": null,
       "ocLink": "https://www.oddschecker.com/golf/travelers-championship/top-10-finish",
       "rationale": "Mr Consistency. The 2024 PGA and Open champion is the hardest man in golf to leave off a leaderboard, he turns up, contends and stacks top-10s. On a course that rewards all-round excellence, he is about as solid a top-10 play as exists. The value: the model makes him 22% to finish top 10 where the best price implies about 19% - a +15% edge.",
       "points": 1,
@@ -277,6 +282,57 @@
       "priceDecimal": 5.245901639344263,
       "priceFractional": "4/1"
     },
+    {
+      "playerId": "50525",
+      "name": "Collin Morikawa",
+      "headshot": "https://pga-tour-res.cloudinary.com/image/upload/c_fill,g_face:center,h_240,w_240,q_auto,f_auto/headshots_50525.png",
+      "country": "USA",
+      "owgr": "9",
+      "market": "win",
+      "marketLabel": "To Win",
+      "eachWay": true,
+      "modelProb": 0.024,
+      "modelOdds": {
+        "prob": 0.024,
+        "decimal": 41.666666666666664,
+        "fractional": "40/1"
+      },
+      "marketProb": 0.0216875,
+      "marketOdds": {
+        "prob": 0.0216875,
+        "decimal": 46.10951008645534,
+        "fractional": "50/1"
+      },
+      "edgePct": 27,
+      "valueScore": 0.01651877623166277,
+      "confidence": 1,
+      "trend": "up",
+      "sg": {
+        "total": 1.162,
+        "ott": 0.35,
+        "app": 0.749,
+        "arg": 0.097,
+        "putt": -0.033
+      },
+      "recentSG": 1.5665,
+      "recentEvents": 2,
+      "dataThin": false,
+      "letdownFlag": null,
+      "playerNote": null,
+      "playerNoteTag": null,
+      "lastWeekFinish": "T17",
+      "playedLastWeek": true,
+      "bookie": null,
+      "ocLink": "https://www.oddschecker.com/golf/travelers-championship/winner",
+      "rationale": "Fits TPC River Highlands - strongest on approach, what wins here. Trending up (1.57 SG/rd over last 2 starts). Finished T17 last week. The value: the model makes him 2.4% to win where the best price implies about 2.2% - a +11% edge.",
+      "marquee": "Each-way to win",
+      "points": 2,
+      "tracked": true,
+      "priceDecimal": 46.10951008645534,
+      "priceFractional": "50/1"
+    }
+  ],
+  "flutters": [
     {
       "playerId": "46046",
       "name": "Scottie Scheffler",
@@ -317,104 +373,56 @@
       "playerNoteTag": null,
       "lastWeekFinish": "T4",
       "playedLastWeek": true,
+      "bookie": null,
       "ocLink": "https://www.oddschecker.com/golf/travelers-championship/winner",
-      "rationale": "The world number one and the best ball-striker on the planet, whose floor is most players' ceiling. He contended again at the U.S. Open (T4), and on a scoreable course the only question is whether the putter behaves, which is exactly why each-way is the smart way in at this price. The value: the model makes him 20% to finish to win where the best price implies about 19% - a +8% edge.",
-      "marquee": "Each-way to win",
-      "points": 2,
-      "tracked": true,
-      "priceDecimal": 5.369127516778524,
-      "priceFractional": "9/2"
-    }
-  ],
-  "flutters": [
+      "rationale": "The world number one and the best ball-striker on the planet, whose floor is most players' ceiling. He contended again at the U.S. Open (T4), and on a scoreable course the only question is whether the putter behaves, which is exactly why each-way is the smart way in at this price. The value: the model makes him 20% to win where the best price implies about 19% - a +8% edge.",
+      "kind": "Favourite punt",
+      "tracked": false,
+      "points": 1
+    },
     {
-      "playerId": "37455",
-      "name": "Si Woo Kim",
-      "headshot": "https://pga-tour-res.cloudinary.com/image/upload/c_fill,g_face:center,h_240,w_240,q_auto,f_auto/headshots_37455.png",
-      "country": "KOR",
-      "owgr": "21",
+      "playerId": "46717",
+      "name": "Viktor Hovland",
+      "headshot": "https://pga-tour-res.cloudinary.com/image/upload/c_fill,g_face:center,h_240,w_240,q_auto,f_auto/headshots_46717.png",
+      "country": "NOR",
+      "owgr": "30",
       "market": "win",
       "marketLabel": "To Win",
       "eachWay": true,
-      "modelProb": 0.0579375,
+      "modelProb": 0.023125,
       "modelOdds": {
-        "prob": 0.0579375,
-        "decimal": 17.25997842502697,
-        "fractional": "16/1"
+        "prob": 0.023125,
+        "decimal": 43.24324324324324,
+        "fractional": "40/1"
       },
-      "marketProb": 0.0596875,
+      "marketProb": 0.0263125,
       "marketOdds": {
-        "prob": 0.0596875,
-        "decimal": 16.75392670157068,
-        "fractional": "16/1"
+        "prob": 0.0263125,
+        "decimal": 38.00475059382423,
+        "fractional": "40/1"
       },
-      "edgePct": -3,
-      "valueScore": -0.007057234288031498,
-      "confidence": 2,
+      "edgePct": -12,
+      "valueScore": -0.018421667995558732,
+      "confidence": 1,
       "trend": "up",
       "sg": {
-        "total": 1.348,
-        "ott": 0.504,
-        "app": 0.735,
-        "arg": 0.243,
-        "putt": -0.135
+        "total": 0.529,
+        "ott": -0.112,
+        "app": 0.488,
+        "arg": 0.151,
+        "putt": 0.003
       },
-      "recentSG": 3.082,
-      "recentEvents": 2,
+      "recentSG": 2.747,
+      "recentEvents": 1,
       "dataThin": false,
       "letdownFlag": null,
       "playerNote": null,
       "playerNoteTag": null,
       "lastWeekFinish": "MC",
       "playedLastWeek": true,
+      "bookie": null,
       "ocLink": "https://www.oddschecker.com/golf/travelers-championship/winner",
-      "rationale": "Fits TPC River Highlands - strongest on approach, what wins here. Trending up (3.08 SG/rd over last 2 starts). Finished MC last week. The value: the model makes him 5.8% to finish to win where the best price implies about 6.0% - a +-3% edge.",
-      "kind": "Favourite punt",
-      "tracked": false,
-      "points": 1
-    },
-    {
-      "playerId": "50525",
-      "name": "Collin Morikawa",
-      "headshot": "https://pga-tour-res.cloudinary.com/image/upload/c_fill,g_face:center,h_240,w_240,q_auto,f_auto/headshots_50525.png",
-      "country": "USA",
-      "owgr": "9",
-      "market": "win",
-      "marketLabel": "To Win",
-      "eachWay": true,
-      "modelProb": 0.024,
-      "modelOdds": {
-        "prob": 0.024,
-        "decimal": 41.666666666666664,
-        "fractional": "40/1"
-      },
-      "marketProb": 0.0216875,
-      "marketOdds": {
-        "prob": 0.0216875,
-        "decimal": 46.10951008645534,
-        "fractional": "50/1"
-      },
-      "edgePct": 11,
-      "valueScore": 0.01651877623166277,
-      "confidence": 1,
-      "trend": "up",
-      "sg": {
-        "total": 1.162,
-        "ott": 0.35,
-        "app": 0.749,
-        "arg": 0.097,
-        "putt": -0.033
-      },
-      "recentSG": 1.5665,
-      "recentEvents": 2,
-      "dataThin": false,
-      "letdownFlag": null,
-      "playerNote": null,
-      "playerNoteTag": null,
-      "lastWeekFinish": "T17",
-      "playedLastWeek": true,
-      "ocLink": "https://www.oddschecker.com/golf/travelers-championship/winner",
-      "rationale": "Fits TPC River Highlands - strongest on approach, what wins here. Trending up (1.57 SG/rd over last 2 starts). Finished T17 last week. The value: the model makes him 2.4% to finish to win where the best price implies about 2.2% - a +11% edge.",
+      "rationale": "Fits TPC River Highlands - strongest on approach, what wins here. Trending up (2.75 SG/rd over last 1 start). Finished MC last week. The value: the model makes him 2.3% to win where the best price implies about 2.6% - a +-12% edge.",
       "kind": "Longshot punt",
       "tracked": false,
       "points": 1
@@ -460,6 +468,7 @@
     "playerNoteTag": null,
     "lastWeekFinish": "T17",
     "playedLastWeek": true,
+    "bookie": null,
     "ocLink": "https://www.oddschecker.com/golf/travelers-championship/top-10-finish",
     "rationale": "Sweden's smooth-swinging heir apparent has looked a major champion in waiting since turning pro, a runner-up at the 2024 Masters in his very first start there. His game is built on towering, pure iron play, the single most valuable skill on a tight, second-shot course like River Highlands, and he arrives in good order off a T17 at the U.S. Open. The value: the model makes him 25% to finish top 10 where the best price implies about 19% - a +34% edge.",
     "points": 3,
@@ -493,19 +502,6 @@
       "winOdds": "250/1",
       "why": "Underlying numbers improving - monitor.",
       "tag": null
-    },
-    {
-      "playerId": "46717",
-      "name": "Viktor Hovland",
-      "headshot": "https://pga-tour-res.cloudinary.com/image/upload/c_fill,g_face:center,h_240,w_240,q_auto,f_auto/headshots_46717.png",
-      "country": "NOR",
-      "owgr": "30",
-      "trend": "up",
-      "recentSG": 2.747,
-      "recentEvents": 1,
-      "winOdds": "40/1",
-      "why": "Form spiking (2.75 SG/rd lately) but no value at the current price - watch for a bigger number.",
-      "tag": "In form"
     },
     {
       "playerId": "51766",
@@ -544,6 +540,19 @@
       "recentEvents": 2,
       "winOdds": "28/1",
       "why": "Form spiking (2.93 SG/rd lately) but no value at the current price - watch for a bigger number.",
+      "tag": "In form"
+    },
+    {
+      "playerId": "49771",
+      "name": "J.T. Poston",
+      "headshot": "https://pga-tour-res.cloudinary.com/image/upload/c_fill,g_face:center,h_240,w_240,q_auto,f_auto/headshots_49771.png",
+      "country": "USA",
+      "owgr": "32",
+      "trend": "up",
+      "recentSG": 2.2493333333333334,
+      "recentEvents": 3,
+      "winOdds": "80/1",
+      "why": "Form spiking (2.25 SG/rd lately) but no value at the current price - watch for a bigger number.",
       "tag": "In form"
     }
   ],
@@ -588,6 +597,7 @@
       "playerNoteTag": null,
       "lastWeekFinish": "22",
       "playedLastWeek": true,
+      "bookie": null,
       "ocLink": "https://www.oddschecker.com/golf/travelers-championship/top-5-finish",
       "rationale": "Golf's great perfectionist, the 2022 U.S. Open champion who logs every shot he hits and sharpens his approach play to a razor's edge. That precision iron game is tailor-made for River Highlands' small greens, and he was already in the mix (22nd) at Shinnecock last week. The value: the model makes him 22% to finish top 5 where the best price implies about 17% - a +24% edge."
     },
@@ -631,6 +641,7 @@
       "playerNoteTag": null,
       "lastWeekFinish": "T17",
       "playedLastWeek": true,
+      "bookie": null,
       "ocLink": "https://www.oddschecker.com/golf/travelers-championship/top-5-finish",
       "rationale": "Fits TPC River Highlands - strongest on approach, what wins here. Trending up (1.57 SG/rd over last 2 starts). Finished T17 last week. The value: the model makes him 14% to finish top 5 where the best price implies about 12% - a +13% edge."
     }
@@ -676,6 +687,7 @@
       "playerNoteTag": null,
       "lastWeekFinish": "T17",
       "playedLastWeek": true,
+      "bookie": null,
       "ocLink": "https://www.oddschecker.com/golf/travelers-championship/top-5-finish",
       "rationale": "Sweden's smooth-swinging heir apparent has looked a major champion in waiting since turning pro, a runner-up at the 2024 Masters in his very first start there. His game is built on towering, pure iron play, the single most valuable skill on a tight, second-shot course like River Highlands, and he arrives in good order off a T17 at the U.S. Open. The value: the model makes him 12% to finish top 5 where the best price implies about 8.7% - a +38% edge."
     },
@@ -719,6 +731,7 @@
       "playerNoteTag": null,
       "lastWeekFinish": "22",
       "playedLastWeek": true,
+      "bookie": null,
       "ocLink": "https://www.oddschecker.com/golf/travelers-championship/top-5-finish",
       "rationale": "Golf's great perfectionist, the 2022 U.S. Open champion who logs every shot he hits and sharpens his approach play to a razor's edge. That precision iron game is tailor-made for River Highlands' small greens, and he was already in the mix (22nd) at Shinnecock last week. The value: the model makes him 22% to finish top 5 where the best price implies about 17% - a +24% edge."
     },
@@ -762,6 +775,7 @@
       "playerNoteTag": null,
       "lastWeekFinish": "T11",
       "playedLastWeek": true,
+      "bookie": null,
       "ocLink": "https://www.oddschecker.com/golf/travelers-championship/top-5-finish",
       "rationale": "Mr Consistency. The 2024 PGA and Open champion is the hardest man in golf to leave off a leaderboard, he turns up, contends and stacks top-10s. On a course that rewards all-round excellence, he is about as solid a top-10 play as exists. The value: the model makes him 10% to finish top 5 where the best price implies about 8.5% - a +19% edge."
     },
@@ -805,6 +819,7 @@
       "playerNoteTag": null,
       "lastWeekFinish": null,
       "playedLastWeek": false,
+      "bookie": null,
       "ocLink": "https://www.oddschecker.com/golf/travelers-championship/top-5-finish",
       "rationale": "Gaining on putting (+0.66/rd). Trending up (2.14 SG/rd over last 3 starts). Did not play last week, so arrives fresh. The value: the model makes him 12% to finish top 5 where the best price implies about 10% - a +13% edge."
     },
@@ -848,6 +863,7 @@
       "playerNoteTag": null,
       "lastWeekFinish": "T17",
       "playedLastWeek": true,
+      "bookie": null,
       "ocLink": "https://www.oddschecker.com/golf/travelers-championship/top-5-finish",
       "rationale": "Fits TPC River Highlands - strongest on approach, what wins here. Trending up (1.57 SG/rd over last 2 starts). Finished T17 last week. The value: the model makes him 14% to finish top 5 where the best price implies about 12% - a +13% edge."
     },
@@ -891,6 +907,7 @@
       "playerNoteTag": null,
       "lastWeekFinish": "T4",
       "playedLastWeek": true,
+      "bookie": null,
       "ocLink": "https://www.oddschecker.com/golf/travelers-championship/top-5-finish",
       "rationale": "The world number one and the best ball-striker on the planet, whose floor is most players' ceiling. He contended again at the U.S. Open (T4), and on a scoreable course the only question is whether the putter behaves, which is exactly why each-way is the smart way in at this price. The value: the model makes him 69% to finish top 5 where the best price implies about 66% - a +4% edge."
     }
@@ -936,6 +953,7 @@
       "playerNoteTag": null,
       "lastWeekFinish": "T17",
       "playedLastWeek": true,
+      "bookie": null,
       "ocLink": "https://www.oddschecker.com/golf/travelers-championship/top-10-finish",
       "rationale": "Sweden's smooth-swinging heir apparent has looked a major champion in waiting since turning pro, a runner-up at the 2024 Masters in his very first start there. His game is built on towering, pure iron play, the single most valuable skill on a tight, second-shot course like River Highlands, and he arrives in good order off a T17 at the U.S. Open. The value: the model makes him 25% to finish top 10 where the best price implies about 19% - a +34% edge."
     },
@@ -979,6 +997,7 @@
       "playerNoteTag": null,
       "lastWeekFinish": "T17",
       "playedLastWeek": true,
+      "bookie": null,
       "ocLink": "https://www.oddschecker.com/golf/travelers-championship/top-10-finish",
       "rationale": "The aggressive young left-hander is one of the tour's most natural scorers, and when the irons are sharp he goes very low. A short, attackable course plays straight into his birdie-making hands. The value: the model makes him 22% to finish top 10 where the best price implies about 18% - a +22% edge."
     },
@@ -1022,6 +1041,7 @@
       "playerNoteTag": null,
       "lastWeekFinish": "22",
       "playedLastWeek": true,
+      "bookie": null,
       "ocLink": "https://www.oddschecker.com/golf/travelers-championship/top-10-finish",
       "rationale": "Golf's great perfectionist, the 2022 U.S. Open champion who logs every shot he hits and sharpens his approach play to a razor's edge. That precision iron game is tailor-made for River Highlands' small greens, and he was already in the mix (22nd) at Shinnecock last week. The value: the model makes him 43% to finish top 10 where the best price implies about 36% - a +17% edge."
     },
@@ -1065,6 +1085,7 @@
       "playerNoteTag": null,
       "lastWeekFinish": "T11",
       "playedLastWeek": true,
+      "bookie": null,
       "ocLink": "https://www.oddschecker.com/golf/travelers-championship/top-10-finish",
       "rationale": "Mr Consistency. The 2024 PGA and Open champion is the hardest man in golf to leave off a leaderboard, he turns up, contends and stacks top-10s. On a course that rewards all-round excellence, he is about as solid a top-10 play as exists. The value: the model makes him 22% to finish top 10 where the best price implies about 19% - a +15% edge."
     },
@@ -1108,6 +1129,7 @@
       "playerNoteTag": null,
       "lastWeekFinish": null,
       "playedLastWeek": false,
+      "bookie": null,
       "ocLink": "https://www.oddschecker.com/golf/travelers-championship/top-10-finish",
       "rationale": "Gaining on putting (+0.66/rd). Trending up (2.14 SG/rd over last 3 starts). Did not play last week, so arrives fresh. The value: the model makes him 26% to finish top 10 where the best price implies about 23% - a +13% edge."
     },
@@ -1151,6 +1173,7 @@
       "playerNoteTag": null,
       "lastWeekFinish": "T17",
       "playedLastWeek": true,
+      "bookie": null,
       "ocLink": "https://www.oddschecker.com/golf/travelers-championship/top-10-finish",
       "rationale": "Fits TPC River Highlands - strongest on approach, what wins here. Trending up (1.57 SG/rd over last 2 starts). Finished T17 last week. The value: the model makes him 29% to finish top 10 where the best price implies about 26% - a +11% edge."
     }
@@ -1196,6 +1219,7 @@
       "playerNoteTag": null,
       "lastWeekFinish": "T17",
       "playedLastWeek": true,
+      "bookie": null,
       "ocLink": "https://www.oddschecker.com/golf/travelers-championship/top-20-finish",
       "rationale": "Sweden's smooth-swinging heir apparent has looked a major champion in waiting since turning pro, a runner-up at the 2024 Masters in his very first start there. His game is built on towering, pure iron play, the single most valuable skill on a tight, second-shot course like River Highlands, and he arrives in good order off a T17 at the U.S. Open. The value: the model makes him 52% to finish top 20 where the best price implies about 42% - a +22% edge."
     },
@@ -1239,6 +1263,7 @@
       "playerNoteTag": null,
       "lastWeekFinish": "T39",
       "playedLastWeek": true,
+      "bookie": null,
       "ocLink": "https://www.oddschecker.com/golf/travelers-championship/top-20-finish",
       "rationale": "One of the most improved young Americans on tour, Bridgeman has quietly become a relentless scorer with a red-hot putter (+0.76 strokes a round). On a birdie-fest where someone always goes deep, a player holing everything is dangerous at a three-figure-friendly price. The value: the model makes him 36% to finish top 20 where the best price implies about 30% - a +21% edge."
     },
@@ -1282,6 +1307,7 @@
       "playerNoteTag": null,
       "lastWeekFinish": "T17",
       "playedLastWeek": true,
+      "bookie": null,
       "ocLink": "https://www.oddschecker.com/golf/travelers-championship/top-20-finish",
       "rationale": "The aggressive young left-hander is one of the tour's most natural scorers, and when the irons are sharp he goes very low. A short, attackable course plays straight into his birdie-making hands. The value: the model makes him 47% to finish top 20 where the best price implies about 41% - a +14% edge."
     },
@@ -1325,6 +1351,7 @@
       "playerNoteTag": null,
       "lastWeekFinish": "22",
       "playedLastWeek": true,
+      "bookie": null,
       "ocLink": "https://www.oddschecker.com/golf/travelers-championship/top-20-finish",
       "rationale": "Golf's great perfectionist, the 2022 U.S. Open champion who logs every shot he hits and sharpens his approach play to a razor's edge. That precision iron game is tailor-made for River Highlands' small greens, and he was already in the mix (22nd) at Shinnecock last week. The value: the model makes him 75% to finish top 20 where the best price implies about 69% - a +9% edge."
     },
@@ -1368,6 +1395,7 @@
       "playerNoteTag": null,
       "lastWeekFinish": "T11",
       "playedLastWeek": true,
+      "bookie": null,
       "ocLink": "https://www.oddschecker.com/golf/travelers-championship/top-20-finish",
       "rationale": "Mr Consistency. The 2024 PGA and Open champion is the hardest man in golf to leave off a leaderboard, he turns up, contends and stacks top-10s. On a course that rewards all-round excellence, he is about as solid a top-10 play as exists. The value: the model makes him 48% to finish top 20 where the best price implies about 44% - a +9% edge."
     },
@@ -1411,6 +1439,7 @@
       "playerNoteTag": null,
       "lastWeekFinish": "MC",
       "playedLastWeek": true,
+      "bookie": null,
       "ocLink": "https://www.oddschecker.com/golf/travelers-championship/top-20-finish",
       "rationale": "Fits TPC River Highlands - strongest on approach, what wins here. Trending up (1.61 SG/rd over last 1 start). Finished MC last week. The value: the model makes him 38% to finish top 20 where the best price implies about 35% - a +9% edge."
     },
@@ -1454,6 +1483,7 @@
       "playerNoteTag": null,
       "lastWeekFinish": null,
       "playedLastWeek": false,
+      "bookie": null,
       "ocLink": "https://www.oddschecker.com/golf/travelers-championship/top-20-finish",
       "rationale": "Gaining on putting (+0.66/rd). Trending up (2.14 SG/rd over last 3 starts). Did not play last week, so arrives fresh. The value: the model makes him 53% to finish top 20 where the best price implies about 50% - a +7% edge."
     },
@@ -1497,6 +1527,7 @@
       "playerNoteTag": null,
       "lastWeekFinish": "T32",
       "playedLastWeek": true,
+      "bookie": null,
       "ocLink": "https://www.oddschecker.com/golf/travelers-championship/top-20-finish",
       "rationale": "Gaining on putting (+0.49/rd). Trending up (1.50 SG/rd over last 2 starts). Finished T32 last week. The value: the model makes him 36% to finish top 20 where the best price implies about 34% - a +6% edge."
     }
@@ -2104,7 +2135,7 @@
       "country": "USA",
       "headshot": "https://pga-tour-res.cloudinary.com/image/upload/c_fill,g_face:center,h_240,w_240,q_auto,f_auto/headshots_46046.png",
       "winOdds": "4/1",
-      "value": true
+      "value": false
     },
     {
       "owgr": "3",
@@ -2160,7 +2191,7 @@
       "country": "USA",
       "headshot": "https://pga-tour-res.cloudinary.com/image/upload/c_fill,g_face:center,h_240,w_240,q_auto,f_auto/headshots_50525.png",
       "winOdds": "40/1",
-      "value": false
+      "value": true
     },
     {
       "owgr": "11",
@@ -2892,12 +2923,12 @@
     "stakedThisWeekPoints": 11,
     "weekNumber": 26
   },
-  "ewTerms": "5 places at 1/5 odds (Bet365 often enhances places - check before betting)",
+  "ewTerms": "5 places at 1/5 odds (best price varies by book - check before betting)",
   "notes": [
     "2 players in the field have little/no PGA Tour strokes-gained data - they are excluded from value bets and flagged.",
     "Last week was the U.S. Open (a major), so players who contended - especially winner Wyndham Clark - are docked for the post-major let-down. Affected players carry a let-down flag.",
-    "Recommendations are ranked by VALUE: the model probability vs an estimated market price (the edge). Win/Top-5/Top-10/Top-20 probabilities come from a 16,000-run Monte Carlo simulation. Market prices are estimated until live Bet365 odds are wired in.",
-    "Tracked bets feed the P&L. Untracked \"flutters\" do not. Bets are settled the following week off the final leaderboard."
+    "Recommendations are ranked by VALUE - the model's probability vs the best price (the edge). Win/Top-5/Top-10/Top-20 probabilities come from a Monte Carlo simulation. Prices are model estimates until a live odds feed is connected.",
+    "Tracked bets feed the P&L (points/units). Untracked \"flutters\" do not. Bets settle the following week off the final leaderboard."
   ],
   "pnl": {
     "startBankPts": 100,
@@ -2916,20 +2947,20 @@
     "byMarket": [],
     "openBets": [
       {
-        "id": "R2026034:46046:win",
+        "id": "R2026034:50525:win",
         "weekNumber": 26,
         "eventId": "R2026034",
         "eventName": "Travelers Championship",
-        "placedAt": "2026-06-23T09:26:18.684Z",
-        "playerId": "46046",
-        "player": "Scottie Scheffler",
+        "placedAt": "2026-06-23T19:02:02.041Z",
+        "playerId": "50525",
+        "player": "Collin Morikawa",
         "market": "win",
         "marketLabel": "To Win",
         "eachWay": true,
         "stakePts": 2,
-        "priceDecimal": 5.369127516778524,
-        "priceFractional": "9/2",
-        "modelProb": 0.20075,
+        "priceDecimal": 46.10951008645534,
+        "priceFractional": "50/1",
+        "modelProb": 0.024,
         "status": "pending",
         "finishPos": null,
         "returnPts": null,
@@ -2940,7 +2971,7 @@
         "weekNumber": 26,
         "eventId": "R2026034",
         "eventName": "Travelers Championship",
-        "placedAt": "2026-06-23T09:26:18.684Z",
+        "placedAt": "2026-06-23T19:02:02.041Z",
         "playerId": "48081",
         "player": "Xander Schauffele",
         "market": "top10",
@@ -2960,7 +2991,7 @@
         "weekNumber": 26,
         "eventId": "R2026034",
         "eventName": "Travelers Championship",
-        "placedAt": "2026-06-23T09:26:18.684Z",
+        "placedAt": "2026-06-23T19:02:02.041Z",
         "playerId": "56630",
         "player": "Akshay Bhatia",
         "market": "top10",
@@ -2980,7 +3011,7 @@
         "weekNumber": 26,
         "eventId": "R2026034",
         "eventName": "Travelers Championship",
-        "placedAt": "2026-06-23T09:26:18.684Z",
+        "placedAt": "2026-06-23T19:02:02.041Z",
         "playerId": "40098",
         "player": "Matt Fitzpatrick",
         "market": "top10",
@@ -3000,7 +3031,7 @@
         "weekNumber": 26,
         "eventId": "R2026034",
         "eventName": "Travelers Championship",
-        "placedAt": "2026-06-23T09:26:18.684Z",
+        "placedAt": "2026-06-23T19:02:02.041Z",
         "playerId": "60004",
         "player": "Jacob Bridgeman",
         "market": "top20",
@@ -3020,7 +3051,7 @@
         "weekNumber": 26,
         "eventId": "R2026034",
         "eventName": "Travelers Championship",
-        "placedAt": "2026-06-23T09:26:18.684Z",
+        "placedAt": "2026-06-23T19:02:02.041Z",
         "playerId": "52955",
         "player": "Ludvig Åberg",
         "market": "top10",
@@ -3038,20 +3069,20 @@
     ],
     "allBets": [
       {
-        "id": "R2026034:46046:win",
+        "id": "R2026034:50525:win",
         "weekNumber": 26,
         "eventId": "R2026034",
         "eventName": "Travelers Championship",
-        "placedAt": "2026-06-23T09:26:18.684Z",
-        "playerId": "46046",
-        "player": "Scottie Scheffler",
+        "placedAt": "2026-06-23T19:02:02.041Z",
+        "playerId": "50525",
+        "player": "Collin Morikawa",
         "market": "win",
         "marketLabel": "To Win",
         "eachWay": true,
         "stakePts": 2,
-        "priceDecimal": 5.369127516778524,
-        "priceFractional": "9/2",
-        "modelProb": 0.20075,
+        "priceDecimal": 46.10951008645534,
+        "priceFractional": "50/1",
+        "modelProb": 0.024,
         "status": "pending",
         "finishPos": null,
         "returnPts": null,
@@ -3062,7 +3093,7 @@
         "weekNumber": 26,
         "eventId": "R2026034",
         "eventName": "Travelers Championship",
-        "placedAt": "2026-06-23T09:26:18.684Z",
+        "placedAt": "2026-06-23T19:02:02.041Z",
         "playerId": "48081",
         "player": "Xander Schauffele",
         "market": "top10",
@@ -3082,7 +3113,7 @@
         "weekNumber": 26,
         "eventId": "R2026034",
         "eventName": "Travelers Championship",
-        "placedAt": "2026-06-23T09:26:18.684Z",
+        "placedAt": "2026-06-23T19:02:02.041Z",
         "playerId": "56630",
         "player": "Akshay Bhatia",
         "market": "top10",
@@ -3102,7 +3133,7 @@
         "weekNumber": 26,
         "eventId": "R2026034",
         "eventName": "Travelers Championship",
-        "placedAt": "2026-06-23T09:26:18.684Z",
+        "placedAt": "2026-06-23T19:02:02.041Z",
         "playerId": "40098",
         "player": "Matt Fitzpatrick",
         "market": "top10",
@@ -3122,7 +3153,7 @@
         "weekNumber": 26,
         "eventId": "R2026034",
         "eventName": "Travelers Championship",
-        "placedAt": "2026-06-23T09:26:18.684Z",
+        "placedAt": "2026-06-23T19:02:02.041Z",
         "playerId": "60004",
         "player": "Jacob Bridgeman",
         "market": "top20",
@@ -3142,7 +3173,7 @@
         "weekNumber": 26,
         "eventId": "R2026034",
         "eventName": "Travelers Championship",
-        "placedAt": "2026-06-23T09:26:18.684Z",
+        "placedAt": "2026-06-23T19:02:02.041Z",
         "playerId": "52955",
         "player": "Ludvig Åberg",
         "market": "top10",

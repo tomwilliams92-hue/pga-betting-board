@@ -1,5 +1,6 @@
 node_modules/
 .apikey
+.env
 shots/
 *.log
 .DS_Store

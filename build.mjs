@@ -12,6 +12,41 @@ import { getSchedule, getField, getStat, getEventSG, getLeaderboard } from './pg
 import { profileFor } from './course-profiles.mjs';
 import { buildModel } from './model.mjs';
 import { loadLedger, saveLedger, appendWeek, settle, summary } from './ledger.mjs';
+import { getRealWinnerOdds } from './odds-api.mjs';
+import { runDeepDive } from './deepdive.mjs';
+
+// Replace the algorithmic selections with the AI deep-dive's value-led picks + storylines.
+function applyDeepDive(board, dd, makeBet) {
+  const prep = (c, pts, story) => {
+    c.points = Math.max(1, Math.min(3, pts || 1));
+    c.priceDecimal = c.marketOdds.decimal;
+    c.priceFractional = c.marketOdds.fractional;
+    if (story) c.rationale = story;
+    return c;
+  };
+  const tracked = [];
+  for (const b of dd.trackedBets || []) {
+    const c = makeBet(b.playerId, b.market); if (!c) continue;
+    c.tracked = true; if (b.eachWayToWin) c.marquee = 'Each-way to win';
+    tracked.push(prep(c, b.stakePoints, b.story));
+  }
+  if (!tracked.length) return; // nothing usable - keep algorithmic board
+  board.trackedBets = tracked;
+  board.bankroll.stakedThisWeekPoints = tracked.reduce((a, c) => a + c.points, 0);
+  if (dd.bestBet) {
+    const bb = makeBet(dd.bestBet.playerId, dd.bestBet.market);
+    if (bb) board.bestBet = tracked.find((t) => t.playerId === bb.playerId && t.market === bb.market) || prep(bb, 2);
+  }
+  const fl = [];
+  for (const f of dd.flutters || []) { const c = makeBet(f.playerId, f.market); if (!c) continue; c.tracked = false; c.kind = f.kind || 'Flutter'; fl.push(prep(c, 1, f.story)); }
+  if (fl.length) board.flutters = fl;
+  const wl = [];
+  for (const w of dd.watchlist || []) {
+    const c = makeBet(w.playerId, 'win'); if (!c) continue;
+    wl.push({ playerId: c.playerId, name: c.name, headshot: c.headshot, country: c.country, owgr: c.owgr, trend: c.trend, recentSG: c.recentSG, recentEvents: c.recentEvents, winOdds: c.marketOdds.fractional, why: w.why, tag: c.playerNoteTag || null });
+  }
+  if (wl.length) board.watchlist = wl;
+}
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const SG = { total: '02675', ott: '02567', app: '02568', arg: '02569', putt: '02564' };
@@ -75,6 +110,9 @@ async function main() {
   } : null;
   if (previousEvent) console.error(`[build] last week: ${previousEvent.name}${previousEvent.isMajor ? ' (MAJOR)' : ''} won by ${previousEvent.champion} | finishes: ${prevLb?.positions.size || 0}`);
 
+  // real best-price winner odds across UK books (the-odds-api) - null without a key
+  const realOdds = await getRealWinnerOdds(event.tournamentName).catch(() => null);
+
   const model = buildModel({
     field,
     profile,
@@ -85,13 +123,17 @@ async function main() {
     weekNumber: completed.length + 1,
     eventSlug: slugify(event.tournamentName),
     affiliate: AFFILIATE,
+    realOdds,
   });
 
   const notes = [];
   if (model.dataThinCount) notes.push(`${model.dataThinCount} players in the field have little/no PGA Tour strokes-gained data - they are excluded from value bets and flagged.`);
   if (previousEvent?.isMajor) notes.push(`Last week was the ${previousEvent.name} (a major), so players who contended - especially winner ${previousEvent.champion} - are docked for the post-major let-down. Affected players carry a let-down flag.`);
-  notes.push('Recommendations are ranked by VALUE: the model probability vs an estimated market price (the edge). Win/Top-5/Top-10/Top-20 probabilities come from a 16,000-run Monte Carlo simulation. Market prices are estimated until live Bet365 odds are wired in.');
-  notes.push('Tracked bets feed the P&L. Untracked "flutters" do not. Bets are settled the following week off the final leaderboard.');
+  const oddsNote = realOdds
+    ? 'Win-market prices are the best available across UK bookmakers (live); place-market prices (top 5/10/20) are model estimates.'
+    : 'Prices are model estimates until a live odds feed is connected.';
+  notes.push(`Recommendations are ranked by VALUE - the model's probability vs the best price (the edge). Win/Top-5/Top-10/Top-20 probabilities come from a Monte Carlo simulation. ${oddsNote}`);
+  notes.push('Tracked bets feed the P&L (points/units). Untracked "flutters" do not. Bets settle the following week off the final leaderboard.');
 
   const board = {
     generatedAt: new Date().toISOString(),
@@ -131,6 +173,12 @@ async function main() {
     ewTerms: model.ewTerms,
     notes,
   };
+
+  // ---- AI deep-dive: re-select picks by value + write storylines (falls back if no key) ----
+  try {
+    const dd = await runDeepDive({ event: board.event, courseProfile: board.courseProfile, previousEvent, players: model.deepDivePayload });
+    if (dd && dd.trackedBets && dd.trackedBets.length) { applyDeepDive(board, dd, model.makeBet); console.error('[build] applied AI deep-dive picks'); }
+  } catch (e) { console.error('[build] deep-dive skipped, keeping algorithmic picks:', e.message); }
 
   // ---- P&L ledger: settle finished events, then record this week's tracked bets ----
   const ledger = loadLedger();
