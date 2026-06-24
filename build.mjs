@@ -17,11 +17,17 @@ import { runDeepDive } from './deepdive.mjs';
 
 // Replace the algorithmic selections with the AI deep-dive's value-led picks + storylines.
 function applyDeepDive(board, dd, makeBet) {
+  const pct2 = (v) => (v * 100).toFixed(v < 0.1 ? 1 : 0) + '%';
   const prep = (c, pts, story) => {
     c.points = Math.max(1, Math.min(3, pts || 1));
     c.priceDecimal = c.marketOdds.decimal;
     c.priceFractional = c.marketOdds.fractional;
-    if (story) c.rationale = story;
+    if (story) {
+      // Append the model's exact value line so the edge in the write-up always matches the chip
+      const phrase = c.market === 'win' ? 'to win' : `to finish ${(c.marketLabel || c.market).toLowerCase()}`;
+      const vl = `The value: the model rates him ${pct2(c.modelProb)} ${phrase} vs the market's ${pct2(c.marketProb)} implied — a +${c.edgePct}% edge.`;
+      c.rationale = `${story} ${vl}`;
+    }
     return c;
   };
   const tracked = [];
@@ -98,6 +104,12 @@ function buildManualCard(board, model) {
       c.marketOdds = { prob: 1 / price.decimal, decimal: price.decimal, fractional: price.fractional };
       c.marketProb = 1 / price.decimal;
       c.edgePct = Math.round((c.modelProb / c.marketProb - 1) * 100);
+      // Re-stamp the value line in the rationale to match the updated edge
+      const pct3 = (v) => (v * 100).toFixed(v < 0.1 ? 1 : 0) + '%';
+      const phrase3 = c.market === 'win' ? 'to win' : `to finish ${(c.marketLabel || c.market).toLowerCase()}`;
+      const newVl = `the value: the model makes him ${pct3(c.modelProb)} ${phrase3} where the best price implies about ${pct3(c.marketProb)} - a +${c.edgePct}% edge`;
+      c.rationale = c.rationale.replace(/the value:[^.]+\./i, newVl + '.');
+      if (!c.rationale.toLowerCase().includes('the value:')) c.rationale += ` ${newVl.charAt(0).toUpperCase() + newVl.slice(1)}.`;
     }
     if (e.eachWay) {
       c.marquee = 'Each-way to win'; c.eachWay = true; c.eachWayPlaces = 8;
