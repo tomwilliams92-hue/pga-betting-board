@@ -322,7 +322,15 @@ export function buildModel({ field, profile, sg, driving, recentEvents, previous
 
   // place-market value selections (ranked by edge) - surfaces e.g. value top-20 plays
   const selFor = (m, k) => rows.filter((r) => r[m].prob >= FLOOR[m]).map((r) => candidate(r, m)).sort((a, b) => b.edgePct - a.edgePct).slice(0, k);
-  const eachWayValue = rows.filter((r) => r.top5.prob >= 0.12 && r['edge_top5'] >= 0.05).map((r) => candidate(r, 'top5')).sort((a, b) => b.valueScore - a.valueScore).slice(0, 4);
+  // "best each-way value" = untracked EACH-WAY TO-WIN ideas in the sweet spot. These are WIN-market
+  // bets at a sensible price (>=~13/1; never short-priced favourites - the place return is too thin),
+  // ranked by 8-place each-way EV and shown at win odds with the model's top-8 chance.
+  const eachWayValue = rows
+    .filter((r) => !r.dataThin && !trackedIds.has(r.playerId) && !r.letdownPenalty && r.m_win.decimal >= 17 && r.m_win.decimal <= 51)
+    .map((r) => ({ r, score: ewScore(r), p8: top8(r) }))
+    .sort((a, b) => b.score - a.score)
+    .slice(0, 3)
+    .map(({ r, p8 }) => { const c = candidate(r, 'win'); c.eachWay = true; c.eachWayPlaces = 8; c.ewPlaceProb = Math.round(p8 * 100); return c; });
 
   const placesTable = byWin.slice(0, 18).map((r) => ({
     modelRank: r.modelRank, name: r.name, headshot: r.headshot, letdownFlag: r.letdownFlag || null,

@@ -101,6 +101,7 @@
   .who .row2 { margin-top:5px; display:flex; align-items:center; gap:7px; flex-wrap:wrap; }
   .owgr { font-size:11px; color:var(--muted); } .conf { font-size:10.5px; color:var(--muted); } .stars { color:var(--gold); font-size:12px; } .stars .off { color:#34507f; }
   .marq { margin:11px 16px 0; font-family:'Oswald'; font-size:11px; letter-spacing:1px; text-transform:uppercase; color:var(--gold); }
+  .ewtag { display:inline-block; font-family:'Oswald'; font-size:10px; letter-spacing:1px; text-transform:uppercase; color:var(--gold); margin-bottom:3px; }
 
   .odds-row { display:flex; align-items:center; justify-content:space-between; padding:13px 16px 3px; gap:10px; flex-wrap:wrap; }
   .odds-row .price { font-family:'Oswald'; font-weight:700; font-size:30px; line-height:1; } .odds-row .price small { font-family:'Inter'; font-weight:500; font-size:10.5px; color:var(--muted); display:block; margin-top:3px; } .odds-row .price small b { color:var(--green); }
@@ -139,7 +140,7 @@
   table { width:100%; border-collapse:collapse; margin-top:6px; font-size:13px; min-width:480px; }
   thead th { text-align:left; font-size:10px; text-transform:uppercase; letter-spacing:1px; color:var(--muted); padding:9px 9px; border-bottom:1px solid var(--line); white-space:nowrap; }
   tbody td { padding:9px 9px; border-bottom:1px solid rgba(29,62,114,.5); } tbody tr:hover { background:rgba(43,140,255,.06); }
-  .tname { display:flex; align-items:center; gap:9px; } .tshot { width:28px; height:28px; border-radius:50%; object-fit:cover; background:#0c2750; flex:none; }
+  .tname { display:flex; align-items:center; gap:9px; white-space:nowrap; } .tname span { white-space:nowrap; } .tshot { width:28px; height:28px; border-radius:50%; object-fit:cover; background:#0c2750; flex:none; }
   .rk { color:var(--muted); width:28px; } td.num { font-family:'Oswald'; font-weight:600; } .right { text-align:right; }
   .wbadge { font-size:9.5px; color:var(--green); border:1px solid rgba(54,211,153,.4); border-radius:5px; padding:1px 6px; margin-left:6px; }
   .tagchip { font-size:9.5px; color:#f4d486; border:1px solid rgba(242,193,78,.4); border-radius:5px; padding:1px 6px; }
@@ -178,6 +179,10 @@ const pct = (p)=>(p*100).toFixed(p<0.1?1:0)+'%';
 const edgeStr = (e)=>(e>=0?'+':'−')+Math.abs(e)+'%';
 const pts = (n)=>`${n} pt${Math.abs(n)===1?'':'s'}`;
 const signedPts = (n)=>`${n>=0?'+':''}${n} pts`;
+const PPP = (window.BOARD && window.BOARD.bankroll && window.BOARD.bankroll.poundsPerPoint) || 0; // £ per point (in-house plan)
+const gbp = (n)=> PPP ? `£${Math.round(n*PPP*100)/100}` : '';
+const ptsGbp = (n)=> PPP ? `${pts(n)} (${gbp(n)})` : pts(n);
+const signedGbp = (n)=> PPP ? `${n>=0?'+':'−'}${gbp(Math.abs(n))}` : '';
 const shot=(p,cls,size)=>`<img class="${cls}" src="${p.headshot}" alt="${p.name}" loading="lazy" onerror="this.outerHTML='<div class=\\'${cls} fallback\\' style=\\'font-size:${size}px\\'>${initials(p.name)}</div>'">`;
 
 // Branded "Back it" button — uses the actual best-price bookmaker per pick (from live odds)
@@ -206,20 +211,20 @@ const flag=(code)=>{const c=FLAGS[(code||'').toUpperCase()];return c?`<img class
 
 function valueCard(c) {
   const flut = !c.tracked;
-  // each-way stake reads as "1pt each-way (8 places) · 2pt total" - the points value is the total outlay
+  // each-way reads as "1pt each-way (£5) · 2pt / £10 total"; place bets as "3pt (£15)"
   const stakeLabel = c.eachWay
-    ? `${pts(c.points/2)} each-way${c.eachWayPlaces?` (${c.eachWayPlaces} places)`:''} &middot; ${pts(c.points)} total`
-    : pts(c.points);
+    ? `${ptsGbp(c.points/2)} each-way${c.eachWayPlaces?` (${c.eachWayPlaces} places)`:''} &middot; ${ptsGbp(c.points)} total`
+    : ptsGbp(c.points);
+  const unitNote = PPP ? `tracked in the P&L &middot; in-house plan at ${gbp(1)}/point` : 'tracked in the P&L (points only - set your own unit)';
   const stakeBox = flut
     ? `<div class="stake flut"><div class="big">Flutter &middot; ${stakeLabel}</div><div class="ew">Just for fun - not tracked in the P&L</div></div>`
-    : `<div class="stake"><div class="big">Suggested stake: ${stakeLabel}</div><div class="ew">tracked in the P&L (points only - set your own unit)</div></div>`;
+    : `<div class="stake"><div class="big">Suggested stake: ${stakeLabel}</div><div class="ew">${unitNote}</div></div>`;
   const chips = [];
   if (c.lastWeekFinish) chips.push(`<span class="mini">Last wk: ${c.lastWeekFinish}</span>`);
   else if (c.playedLastWeek===false) chips.push(`<span class="mini">Didn't play last wk</span>`);
   if (c.playerNoteTag) chips.push(`<span class="mini warn">⚠ ${c.playerNoteTag}</span>`);
   return $(`
   <div class="card-base pick ${flut?'flutter':''}">
-    ${c.marquee?`<div class="marq">★ ${c.marquee}</div>`:''}
     <div class="ph">
       <span class="badge">${c.marketLabel}</span>
       ${shot(c,'shot',20)}
@@ -228,7 +233,7 @@ function valueCard(c) {
       </div>
     </div>
     <div class="odds-row">
-      <div class="price">${c.marketOdds.fractional}<small>Best Price &middot; <b>${c.marquee==='Each-way to win'?`${c.ewPlaceProb}% to make top 8`:`${edgeStr(c.edgePct)} edge`}</b></small></div>
+      <div class="price">${c.marquee==='Each-way to win'?'<span class="ewtag">★ Each-way to win</span><br>':''}${c.marketOdds.fractional}<small>Best Price &middot; <b>${c.marquee==='Each-way to win'?`${c.ewPlaceProb}% to make top 8`:`${edgeStr(c.edgePct)} edge`}</b></small></div>
       ${backButton(c)}
     </div>
     <div class="mvm">
@@ -264,7 +269,7 @@ function render() {
     <p><b>Value Edge</b> - how much higher our model rates a player's chance than the <b>Best Price</b> implies. +25% edge means the model thinks he's 25% more likely than the price suggests. Positive edge = potential value. It's the whole game: we back prices that are too big, not just good players.</p>
     <p><b>Best Price</b> - the most generous odds across the major UK bookmakers (Bet365, William Hill, BetVictor, Ladbrokes, Sky Bet, Paddy Power and more). When a live odds feed is connected, each pick names the book with the best price and the button backs it directly; otherwise the price is a model estimate and the "Compare prices" button opens the oddschecker market so you can shop all the books yourself.</p>
     <p><b>Model vs Market</b> - the two bars: our model's probability (blue) vs the price-implied probability (gold). The gap is the edge.</p>
-    <p><b>Each-way (e/w)</b> - half the stake on the win, half on a place at 1/5 of the odds. We use Bet365's 8 places on a full field, so you collect if he finishes in the top 8 even without winning. The backtest sweet spot is 20/1-50/1: below ~16/1 the place return is too thin, above ~50/1 it's a lottery. <b>Points</b> - all staking and the P&L are in points/units; pick your own £ per point.</p>
+    <p><b>Each-way (e/w)</b> - half the stake on the win, half on a place at 1/5 of the odds. We use Bet365's 8 places on a full field, so you collect if he finishes in the top 8 even without winning. The backtest sweet spot is 20/1-50/1: below ~16/1 the place return is too thin, above ~50/1 it's a lottery. <b>Points & stakes</b> - the P&L runs in points/units. The suggested stakes shown are our in-house plan at £5 per point (e.g. 3pt = £15; a 1pt each-way bet is £5 win + £5 place = £10). Scale it to your own unit.</p>
   </div></details>`));
 
   app.appendChild($(`<div class="tabs">
@@ -305,7 +310,7 @@ function render() {
   const t2=$(`<div class="panel-tab" id="tab-places"></div>`);
   t2.appendChild($(`<div class="shead accent-gold"><h2>Best Each-Way Value</h2><div class="ln"></div><div class="tag">strong top-5 chance at a price</div></div>`));
   const g4=$(`<div class="grid4"></div>`);
-  (B.eachWayValue||[]).forEach(c=>g4.appendChild($(`<div class="card-base ewcard">${shot(c,'bshot',16)}<div class="nm">${flag(c.country)} ${c.name}</div><div class="o">${c.marketOdds.fractional}<small>Top 5 &middot; ${pct(c.modelProb)}</small></div><div class="ed">${edgeStr(c.edgePct)} edge</div></div>`)));
+  (B.eachWayValue||[]).forEach(c=>g4.appendChild($(`<div class="card-base ewcard">${shot(c,'bshot',16)}<div class="nm">${flag(c.country)} ${c.name}</div><div class="o">${c.marketOdds.fractional}<small>To win &middot; e/w 8 places</small></div><div class="ed">${c.ewPlaceProb}% to make top 8</div></div>`)));
   t2.appendChild(g4);
   t2.appendChild($(`<div class="shead accent-blue"><h2>Place Selections</h2><div class="ln"></div><div class="tag">ranked by value</div></div>`));
   t2.appendChild($(`<div class="sel3">${selCol('To Finish Top 5',B.top5Sel)}${selCol('To Finish Top 10',B.top10Sel)}${selCol('To Finish Top 20',B.top20Sel)}</div>`));
@@ -324,11 +329,11 @@ function render() {
   // ---- P&L ----
   const t4=$(`<div class="panel-tab" id="tab-pnl"></div>`);
   const pl=B.pnl, pcls=pl.profitPts>0?'stat-up':pl.profitPts<0?'stat-dn':'';
-  t4.appendChild($(`<div class="shead accent-blue"><h2>P&amp;L Dashboard</h2><div class="ln"></div><div class="tag">points / units &middot; set your own stake</div></div>`));
+  t4.appendChild($(`<div class="shead accent-blue"><h2>P&amp;L Dashboard</h2><div class="ln"></div><div class="tag">${PPP?`in-house plan &middot; ${gbp(1)} per point`:'points / units &middot; set your own stake'}</div></div>`));
   t4.appendChild($(`<div class="pnlgrid">
-    <div class="card-base b"><div class="k">Bank</div><div class="v">${pl.bankNowPts} pts</div><small>from ${pl.startBankPts} pt start</small></div>
-    <div class="card-base b"><div class="k">Net P/L</div><div class="v ${pcls}">${signedPts(pl.profitPts)}</div><small>${pl.settledCount} settled &middot; ${pl.pendingCount} open</small></div>
-    <div class="card-base b"><div class="k">ROI</div><div class="v ${pcls}">${pl.roiPct>=0?'+':''}${pl.roiPct}%</div><small>${pl.stakedPts} pts staked</small></div>
+    <div class="card-base b"><div class="k">Bank</div><div class="v">${pl.bankNowPts} pts</div><small>${PPP?`${gbp(pl.bankNowPts)} &middot; `:''}from ${pl.startBankPts} pt start</small></div>
+    <div class="card-base b"><div class="k">Net P/L</div><div class="v ${pcls}">${signedPts(pl.profitPts)}</div><small>${PPP?`${signedGbp(pl.profitPts)} &middot; `:''}${pl.settledCount} settled &middot; ${pl.pendingCount} open</small></div>
+    <div class="card-base b"><div class="k">ROI</div><div class="v ${pcls}">${pl.roiPct>=0?'+':''}${pl.roiPct}%</div><small>${pl.stakedPts} pts${PPP?` (${gbp(pl.stakedPts)})`:''} staked</small></div>
     <div class="card-base b"><div class="k">Strike rate</div><div class="v">${pl.strikeRatePct}%</div><small>${pl.won}W &middot; ${pl.lost}L &middot; ${pl.totalBets} bets</small></div>
   </div>`));
 

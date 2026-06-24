@@ -70,8 +70,9 @@ const parsePrice = (p) => {
 // the market, stake and REAL price come from here. `price` may be fractional ('21/1') or decimal
 // (2.75). Refresh weekly. Each-way win picks require a real price (the model price is a long-shot
 // artifact for course-history specialists).
+const POUNDS_PER_POINT = 5;                   // in-house suggested stake plan: £5 per point
 const MANUAL_CARD = [
-  { name: 'Akshay Bhatia',    market: 'top10', points: 2, price: 4.75 },
+  { name: 'Akshay Bhatia',    market: 'top10', points: 3, price: 4.75 }, // Best Bet - 3pt
   { name: 'Matt Fitzpatrick', market: 'top10', points: 2, price: 2.75 },
   { name: 'Collin Morikawa',  market: 'top10', points: 1, price: 3.25 },
   { name: 'Eric Cole',        market: 'top20', points: 1, price: 2.62 },
@@ -251,6 +252,7 @@ async function main() {
 
   // hand-curated card for the week (Tom's research): replaces the auto-selection when set
   buildManualCard(board, model);
+  board.bankroll.poundsPerPoint = POUNDS_PER_POINT; // show actual £ stakes (in-house plan)
 
   // ---- P&L ledger: settle finished events, then record this week's tracked bets ----
   const ledger = loadLedger();
