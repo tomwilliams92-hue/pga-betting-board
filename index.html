@@ -54,9 +54,9 @@
   details.key .body b { color:var(--txt); }
   details.key .body p { margin:8px 0; }
 
-  .tabs { display:flex; gap:2px; margin:18px 0 4px; border-bottom:1px solid var(--line); overflow-x:auto; -webkit-overflow-scrolling:touch; }
-  .tab { font-family:'Oswald'; font-weight:600; letter-spacing:.5px; text-transform:uppercase; font-size:13px; color:var(--muted); background:none; border:none; padding:11px 13px; cursor:pointer; border-bottom:2px solid transparent; white-space:nowrap; flex:none; }
-  .tab:hover { color:var(--txt); } .tab.active { color:var(--blue); border-bottom-color:var(--blue); }
+  .tabs { display:flex; gap:6px; margin:18px 0 4px; border-bottom:1px solid var(--line); overflow-x:auto; -webkit-overflow-scrolling:touch; padding-bottom:10px; }
+  .tab { font-family:'Oswald'; font-weight:600; letter-spacing:.5px; text-transform:uppercase; font-size:12.5px; color:var(--bg); background:var(--green); border:none; padding:9px 14px; cursor:pointer; border-radius:8px; white-space:nowrap; flex:none; opacity:.65; transition:opacity .15s; }
+  .tab:hover { opacity:.85; } .tab.active { opacity:1; box-shadow:0 0 0 2px rgba(54,211,153,.5); }
   .panel-tab { display:none; } .panel-tab.active { display:block; }
 
   .shead { display:flex; align-items:center; gap:12px; margin:26px 0 14px; }
@@ -181,9 +181,9 @@
   @media (max-width:560px) {
     .event .ttl { font-size:21px; } .event .logo { width:68px; height:68px; }
     .brand .sub { display:none; } .grid4 { grid-template-columns:1fr 1fr; } .brand .mark { width:90px; height:90px; } .brand h1 { font-size:22px; }
-    .tabs { overflow-x:visible; flex-wrap:wrap; border-bottom:none; gap:4px; padding-bottom:6px; }
-    .tab { flex:1 1 30%; text-align:center; font-size:11px; padding:9px 4px; border:1px solid var(--line) !important; border-radius:8px; white-space:normal; line-height:1.2; }
-    .tab.active { border-color:var(--blue) !important; background:rgba(43,140,255,.10); color:var(--blue); }
+    .tabs { overflow-x:visible; flex-wrap:wrap; border-bottom:none; gap:6px; padding-bottom:6px; }
+    .tab { flex:1 1 30%; text-align:center; font-size:11px; padding:9px 4px; border:none !important; white-space:normal; line-height:1.2; }
+    .tab.active { box-shadow:0 0 0 2px rgba(54,211,153,.6) !important; opacity:1; }
     .bb-main { flex-direction:column; align-items:flex-start; gap:10px; }
     .bb-info { min-width:0; }
     .bb-odds { display:flex; align-items:center; gap:14px; flex-wrap:wrap; }
