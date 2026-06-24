@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>PGA Betting Board</title>
+<title>Monty's Closet Tips</title>
 <meta name="description" content="Free weekly PGA Tour value betting tips: tracked win/each-way/place picks with a transparent points P&L, built from strokes-gained, recent form, course fit and player news." />
-<meta property="og:title" content="PGA Betting Board" />
+<meta property="og:title" content="Monty's Closet Tips" />
 <meta property="og:description" content="Value-led PGA Tour tips with a tracked points P&L. Win, each-way & place picks every Monday." />
 <meta property="og:type" content="website" />
 <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -24,7 +24,7 @@
   header.top { border-bottom:1px solid var(--line); background:linear-gradient(180deg,rgba(43,140,255,.10),transparent); padding:18px 0 16px; }
   .topbar { display:flex; align-items:center; gap:13px; }
   .brand { display:flex; align-items:center; gap:12px; min-width:0; }
-  .brand .mark { width:44px; height:44px; border-radius:10px; flex:none; background:linear-gradient(135deg,var(--blue),var(--blue-d)); display:grid; place-items:center; font-family:'Oswald'; font-weight:700; font-size:17px; color:#fff; box-shadow:0 6px 18px rgba(43,140,255,.4); }
+  .brand .mark { width:56px; height:56px; border-radius:12px; flex:none; object-fit:contain; }
   .brand h1 { font-family:'Oswald'; font-weight:700; font-size:23px; letter-spacing:1px; text-transform:uppercase; line-height:1; }
   .brand .sub { color:var(--muted); font-size:12px; margin-top:3px; }
   .updated { margin-left:auto; text-align:right; font-size:12px; color:var(--muted); flex:none; } .updated b { color:var(--blue); }
@@ -154,13 +154,13 @@
   @media (max-width:880px) { .course,.grid3,.sel3,.grid2 { grid-template-columns:1fr; } .grid4,.pnlgrid { grid-template-columns:repeat(2,1fr); } }
   @media (max-width:560px) {
     .event .ttl { font-size:23px; } .event .logo { width:74px; height:74px; } .event .pills { margin-left:0; width:100%; }
-    .bb-odds { text-align:left; } .brand .sub { display:none; } .grid4 { grid-template-columns:1fr 1fr; }
+    .bb-odds { text-align:left; } .brand .sub { display:none; } .grid4 { grid-template-columns:1fr 1fr; } .brand .mark { width:42px; height:42px; } .brand h1 { font-size:18px; }
   }
 </style>
 </head>
 <body>
 <header class="top"><div class="wrap topbar">
-  <div class="brand"><div class="mark">PGA</div><div><h1>Betting Board</h1><div class="sub">Value tips with a tracked P&amp;L &middot; every Monday</div></div></div>
+  <div class="brand"><img class="mark" src="monty-logo.png" alt="Monty's Closet Tips logo"><div><h1>Monty's Closet Tips</h1><div class="sub">Value tips with a tracked P&amp;L &middot; every Monday</div></div></div>
   <div class="updated" id="updated"></div>
 </div></header>
 <div class="rgbar"><div class="in"><span class="age">18+</span> When the fun stops, stop. Please gamble responsibly &middot; <a href="https://www.begambleaware.org" target="_blank" rel="noopener">BeGambleAware.org</a></div></div>
