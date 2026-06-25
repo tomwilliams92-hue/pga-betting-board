@@ -78,13 +78,13 @@ const parsePrice = (p) => {
 // artifact for course-history specialists).
 const POUNDS_PER_POINT = 5;                   // in-house suggested stake plan: £5 per point
 const MANUAL_CARD = [
-  { name: 'Akshay Bhatia',    market: 'top10', points: 3, price: 4.75 }, // Best Bet - 3pt
-  { name: 'Matt Fitzpatrick', market: 'top10', points: 2, price: 2.75 },
-  { name: 'Collin Morikawa',  market: 'top10', points: 1, price: 3.25 },
-  { name: 'Eric Cole',        market: 'top20', points: 1, price: 2.62 },
-  { name: 'Tommy Fleetwood',  market: 'win', eachWay: true, points: 2, price: '18/1' },
-  { name: 'Justin Thomas',    market: 'win', eachWay: true, points: 2, price: '21/1' },
-  { name: 'Brian Harman',     market: 'win', eachWay: true, points: 2, price: '41/1' },
+  { name: 'Akshay Bhatia',    market: 'top10', points: 3,   price: 4.75  }, // Best Bet - 3pt
+  { name: 'Matt Fitzpatrick', market: 'top10', points: 2,   price: 2.75  },
+  { name: 'Sam Burns',        market: 'top10', points: 1,   price: 2.75  }, // course specialist - 2x Travelers winner
+  { name: 'Eric Cole',        market: 'top20', points: 1,   price: 2.62  },
+  { name: 'Tommy Fleetwood',  market: 'win', eachWay: true, points: 2,   price: '18/1' },
+  { name: 'Justin Thomas',    market: 'win', eachWay: true, points: 1,   price: '21/1' }, // 0.5pt e/w each side
+  { name: 'Brian Harman',     market: 'win', eachWay: true, points: 1,   price: '41/1' }, // 0.5pt e/w each side
 ];
 const BEST_BET_NAME = 'Akshay Bhatia';        // headline pick (null = highest-edge place bet)
 const REMOVE = ['Ludvig Åberg'];              // never feature these (also pulled from flutters)
