@@ -80,7 +80,7 @@ const POUNDS_PER_POINT = 5;                   // in-house suggested stake plan: 
 const MANUAL_CARD = [
   { name: 'Akshay Bhatia',    market: 'top10', points: 3,   price: 4.75  }, // Best Bet - 3pt
   { name: 'Matt Fitzpatrick', market: 'top10', points: 2,   price: 2.75  },
-  { name: 'Sam Burns',        market: 'top10', points: 1,   price: 2.75  }, // course specialist - 2x Travelers winner
+  { name: 'Brian Harman',     market: 'top10', points: 2,   price: 4.0   }, // course fit - top10 at 3/1
   { name: 'Eric Cole',        market: 'top20', points: 1,   price: 2.62  },
   { name: 'Tommy Fleetwood',  market: 'win', eachWay: true, points: 2,   price: '18/1' },
   { name: 'Justin Thomas',    market: 'win', eachWay: true, points: 1,   price: '21/1' }, // 0.5pt e/w each side
