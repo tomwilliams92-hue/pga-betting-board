@@ -18,10 +18,10 @@
       "priceDecimal": 4.75,
       "priceFractional": "7/2",
       "modelProb": 0.23725,
-      "status": "pending",
-      "finishPos": null,
-      "returnPts": null,
-      "profitPts": null
+      "status": "won",
+      "finishPos": "T5",
+      "returnPts": 14.25,
+      "profitPts": 11.25
     },
     {
       "id": "R2026034:40098:top10",
@@ -39,10 +39,10 @@
       "priceDecimal": 2.75,
       "priceFractional": "7/4",
       "modelProb": 0.4271875,
-      "status": "pending",
-      "finishPos": null,
-      "returnPts": null,
-      "profitPts": null
+      "status": "won",
+      "finishPos": "4",
+      "returnPts": 5.5,
+      "profitPts": 3.5
     },
     {
       "id": "R2026034:27644:top10",
@@ -60,10 +60,10 @@
       "priceDecimal": 4,
       "priceFractional": "3/1",
       "modelProb": 0.0676875,
-      "status": "pending",
-      "finishPos": null,
-      "returnPts": null,
-      "profitPts": null
+      "status": "lost",
+      "finishPos": "T25",
+      "returnPts": 0,
+      "profitPts": -2
     },
     {
       "id": "R2026034:47591:top20",
@@ -81,10 +81,10 @@
       "priceDecimal": 2.62,
       "priceFractional": "13/8",
       "modelProb": 0.490125,
-      "status": "pending",
-      "finishPos": null,
-      "returnPts": null,
-      "profitPts": null
+      "status": "lost",
+      "finishPos": "T38",
+      "returnPts": 0,
+      "profitPts": -1
     },
     {
       "id": "R2026034:30911:win",
@@ -102,10 +102,10 @@
       "priceDecimal": 19,
       "priceFractional": "18/1",
       "modelProb": 0.0445,
-      "status": "pending",
-      "finishPos": null,
-      "returnPts": null,
-      "profitPts": null
+      "status": "lost",
+      "finishPos": "T14",
+      "returnPts": 0,
+      "profitPts": -2
     },
     {
       "id": "R2026034:33448:win",
@@ -123,10 +123,10 @@
       "priceDecimal": 22,
       "priceFractional": "21/1",
       "modelProb": 0.0146875,
-      "status": "pending",
-      "finishPos": null,
-      "returnPts": null,
-      "profitPts": null
+      "status": "lost",
+      "finishPos": "T14",
+      "returnPts": 0,
+      "profitPts": -1
     },
     {
       "id": "R2026034:27644:win",
@@ -144,10 +144,10 @@
       "priceDecimal": 42,
       "priceFractional": "41/1",
       "modelProb": 0.0046875,
-      "status": "pending",
-      "finishPos": null,
-      "returnPts": null,
-      "profitPts": null
+      "status": "lost",
+      "finishPos": "T25",
+      "returnPts": 0,
+      "profitPts": -1
     }
   ]
 }
