@@ -268,13 +268,13 @@ function valueCard(c) {
       </div>
     </div>
     <div class="odds-row">
-      <div class="price">${c.marquee==='Each-way to win'?'<span class="ewtag">★ Each-way to win</span><br>':''}${c.marketOdds.fractional}<small>Best Price &middot; <b>${c.marquee==='Each-way to win'?`${c.ewPlaceProb}% to make top 8`:`${edgeStr(c.edgePct)} edge`}</b></small></div>
+      <div class="price">${c.marquee==='Each-way to win'?'<span class="ewtag">★ Each-way to win</span><br>':''}${c.marketOdds.fractional}<small>Best Price &middot; <b>${c.marquee==='Each-way to win'?`${c.ewPlaceProb}% to make top ${c.eachWayPlaces||8}`:(c.judgment?'Judgement pick':`${edgeStr(c.edgePct)} edge`)}</b></small></div>
       ${backButton(c)}
     </div>
-    <div class="mvm">
+    ${c.judgment?`<div class="mvm"><div class="r mk"><span class="lab">Market</span><div class="track"><i style="width:${Math.min(100,c.marketProb*100)}%"></i></div><span class="v">${pct(c.marketProb)}</span></div><div class="r"><span class="lab">Model</span><div class="track"></div><span class="v" style="font-size:11.5px;opacity:.85">no rating — too new for tour data</span></div></div>`:`<div class="mvm">
       <div class="r"><span class="lab">Model</span><div class="track"><i style="width:${Math.min(100,c.modelProb*100)}%"></i></div><span class="v">${pct(c.modelProb)}</span></div>
       <div class="r mk"><span class="lab">Market</span><div class="track"><i style="width:${Math.min(100,c.marketProb*100)}%"></i></div><span class="v">${pct(c.marketProb)}</span></div>
-    </div>
+    </div>`}
     ${chips.length?`<div class="chiprow">${chips.join('')}</div>`:''}
     ${stakeBox}
     <div class="sg">
@@ -317,10 +317,18 @@ function render() {
 
   // ---- THE CARD ----
   const t1 = $(`<div class="panel-tab active" id="tab-card"></div>`);
+  if (B.editorial) {
+    const ed = B.editorial, r = ed.recap;
+    const pcol = (v)=>v>=0?'#36d399':'#ff6f6f';
+    const recapHtml = r ? `<div style="margin:0 0 12px"><div style="font-weight:800;margin-bottom:3px">📊 Last week — ${r.eventName}</div><div style="color:var(--muted,#c3d2ea);font-size:13.5px;line-height:1.55"><b style="color:${pcol(r.profitPts)}">${r.profitPts>=0?'+':''}${r.profitPts} pts</b> &middot; ${r.roiPct>=0?'+':''}${r.roiPct}% ROI from ${r.settledCount} bets &middot; bank now <b>${r.bankNowPts} pts</b>.${r.winners.length?` Winners: ${r.winners.map(w=>`<b>${w.player}</b> ${w.finishPos} (${w.marketLabel} ${w.price}, +${w.profitPts}pts)`).join('; ')}.`:' No winners landed.'} A profitable first run — exactly the start we wanted.</div></div>` : '';
+    const aheadHtml = ed.weekAhead ? `<div style="margin:0 0 12px"><div style="font-weight:800;margin-bottom:3px">🔭 The week ahead</div><div style="color:var(--muted,#c3d2ea);font-size:13.5px;line-height:1.55">${ed.weekAhead}</div></div>` : '';
+    const spotHtml = ed.spotlight ? `<div style="margin:2px 0 0;padding:11px 13px;border-radius:10px;background:rgba(230,184,0,.08);border:1px solid rgba(230,184,0,.25)"><div style="font-weight:800;margin-bottom:3px">📌 Spotlight — ${ed.spotlight.name}</div><div style="color:var(--muted,#c3d2ea);font-size:13.5px;line-height:1.55">${ed.spotlight.text}</div></div>` : '';
+    t1.appendChild($(`<div class="card-base" style="padding:16px 18px 15px;margin-bottom:14px;border-left:3px solid var(--gold,#e6b800)"><div style="font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold,#e6b800);font-weight:800;margin-bottom:11px">⛳ Monty's Update</div>${recapHtml}${aheadHtml}${spotHtml}</div>`));
+  }
   const bb = B.bestBet;
   if (bb) t1.appendChild($(`<div class="card-base bestbet"><div class="bb-tag">★ Best Bet of the Week &middot; ${bb.marketLabel}</div>
     <div class="bb-main">${shot(bb,'shot',24)}<div class="bb-info"><div class="nm">${flag(bb.country)} ${bb.name}</div><div class="why">${bb.rationale}</div></div>
-    <div class="bb-odds"><div class="o">${bb.marketOdds.fractional}</div><div class="l">Best Price</div><div class="edgechip">${edgeStr(bb.edgePct)} edge</div>
+    <div class="bb-odds"><div class="o">${bb.marketOdds.fractional}</div><div class="l">Best Price</div><div class="edgechip">${bb.judgment?'Judgement pick':`${edgeStr(bb.edgePct)} edge`}</div>
       ${backButton(bb)}</div></div></div>`));
 
   t1.appendChild($(`<div class="shead accent-blue"><h2>Tracked Bets</h2><div class="ln"></div><div class="tag">value-ranked &middot; feed the P&L</div></div>`));

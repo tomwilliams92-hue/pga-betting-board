@@ -77,17 +77,30 @@ const parsePrice = (p) => {
 // (2.75). Refresh weekly. Each-way win picks require a real price (the model price is a long-shot
 // artifact for course-history specialists).
 const POUNDS_PER_POINT = 5;                   // in-house suggested stake plan: £5 per point
+// John Deere Classic 2026 (TPC Deere Run) - Tom's hand-picked card with real book prices.
+// `eachWay: true` = 1pt e/w to win (half win, half place); `places` overrides the 8-place default.
+// `judgment: true` = market/eye-test pick the model can't price (data-thin); uses `story` and
+// shows no model edge. Travelers form folded in by hand (SG feed not yet finalised on the day).
 const MANUAL_CARD = [
-  { name: 'Akshay Bhatia',    market: 'top10', points: 3,   price: 4.75  }, // Best Bet - 3pt
-  { name: 'Matt Fitzpatrick', market: 'top10', points: 2,   price: 2.75  },
-  { name: 'Brian Harman',     market: 'top10', points: 2,   price: 4.0   }, // course fit - top10 at 3/1
-  { name: 'Eric Cole',        market: 'top20', points: 1,   price: 2.62  },
-  { name: 'Tommy Fleetwood',  market: 'win', eachWay: true, points: 2,   price: '18/1' },
-  { name: 'Justin Thomas',    market: 'win', eachWay: true, points: 1,   price: '21/1' }, // 0.5pt e/w each side
-  { name: 'Brian Harman',     market: 'win', eachWay: true, points: 1,   price: '41/1' }, // 0.5pt e/w each side
+  { name: 'Jackson Koivun',          market: 'top10', points: 3, price: 3.40, judgment: true,
+    story: "Pure judgement pick - and the headline one. The model can't rate him (he has no tracked PGA Tour strokes-gained yet), so the eye test does the talking. He went T11 here at TPC Deere Run and T23 at the U.S. Open at brutal Oakmont, gaining +1.39 strokes a round in a major - one of the best young players in the game arriving on a low-scoring birdie course that suits. It's a punt on a player early in his pro career, but the class is obvious and the market makes him about 29% for a top 10. We're happy to take the 3.40." },
+  { name: 'Ben Griffin',             market: 'top10', points: 3, price: 2.70 },  // 46% model vs 37% implied = +24%
+  { name: 'Ben Griffin',             market: 'win',   points: 2, price: '16/1' }, // straight win (top-10 covers the place)
+  { name: 'Christiaan Bezuidenhout', market: 'top20', points: 2, price: 3.30 },  // 40% model vs 30% implied = +32%
+  { name: 'Jackson Suber', market: 'win', eachWay: true, points: 2, price: '56/1', places: 10 }, // 10-place e/w, the value is the place side
+  { name: 'Sudarshan Yellamaraju',   market: 'top20', points: 1, price: 3.00 },  // 34% model vs 33% implied = fair
 ];
-const BEST_BET_NAME = 'Akshay Bhatia';        // headline pick (null = highest-edge place bet)
+const BEST_BET_NAME = 'Jackson Koivun';        // headline pick (null = highest-edge place bet)
 const REMOVE = ['Ludvig Åberg'];              // never feature these (also pulled from flutters)
+
+// Weekly editorial - the recap is auto-built from the ledger; week-ahead + spotlight are hand-written.
+const EDITORIAL = {
+  weekAhead: "The John Deere Classic is a deliberately reduced field - a number of the bigger names are sitting it out, resting or warming up for the Genesis Scottish Open and The Open Championship. That is the opportunity: with the marquee names away, the door opens for in-form, well-suited players like Ben Griffin and Jackson Koivun to shine on a low-scoring birdie course where pinpoint approach play and a hot putter win out.",
+  spotlight: {
+    name: 'Jackson Koivun',
+    text: "Our headline focus - this week and beyond. Koivun has only just turned professional, so the bookmakers have barely any form to price him on, and that is exactly where the value sits. He went T11 here at TPC Deere Run and T23 at the U.S. Open at brutal Oakmont, gaining +1.39 strokes a round in a major. As his results land on the professional stage his prices will only shorten, so we want to be early. He is our Best Bet for a top 10 this week, and one we will be tracking every week from here.",
+  },
+};
 
 function buildManualCard(board, model) {
   if (!MANUAL_CARD.length) return;
@@ -100,22 +113,28 @@ function buildManualCard(board, model) {
     const c = model.makeBet(id, e.market);
     if (!c) { console.error(`[build] manual card: makeBet failed for ${e.name}`); continue; }
     c.tracked = true; c.points = e.points || 1;
+    c.eachWay = !!e.eachWay; // win-market candidates default to each-way; honour the card explicitly
     if (price) { // override the model estimate with Tom's real market price
       c.marketOdds = { prob: 1 / price.decimal, decimal: price.decimal, fractional: price.fractional };
       c.marketProb = 1 / price.decimal;
       c.edgePct = Math.round((c.modelProb / c.marketProb - 1) * 100);
-      // Re-stamp the value line in the rationale to match the updated edge
-      const pct3 = (v) => (v * 100).toFixed(v < 0.1 ? 1 : 0) + '%';
-      const phrase3 = c.market === 'win' ? 'to win' : `to finish ${(c.marketLabel || c.market).toLowerCase()}`;
-      const newVl = `the value: the model makes him ${pct3(c.modelProb)} ${phrase3} where the best price implies about ${pct3(c.marketProb)} - a +${c.edgePct}% edge`;
-      c.rationale = c.rationale.replace(/the value:[^.]+\./i, newVl + '.');
-      if (!c.rationale.toLowerCase().includes('the value:')) c.rationale += ` ${newVl.charAt(0).toUpperCase() + newVl.slice(1)}.`;
+      if (!e.judgment) { // re-stamp the value line to match the real price (skipped for judgement picks)
+        const pct3 = (v) => (v * 100).toFixed(v < 0.1 ? 1 : 0) + '%';
+        const phrase3 = c.market === 'win' ? 'to win' : `to finish ${(c.marketLabel || c.market).toLowerCase()}`;
+        const newVl = `the value: the model makes him ${pct3(c.modelProb)} ${phrase3} where the best price implies about ${pct3(c.marketProb)} - a +${c.edgePct}% edge`;
+        c.rationale = c.rationale.replace(/the value:[^.]+\./i, newVl + '.');
+        if (!c.rationale.toLowerCase().includes('the value:')) c.rationale += ` ${newVl.charAt(0).toUpperCase() + newVl.slice(1)}.`;
+      }
     }
     if (e.eachWay) {
-      c.marquee = 'Each-way to win'; c.eachWay = true; c.eachWayPlaces = 8;
-      c.ewPlaceProb = Math.round((c.placeProbTop8 || 0) * 100);
-      c.rationale += ` Each-way angle: the model has him about ${c.ewPlaceProb}% to finish inside the top 8, so at 8 places (1/5 odds) the place half of the bet is where the value sits.`;
+      const places = e.places || 8;
+      c.marquee = 'Each-way to win'; c.eachWayPlaces = places;
+      // place chance = P(top N): use the top-10 market for 10 places, else the model's top-8 interpolation
+      const placeProb = places >= 10 ? (model.makeBet(id, 'top10')?.modelProb ?? c.placeProbTop8 ?? 0) : (c.placeProbTop8 || 0);
+      c.ewPlaceProb = Math.round(placeProb * 100);
+      c.rationale += ` Each-way angle: the model has him about ${c.ewPlaceProb}% to finish inside the top ${places}, so at ${places} places (1/5 odds) the place half of the bet is where the value sits.`;
     }
+    if (e.judgment) { c.judgment = true; c.edgePct = null; if (e.story) c.rationale = e.story; }
     c.priceDecimal = c.marketOdds.decimal; c.priceFractional = c.marketOdds.fractional;
     out.push(c);
   }
@@ -126,6 +145,26 @@ function buildManualCard(board, model) {
   board.bestBet = bb || out.filter((c) => !c.marquee).sort((a, b) => b.edgePct - a.edgePct)[0] || out[0];
   if (REMOVE.length) board.flutters = (board.flutters || []).filter((f) => !REMOVE.includes(f.name));
 }
+
+// Build the weekly update block: auto-recap of the most recent settled event + hand-written look-ahead.
+function buildEditorial(board, ledger) {
+  board.editorial = { weekAhead: EDITORIAL.weekAhead, spotlight: EDITORIAL.spotlight, recap: null };
+  const settled = ledger.bets.filter((b) => b.status === 'won' || b.status === 'lost');
+  if (!settled.length) return;
+  const lastId = settled[settled.length - 1].eventId; // most recently settled event
+  const ev = settled.filter((b) => b.eventId === lastId);
+  const rr = (n) => Math.round(n * 100) / 100;
+  const staked = ev.reduce((a, b) => a + b.stakePts, 0);
+  const profit = rr(ev.reduce((a, b) => a + b.profitPts, 0));
+  const winners = ev.filter((b) => b.profitPts > 0).sort((a, b) => b.profitPts - a.profitPts)
+    .map((b) => ({ player: b.player, marketLabel: b.marketLabel, finishPos: b.finishPos, price: b.priceFractional, profitPts: rr(b.profitPts) }));
+  board.editorial.recap = {
+    eventName: ev[0].eventName, settledCount: ev.length, wonCount: winners.length,
+    stakedPts: rr(staked), profitPts: profit, roiPct: staked ? Math.round((profit / staked) * 1000) / 10 : 0,
+    bankNowPts: board.pnl.bankNowPts, winners,
+  };
+}
+
 const slugify = (s) => s.toLowerCase().replace(/&/g, 'and').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
 const logoUrl = (a) => (a && a.imagePath ? `https://res.cloudinary.com/pgatour-prod/image/upload/q_auto,f_auto/${a.imagePath}` : null);
 
@@ -161,7 +200,7 @@ async function main() {
   const profile = profileFor(event.id);
 
   // pull everything in parallel
-  const recentSrc = completed.slice(-5).reverse(); // most recent first
+  const recentSrc = completed.slice(-6).reverse(); // most recent first (last 6 events)
   const [field, sgTotal, sgOTT, sgAPP, sgARG, sgPUTT, dDist, dAcc, ...recent] = await Promise.all([
     getField(event.id),
     getStat(SG.total, year), getStat(SG.ott, year), getStat(SG.app, year),
@@ -273,6 +312,7 @@ async function main() {
   appendWeek(ledger, board);
   saveLedger(ledger);
   board.pnl = summary(ledger);
+  buildEditorial(board, ledger);
 
   fs.writeFileSync(path.join(__dirname, 'data.js'), 'window.BOARD = ' + JSON.stringify(board) + ';\n');
   fs.writeFileSync(path.join(__dirname, 'data.json'), JSON.stringify(board, null, 2));
