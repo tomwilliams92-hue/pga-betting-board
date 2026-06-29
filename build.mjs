@@ -88,6 +88,7 @@ const MANUAL_CARD = [
   { name: 'Ben Griffin',             market: 'win',   points: 2, price: '16/1' }, // straight win (top-10 covers the place)
   { name: 'Christiaan Bezuidenhout', market: 'top20', points: 2, price: 3.30 },  // 40% model vs 30% implied = +32%
   { name: 'Jackson Suber', market: 'win', eachWay: true, points: 2, price: '56/1', places: 10 }, // 10-place e/w, the value is the place side
+  { name: 'Tom Kim', market: 'win', eachWay: true, points: 2.5, price: '31/1', places: 10 }, // 10-place e/w to win
   { name: 'Sudarshan Yellamaraju',   market: 'top20', points: 1, price: 3.00 },  // 34% model vs 33% implied = fair
 ];
 const BEST_BET_NAME = 'Jackson Koivun';        // headline pick (null = highest-edge place bet)
