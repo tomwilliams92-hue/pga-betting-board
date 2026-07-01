@@ -201,7 +201,7 @@
 <div class="rgbar"><div class="in"><span class="age">18+</span> When the fun stops, stop. Please gamble responsibly &middot; <a href="https://www.begambleaware.org" target="_blank" rel="noopener">BeGambleAware.org</a></div></div>
 <main class="wrap" id="app"></main>
 
-<script src="data.js?v=1782761379269"></script>
+<script src="data.js?v=1782919872331"></script>
 <script>
 const B = window.BOARD;
 const $ = (h)=>{const t=document.createElement('template');t.innerHTML=h.trim();return t.content.firstChild;};
@@ -337,6 +337,21 @@ function render() {
   if (B.flutters && B.flutters.length) {
     t1.appendChild($(`<div class="shead accent-gold"><h2>Untracked Flutters</h2><div class="ln"></div><div class="tag">if you fancy it &middot; not in the P&L</div></div>`));
     const g2=$(`<div class="grid2"></div>`); B.flutters.forEach(c=>g2.appendChild(valueCard(c))); t1.appendChild(g2);
+  }
+
+  if (B.extraCard && B.extraCard.bets && B.extraCard.bets.length) {
+    const ec = B.extraCard;
+    t1.appendChild($(`<div class="shead accent-gold"><h2>Also On &mdash; ${ec.eventName}</h2><div class="ln"></div><div class="tag">${ec.tour} &middot; not tracked in the P&L</div></div>`));
+    const ecCards = ec.bets.map(b=>`<div class="card-base" style="padding:15px 17px">
+      <div style="font-family:'Oswald';font-weight:600;font-size:16px;text-transform:uppercase;line-height:1.15">${b.name}</div>
+      <div style="display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin-top:9px">
+        <span style="color:var(--muted);font-size:12.5px">${b.market}${b.places?` &middot; ${b.places} places`:''}</span>
+        <span style="font-family:'Oswald';font-weight:700;font-size:24px;color:var(--gold)">${b.priceFractional}</span>
+      </div>
+      <div style="margin-top:9px;font-size:12.5px;color:#dce8fa">Stake: <b>${b.stakeText}</b></div>
+    </div>`).join('');
+    t1.appendChild($(`<div class="grid2">${ecCards}</div>`));
+    if (ec.note) t1.appendChild($(`<div class="alert" style="margin-top:12px"><span>&#8505;</span><div>${ec.note}</div></div>`));
   }
 
   t1.appendChild($(`<div class="shead accent-blue"><h2>The Course</h2><div class="ln"></div><div class="tag">course-fit drives the value</div></div>`));

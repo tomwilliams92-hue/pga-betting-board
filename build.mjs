@@ -82,24 +82,38 @@ const POUNDS_PER_POINT = 5;                   // in-house suggested stake plan: 
 // `judgment: true` = market/eye-test pick the model can't price (data-thin); uses `story` and
 // shows no model edge. Travelers form folded in by hand (SG feed not yet finalised on the day).
 const MANUAL_CARD = [
-  { name: 'Jackson Koivun',          market: 'top10', points: 3, price: 3.40, judgment: true,
-    story: "Pure judgement pick - and the headline one. The model can't rate him (he has no tracked PGA Tour strokes-gained yet), so the eye test does the talking. He went T11 here at TPC Deere Run and T23 at the U.S. Open at brutal Oakmont, gaining +1.39 strokes a round in a major - one of the best young players in the game arriving on a low-scoring birdie course that suits. It's a punt on a player early in his pro career, but the class is obvious and the market makes him about 29% for a top 10. We're happy to take the 3.40." },
+  { name: 'Jackson Koivun',          market: 'top20', points: 4, price: 2.10, judgment: true,
+    story: "Pure judgement pick - and the headline one. The model can't rate him (he has no tracked PGA Tour strokes-gained yet), so the eye test does the talking. He went T11 here at TPC Deere Run and T23 at the U.S. Open at brutal Oakmont, gaining +1.39 strokes a round in a major - one of the best young players in the game arriving on a low-scoring birdie course that suits. It's a punt on a player early in his pro career, but the class is obvious and the market makes him about 48% for a top 20. We're happy to take the 2.10." },
   { name: 'Ben Griffin',             market: 'top10', points: 3, price: 2.70 },  // 46% model vs 37% implied = +24%
   { name: 'Ben Griffin',             market: 'win',   points: 2, price: '16/1' }, // straight win (top-10 covers the place)
-  { name: 'Christiaan Bezuidenhout', market: 'top20', points: 2, price: 3.30 },  // 40% model vs 30% implied = +32%
-  { name: 'Jackson Suber', market: 'win', eachWay: true, points: 2, price: '56/1', places: 10 }, // 10-place e/w, the value is the place side
-  { name: 'Tom Kim', market: 'win', eachWay: true, points: 1, price: '31/1', places: 10 }, // 0.5pt e/w each side (£2.50/side at £5/pt = 1pt total)
-  { name: 'Sudarshan Yellamaraju',   market: 'top20', points: 1, price: 3.00 },  // 34% model vs 33% implied = fair
+  { name: 'Jackson Suber', market: 'win', eachWay: true, points: 2, price: '56/1', places: 10 }, // £5 e/w (1pt/side, 2pt total), 10 places - value is the place side
+  { name: 'Tom Kim', market: 'win', eachWay: true, points: 2, price: '31/1', places: 10 }, // £5 e/w (1pt/side, 2pt total), 10 places
+  { name: 'Denny McCarthy', market: 'win', eachWay: true, points: 1, price: '36/1', places: 8 }, // £2.50 e/w (0.5pt/side, 1pt total), 8 places
+  { name: 'Eric Cole', market: 'win', eachWay: true, points: 1, price: '29/1', places: 8 }, // £2.50 e/w (0.5pt/side, 1pt total), 8 places
+  { name: 'Sudarshan Yellamaraju',   market: 'top20', points: 1, price: '3/1' },  // £5 top-20 single
 ];
 const BEST_BET_NAME = 'Jackson Koivun';        // headline pick (null = highest-edge place bet)
 const REMOVE = ['Ludvig Åberg'];              // never feature these (also pulled from flutters)
+
+// EXTRA CARD - hand-added bets on a NON-PGA-Tour event the pipeline can't price or settle
+// (different tour, no strokes-gained feed, no auto-settlement). DISPLAY-ONLY: shown on the
+// board for the record but NOT tracked in the points P&L. Set to null once the event is done.
+const EXTRA_CARD = {
+  eventName: 'BMW International Open',
+  tour: 'DP World Tour',
+  note: 'Off-pipeline: a DP World Tour event, so these two are shown for the record but are not priced by the model or settled in the points P&L.',
+  bets: [
+    { name: 'Rasmus Neergaard-Petersen', market: 'Each-way to win', places: 8,  priceFractional: '23/1', stakeText: '£2.50 e/w (£5 total)' },
+    { name: 'Oliver Lindell',            market: 'Each-way to win', places: 10, priceFractional: '29/1', stakeText: '£5 e/w (£10 total)' },
+  ],
+};
 
 // Weekly editorial - the recap is auto-built from the ledger; week-ahead + spotlight are hand-written.
 const EDITORIAL = {
   weekAhead: "The John Deere Classic is a deliberately reduced field - a number of the bigger names are sitting it out, resting or warming up for the Genesis Scottish Open and The Open Championship. That is the opportunity: with the marquee names away, the door opens for in-form, well-suited players like Ben Griffin and Jackson Koivun to shine on a low-scoring birdie course where pinpoint approach play and a hot putter win out.",
   spotlight: {
     name: 'Jackson Koivun',
-    text: "Our headline focus - this week and beyond. Koivun has only just turned professional, so the bookmakers have barely any form to price him on, and that is exactly where the value sits. He went T11 here at TPC Deere Run and T23 at the U.S. Open at brutal Oakmont, gaining +1.39 strokes a round in a major. As his results land on the professional stage his prices will only shorten, so we want to be early. He is our Best Bet for a top 10 this week, and one we will be tracking every week from here.",
+    text: "Our headline focus - this week and beyond. Koivun has only just turned professional, so the bookmakers have barely any form to price him on, and that is exactly where the value sits. He went T11 here at TPC Deere Run and T23 at the U.S. Open at brutal Oakmont, gaining +1.39 strokes a round in a major. As his results land on the professional stage his prices will only shorten, so we want to be early. He is our Best Bet for a top 20 this week, and one we will be tracking every week from here.",
   },
 };
 
@@ -305,6 +319,7 @@ async function main() {
   // hand-curated card for the week (Tom's research): replaces the auto-selection when set
   buildManualCard(board, model);
   board.bankroll.poundsPerPoint = POUNDS_PER_POINT; // show actual £ stakes (in-house plan)
+  board.extraCard = EXTRA_CARD; // hand-added off-pipeline bets (e.g. DP World Tour) - display only
 
   // ---- P&L ledger: settle finished events, then record this week's tracked bets ----
   const ledger = loadLedger();
